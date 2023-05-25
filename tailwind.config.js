@@ -15,8 +15,8 @@ module.exports = {
 		},
 		extend: {
 			backgroundImage: {
-				"auth-left-waves2": "url('./src/assets/img/hero-content(ph).svg')",
 				"auth-left-waves": "url('./src/assets/img/waves.svg')",
+				"auth-left-mini-app": "url('./src/assets/img/mini-app.svg')",
 			},
 			minWidth: {
 				"form-min": "20%",
