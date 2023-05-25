@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 
 interface IAuthFormProps {
@@ -32,9 +32,9 @@ const AuthForm = ({ handleSubmit, action }: IAuthFormProps) => {
 		},
 	];
 
-	const mapFormInputs = formInputs.map((input) => {
+	const mapFormInputs = showRelevantInputs().map((input) => {
 		return (
-			<div className="inputs-container">
+			<div key={input.id} className="inputs-container">
 				<label className="block" htmlFor={input.htmlFor}>
 					{input.label}
 				</label>
@@ -42,12 +42,27 @@ const AuthForm = ({ handleSubmit, action }: IAuthFormProps) => {
 			</div>
 		);
 	});
+	function showRelevantInputs() {
+		if (action === "/") {
+			const filterInputs = formInputs.filter(
+				(input) => input.id !== "pass-conf"
+			);
+			console.log(filterInputs);
+			return filterInputs;
+		} else {
+			console.log(formInputs);
+			return formInputs;
+		}
+	}
 
 	return (
 		<div className="">
 			<form className="text-vn-white" onSubmit={handleSubmit}>
 				this is a form
 				{mapFormInputs}
+				<button type="submit">
+					{action === "/" ? "Sign in" : "Sign up"}
+				</button>
 			</form>
 		</div>
 	);
