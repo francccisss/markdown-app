@@ -7,10 +7,9 @@ interface IAuthFormProps {
 const AuthForm = ({ handleSubmit, action }: IAuthFormProps) => {
 	console.log(action);
 	return (
-		<>
-			<NavLink to={action === "/" ? "/sign-up" : "/"}>Link</NavLink>
-			<form onSubmit={handleSubmit}>This is a form in {action}</form>;
-		</>
+		<form className="text-vn-white" onSubmit={handleSubmit}>
+			This is a form in {action}
+		</form>
 	);
 };
 
