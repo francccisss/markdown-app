@@ -5,7 +5,11 @@ import { useParams, NavLink, useLoaderData } from "react-router-dom";
 const RootAuth = () => {
 	const { action } = useLoaderData();
 	return (
-		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-full">
+		<main
+			id="auth"
+			className="page 
+		flex bg-[#ffffff] h-screen min-w-full"
+		>
 			<section
 				id="left-auth-contents"
 				className="flex-1 flex w-full 
