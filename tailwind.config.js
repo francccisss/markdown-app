@@ -13,7 +13,15 @@ module.exports = {
 			"vn-dshade-green": "#5c8c54",
 			"vn-dshade-white": "#878a8c",
 		},
-		extend: {},
+		extend: {
+			backgroundImage: {
+				"auth-left-waves2": "url('./src/assets/img/hero-content(ph).svg')",
+				"auth-left-waves": "url('./src/assets/img/waves.svg')",
+			},
+			minWidth: {
+				"form-min": "20%",
+			},
+		},
 	},
 	plugins: [],
 };
