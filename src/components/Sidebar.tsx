@@ -1,4 +1,8 @@
-const Sidebar = ({ children }: React.ReactElement) => {
+interface ISidebarProps {
+	children: React.ReactNode;
+}
+
+const Sidebar = ({ children }: ISidebarProps) => {
 	return (
 		<div
 			id="sidebar"
