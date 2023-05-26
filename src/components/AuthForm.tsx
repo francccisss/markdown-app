@@ -25,7 +25,7 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 	return (
 		<div id="auth-form" className="flex w-2/3 flex-col z-10 text-[#ffffff]">
 			<div id="instruct-user-txt">
-				<h1 className="font-semibold text-4xl mb-[8px]">
+				<h1 className="font-semibold mb-[8px] sm:text-2xl lg:text-3xl xl:text-4xl">
 					{action === "/" ? text.signIn.header : text.signUp.header}
 				</h1>
 				<p className="font-light">Enter your account details below</p>
