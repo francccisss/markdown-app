@@ -1,12 +1,14 @@
 import { useEffect, useMemo } from "react";
 import { Link, NavLink } from "react-router-dom";
 
+import { IAuthProps, mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
 	children: React.ReactNode;
 	action: "/" | "/sign-up";
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const AuthForm = ({ action, children }: IAuthFormProps) => {
+const AuthForm = ({ action, children, handleSubmit }: IAuthFormProps) => {
 	const text = {
 		signIn: {
 			header: "Sign in to Vimnotes",
@@ -29,7 +31,15 @@ const AuthForm = ({ action, children }: IAuthFormProps) => {
 				</h1>
 				<p className="font-light">Enter your account details below</p>
 			</div>
-			{children}
+			<form
+				className="text-vn-white flex flex-col gap-9 mt-6 "
+				onSubmit={handleSubmit}
+			>
+				{mapFormInputs(action)}
+				<button type="submit" className="text-[#FFFFFF] bg-vn-blue py-4">
+					{action === "/" ? "Sign in" : "Sign up"}
+				</button>
+			</form>
 			<div id="form-actions">
 				{action === "/" ? (
 					<div
@@ -50,7 +60,10 @@ const AuthForm = ({ action, children }: IAuthFormProps) => {
 							{action === "/" ? text.signIn.noAcc : text.signUp.exist}
 						</p>
 					</span>
-					<Link className="hover:bg-[#D9D9D920] hover:transition-colors duration-150 ease-in-out px-7 py-3 inline-block bg-[#D9D9D910]">
+					<Link
+						to={action === "/" ? "/sign-up" : "/"}
+						className="hover:bg-[#D9D9D920] hover:transition-colors duration-150 ease-in-out px-7 py-3 inline-block bg-[#D9D9D910]"
+					>
 						{action === "/"
 							? text.signIn.linkBtnText
 							: text.signUp.linkBtnText}
