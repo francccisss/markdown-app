@@ -46,11 +46,18 @@ export const mapFormInputs: (action: string) => React.ReactNode = function (
 ) {
 	return showRelevantInputs(action).map((input) => {
 		return (
-			<div key={input.id} className="inputs-container flex flex-col">
-				<label className="block w-full" htmlFor={input.htmlFor}>
+			<div key={input.id} className="inputs-container flex flex-col ">
+				<label
+					className="text-sm block w-full text-[#D9D9D970]"
+					htmlFor={input.htmlFor}
+				>
 					{input.label}
 				</label>
-				<input id={input.id} name={input.name} />
+				<input
+					className="appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]"
+					id={input.id}
+					name={input.name}
+				/>
 			</div>
 		);
 	});
