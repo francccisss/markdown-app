@@ -37,7 +37,7 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 				{mapFormInputs(action)}
 				<button
 					type="submit"
-					className="text-[#FFFFFF] bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
+					className="text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
 				>
 					{action === "/" ? "Sign in" : "Sign up"}
 				</button>
@@ -55,7 +55,7 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 				) : null}
 				<div
 					id="create-signin"
-					className="flex justify-between items-center text-sm pt-6 border-t-[1px] border-[#d9d9d970]"
+					className="flex justify-between items-center text-sm pt-6 border-t-[1px] border-[#d9d9d970] max-lg:text-xs"
 				>
 					<span className="inline-block">
 						<p className="text-[#D9D9D970]">

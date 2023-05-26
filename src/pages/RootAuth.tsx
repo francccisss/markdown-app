@@ -11,8 +11,11 @@ const RootAuth = () => {
 				<AuthContents action={action} />
 			</section>
 			<section
+				style={{
+					boxShadow: "-2px 0px 10px 2px rgba(0,0,0,.5)",
+				}}
 				id="auth-form"
-				className="sm:w-1/2 md:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center min-w-fit"
+				className="z-10 max-md:w-1/2 md:w-5/12  2xl:w-4/12 bg-vn-black flex items-center justify-center min-w-fit"
 			>
 				<AuthForm action={action} />
 			</section>
