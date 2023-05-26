@@ -7,7 +7,7 @@ const SignUp = ({ handleSubmit, action }: IAuthProps) => {
 			onSubmit={handleSubmit}
 		>
 			{mapFormInputs(action)}
-			<button type="submit" className="text-[#FFFFFF] bg-vn-blue py-6">
+			<button type="submit" className="text-[#FFFFFF] bg-vn-blue py-4">
 				Sign Up
 			</button>
 		</form>

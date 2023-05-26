@@ -6,6 +6,7 @@ export const formInputs = [
 		htmlFor: "email",
 		label: "Email",
 		id: "email",
+		type: "email",
 	},
 
 	{
@@ -13,12 +14,14 @@ export const formInputs = [
 		htmlFor: "pass",
 		label: "Password",
 		id: "password",
+		type: "password",
 	},
 
 	{
 		name: "pass-conf",
 		htmlFor: "pass-conf",
 		label: "Confirm Password",
+		type: "password",
 		id: "pass-conf",
 	},
 ];
@@ -46,15 +49,16 @@ export const mapFormInputs: (action: string) => React.ReactNode = function (
 ) {
 	return showRelevantInputs(action).map((input) => {
 		return (
-			<div key={input.id} className="inputs-container flex flex-col ">
+			<div key={input.id} className="inputs-container flex flex-col">
 				<label
-					className="text-sm block w-full text-[#D9D9D970]"
+					className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white"
 					htmlFor={input.htmlFor}
 				>
 					{input.label}
 				</label>
 				<input
-					className="appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]"
+					type={input.type}
+					className="focus-within:border-vn-white focus-within:transition-[border-color] duration-200 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]"
 					id={input.id}
 					name={input.name}
 				/>

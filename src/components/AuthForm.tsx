@@ -22,27 +22,35 @@ const AuthForm = ({ action, children }: IAuthFormProps) => {
 	};
 
 	return (
-		<div className="flex flex-col z-10 text-[#ffffff]">
+		<div id="auth-form" className="flex w-2/3 flex-col z-10 text-[#ffffff]">
 			<div id="instruct-user-txt">
 				<h1 className="font-semibold text-4xl mb-[8px]">
 					{action === "/" ? text.signIn.header : text.signUp.header}
 				</h1>
-				<p>Enter your account details below</p>
+				<p className="font-light">Enter your account details below</p>
 			</div>
 			{children}
 			<div id="form-actions">
 				{action === "/" ? (
-					<div id="forgot-redirect">
-						<Link>{text.signIn.forgot}</Link>
+					<div
+						id="forgot-redirect"
+						className="flex content-center justify-center mt-4 mb-4"
+					>
+						<Link className="inline-block text-[#d9d9d970]">
+							{text.signIn.forgot}
+						</Link>
 					</div>
 				) : null}
-				<div id="create-signin">
-					<span>
-						<p>
+				<div
+					id="create-signin"
+					className="flex justify-between items-center text-sm pt-6 border-t-[1px] border-[#d9d9d970]"
+				>
+					<span className="inline-block">
+						<p className="text-[#D9D9D970]">
 							{action === "/" ? text.signIn.noAcc : text.signUp.exist}
 						</p>
 					</span>
-					<Link>
+					<Link className="hover:bg-[#D9D9D920] hover:transition-colors duration-150 ease-in-out px-7 py-3 inline-block bg-[#D9D9D910]">
 						{action === "/"
 							? text.signIn.linkBtnText
 							: text.signUp.linkBtnText}
