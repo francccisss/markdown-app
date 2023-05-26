@@ -1,7 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import Note from "@/components/Note";
+import Navbar from "@/components/Navbar";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import Sidebar from "@/components/Sidebar";
 
 const App = () => {
 	const navigate = useNavigate();
+	const { noteID } = useParams();
 	return (
 		<main>
 			<h1>This is app page</h1>
@@ -14,6 +18,12 @@ const App = () => {
 			>
 				Back
 			</button>
+
+			<Navbar />
+			<section>
+				<Sidebar />
+				<Outlet />
+			</section>
 		</main>
 	);
 };

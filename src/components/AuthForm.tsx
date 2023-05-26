@@ -35,7 +35,7 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 				className="text-vn-white flex flex-col gap-9 mt-6 "
 				onSubmit={(e) => {
 					e.preventDefault();
-					navigate("/app");
+					navigate("/app/note123");
 				}}
 			>
 				{mapFormInputs(action)}
