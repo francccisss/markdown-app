@@ -1,12 +1,17 @@
 import { useParams, Outlet, useNavigate } from "react-router-dom";
+import Editor from "./Editor";
+import Preview from "./Preview";
 const Note = ({ children }: React.ReactNode) => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
 	return (
-		<div id="note" className="flex-1 bg-vn-black">
+		<section
+			id="note"
+			className="flex flex-1 bg-vn-dshade-black relative text-vn-white"
+		>
 			This is note {noteID}
 			<button
-				className="underline"
+				className="underline absolute top-3/4 "
 				onClick={(e) => {
 					e.preventDefault();
 					navigate(-1);
@@ -14,7 +19,9 @@ const Note = ({ children }: React.ReactNode) => {
 			>
 				Back
 			</button>
-		</div>
+			<Editor />
+			<Preview />
+		</section>
 	);
 };
 

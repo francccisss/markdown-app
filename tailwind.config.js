@@ -12,6 +12,8 @@ module.exports = {
 			"vn-dshade2-blue": "#2c2f40",
 			"vn-dshade-green": "#5c8c54",
 			"vn-dshade-white": "#878a8c",
+			"vn-dshade-white2": "#878A8C10",
+			"vn-dshade-black": "#2D2F33",
 		},
 		extend: {
 			backgroundImage: {
@@ -20,6 +22,10 @@ module.exports = {
 			},
 			minWidth: {
 				"form-min": "20%",
+			},
+			borderColor: {
+				"separator-grey-line": "#878a8c10",
+				"note-grey-line": "#878a8c30",
 			},
 		},
 	},
