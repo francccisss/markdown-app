@@ -19,6 +19,9 @@ module.exports = {
 			backgroundImage: {
 				"auth-left-waves": "url('./src/assets/img/waves.svg')",
 				"auth-left-mini-app": "url('./src/assets/img/mini-app.svg')",
+				"nav-sb-icon": "url('./src/assets/img/hamburger.svg')",
+				"nav-info-icon": "url('./src/assets/img/info.svg')",
+				"nav-more-icon": "url('./src/assets/img/more.svg')",
 			},
 			minWidth: {
 				"form-min": "20%",
