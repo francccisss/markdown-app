@@ -7,20 +7,9 @@ const App = () => {
 	const navigate = useNavigate();
 	const { noteID } = useParams();
 	return (
-		<main>
-			<h1>This is app page</h1>
-			<button
-				className="underline"
-				onClick={(e) => {
-					e.preventDefault();
-					navigate(-1);
-				}}
-			>
-				Back
-			</button>
-
+		<main id="app-page" className=" h-screen flex flex-col relative">
 			<Navbar />
-			<section>
+			<section id="content-section" className="flex-1 flex">
 				<Sidebar />
 				<Outlet />
 			</section>
