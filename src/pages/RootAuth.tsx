@@ -25,7 +25,7 @@ const RootAuth = () => {
 				id="auth-form"
 				className="w-1/2 lg:w-2/5 2xl:w-1/3 bg-vn-black flex items-center justify-center"
 			>
-				<AuthForm>
+				<AuthForm action={action}>
 					{action === "/" ? (
 						<SignIn action={action} />
 					) : (

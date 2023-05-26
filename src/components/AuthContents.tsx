@@ -20,7 +20,7 @@ const AuthContents = ({ action }: { action: "/" | "/sign-up" }) => {
 				</div>
 				<Link
 					to={action === "/" ? "/sign-up" : "/"}
-					className="hover:bg-[#5F72D9] ease-out duration-150 transition-all grow-0 font-bold text-[#ffffff] bg-vn-blue px-10 py-4 text-lg inline-block mt-[19px] drop-shadow-md"
+					className="z-0 hover:bg-[#5F72D9] ease-out duration-150 transition-all grow-0 font-bold text-[#ffffff] bg-vn-blue px-10 py-4 text-lg inline-block mt-[19px] drop-shadow-md"
 				>
 					{action === "/" ? "Create account" : "Do Something"}
 				</Link>
