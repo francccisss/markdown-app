@@ -15,7 +15,7 @@ module.exports = {
 			"vn-dshade-white2": "#878A8C10",
 			"vn-dshade-white3": "#878A8C30",
 			"vn-dshade-black": "#2D2F33",
-			"vn-outline-black": "#878a8c70",
+			"vn-outline-black": "#878a8c80",
 		},
 		extend: {
 			backgroundImage: {
