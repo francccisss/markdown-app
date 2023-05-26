@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { IAuthProps, mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
@@ -8,6 +8,7 @@ interface IAuthFormProps {
 }
 
 const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
+	const navigate = useNavigate();
 	const text = {
 		signIn: {
 			header: "Sign in to Vimnotes",
@@ -32,7 +33,10 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 			</div>
 			<form
 				className="text-vn-white flex flex-col gap-9 mt-6 "
-				onSubmit={handleSubmit}
+				onSubmit={(e) => {
+					e.preventDefault();
+					navigate("/app");
+				}}
 			>
 				{mapFormInputs(action)}
 				<button
