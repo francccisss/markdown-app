@@ -3,12 +3,11 @@ import { Link, NavLink } from "react-router-dom";
 
 import { IAuthProps, mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
-	children: React.ReactNode;
 	action: "/" | "/sign-up";
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const AuthForm = ({ action, children, handleSubmit }: IAuthFormProps) => {
+const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 	const text = {
 		signIn: {
 			header: "Sign in to Vimnotes",
@@ -36,7 +35,10 @@ const AuthForm = ({ action, children, handleSubmit }: IAuthFormProps) => {
 				onSubmit={handleSubmit}
 			>
 				{mapFormInputs(action)}
-				<button type="submit" className="text-[#FFFFFF] bg-vn-blue py-4">
+				<button
+					type="submit"
+					className="text-[#FFFFFF] bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
+				>
 					{action === "/" ? "Sign in" : "Sign up"}
 				</button>
 			</form>
@@ -46,7 +48,7 @@ const AuthForm = ({ action, children, handleSubmit }: IAuthFormProps) => {
 						id="forgot-redirect"
 						className="flex content-center justify-center mt-4 mb-4"
 					>
-						<Link className="inline-block text-[#d9d9d970]">
+						<Link className="hover:underline inline-block text-[#d9d9d970]">
 							{text.signIn.forgot}
 						</Link>
 					</div>
