@@ -1,7 +1,7 @@
 import { useParams, Outlet, useNavigate } from "react-router-dom";
 import Editor from "./Editor";
 import Preview from "./Preview";
-const Note = ({ children }: React.ReactNode) => {
+const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
 	return (
