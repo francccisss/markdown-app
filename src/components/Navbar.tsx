@@ -4,7 +4,7 @@ const Navbar = () => {
 	return (
 		<nav
 			id="navbar"
-			className="h-12 flex bg-vn-black px-8 border-b-[2px] items-center border-separator-grey-line"
+			className="h-12 flex bg-vn-black px-6 border-b-[2px] items-center border-separator-grey-line"
 		>
 			<div id="left" className="flex ">
 				<button className="bg-nav-sb-icon bg-contain w-6 h-6 bg-center " />
