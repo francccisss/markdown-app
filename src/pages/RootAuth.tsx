@@ -1,9 +1,12 @@
 import AuthContents from "@/components/AuthContents";
 import AuthForm from "@/components/AuthForm";
+import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 import { useParams, NavLink, useLoaderData } from "react-router-dom";
 
 const RootAuth = () => {
 	const { action } = useLoaderData();
+
 	return (
 		<main
 			id="auth"
@@ -22,7 +25,13 @@ const RootAuth = () => {
 				id="auth-form"
 				className="w-1/2 lg:w-2/5 2xl:w-1/3 bg-vn-black flex items-center justify-center"
 			>
-				<AuthForm action={action} />
+				<AuthForm>
+					{action === "/" ? (
+						<SignIn action={action} />
+					) : (
+						<SignUp action={action} />
+					)}
+				</AuthForm>
 			</section>
 		</main>
 	);
