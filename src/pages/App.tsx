@@ -1,13 +1,15 @@
 import Note from "@/components/Note";
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/sidebar/Sidebar";
 import SearchBar from "@/components/SearchBar";
 import NoteItem from "@/components/NoteItem";
+import { useRef } from "react";
 
 const App = () => {
 	const navigate = useNavigate();
 	const { noteID } = useParams();
+	const sideBarRef = useRef<HTMLDivElement>();
 	const noteItems = [
 		{
 			id: "0",
@@ -63,14 +65,11 @@ const App = () => {
 	}
 	return (
 		<main id="app-page" className=" h-screen flex flex-col relative ">
-			<Navbar />
-			<section id="content-section" className="flex-1 flex">
-				<Sidebar>
+			<Navbar sideBarRef={sideBarRef} />
+			<section id="content-section" className="flex-1 flex h-[0%]">
+				<Sidebar sideBarRef={sideBarRef}>
 					<SearchBar handleInput={handleSearchInput} />
-					<ul
-						id="notes-list"
-						className="flex flex-col gap-3 overflow-y-auto max-h-screen"
-					>
+					<ul id="notes-list" className="h-full">
 						{noteItems.map((note) => {
 							return <NoteItem key={note.id} note={note} />;
 						})}
