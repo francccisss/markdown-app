@@ -1,12 +1,35 @@
 .sidebar-inactive {
-	transition: all 150ms ease-in-out;
-	overflow-y: hidden;
+	transition: all 130ms ease-in-out;
 	width: 0%;
+	#notes-list,
+	input {
+		display: none;
+		opacity: 0;
+	}
+	#notes-list {
+		overflow: hidden;
+	}
 }
+
+@keyframes notelistActiveAnim {
+	from {
+		overflow: hidden;
+		display: none;
+		opacity: 0;
+	}
+	to {
+		display: block;
+		overflow-y: auto;
+		overflow-x: hidden;
+		opacity: 1;
+	}
+}
+
 .sidebar-active {
 	transition: all 150ms ease-in-out;
 	width: 384px;
-	& > * {
-		appearance: none;
+	#notes-list,
+	input {
+		animation: notelistActiveAnim 150ms forwards ease-in-out;
 	}
 }

@@ -69,7 +69,7 @@ const App = () => {
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<Sidebar sideBarRef={sideBarRef}>
 					<SearchBar handleInput={handleSearchInput} />
-					<ul id="notes-list" className="overflow-y-auto h-full">
+					<ul id="notes-list" className="h-full">
 						{noteItems.map((note) => {
 							return <NoteItem key={note.id} note={note} />;
 						})}
