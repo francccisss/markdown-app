@@ -46,12 +46,9 @@ const App = () => {
 			<section id="content-section" className="flex-1 flex">
 				<Sidebar>
 					<SearchBar handleInput={handleSearchInput} />
-					<ul
-						id="notes-list"
-						className="flex flex-col  border-t-[1px] border-t-vn-outline-black gap-3 "
-					>
+					<ul id="notes-list" className="flex flex-col gap-3 ">
 						{noteItems.map((note) => {
-							return <NoteItem note={note} />;
+							return <NoteItem key={note.id} note={note} />;
 						})}
 					</ul>
 				</Sidebar>
