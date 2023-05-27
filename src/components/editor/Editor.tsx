@@ -12,10 +12,7 @@ interface IEdtiorProps {
 
 const Editor = ({ onChange, input }: IEdtiorProps) => {
 	return (
-		<section
-			id="editor-container"
-			className="border-r-[3px] border-vn-dshade-white3"
-		>
+		<section id="editor-container" className="border-r-[3px] border-vn-black">
 			<ReactCodeMirror
 				theme={editorAppTheme}
 				value={input}

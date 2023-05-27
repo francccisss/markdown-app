@@ -48,7 +48,7 @@ const searchQuery = useCallback(
 			className="flex flex-1 bg-vn-dshade-black relative text-vn-white "
 		>
 			<Editor input={input} onChange={handleEditorOnChange} />
-			<Preview />
+			<Preview markdownInput={input} />
 		</section>
 	);
 };

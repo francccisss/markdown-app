@@ -1,6 +1,6 @@
 #markdown-preview {
 	color: rgb(223, 223, 223);
-	background-color: #242424;
+	background-color: #2d2f33 !important;
 	min-width: 300px;
 	flex: 1;
 	padding: 2em;
@@ -14,6 +14,8 @@
 	}
 }
 
+.markdown-body {
+}
 .pane {
 	border-right: #ffffff60 solid 2px;
 }
