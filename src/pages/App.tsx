@@ -35,6 +35,27 @@ const App = () => {
 			desc: "Random description for this note item",
 			path: "/app/task3",
 		},
+
+		{
+			id: "5",
+			title: "Title 5",
+			desc: "Random description for this note item",
+			path: "/app/task4",
+		},
+
+		{
+			id: "6",
+			title: "Title 6",
+			desc: "description for this note item",
+			path: "/app/task5",
+		},
+
+		{
+			id: "7",
+			title: "Title 7",
+			desc: "> Note item for this note item",
+			path: "/app/task6",
+		},
 	];
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -46,7 +67,10 @@ const App = () => {
 			<section id="content-section" className="flex-1 flex">
 				<Sidebar>
 					<SearchBar handleInput={handleSearchInput} />
-					<ul id="notes-list" className="flex flex-col gap-3 ">
+					<ul
+						id="notes-list"
+						className="flex flex-col gap-3 overflow-y-auto max-h-screen"
+					>
 						{noteItems.map((note) => {
 							return <NoteItem key={note.id} note={note} />;
 						})}
