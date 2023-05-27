@@ -15,7 +15,7 @@ const Navbar = ({ sideBarRef }) => {
 	return (
 		<nav
 			id="navbar"
-			className="min-h-fit bg-no-repeat flex bg-vn-black px-6 py-2 border-b-[2px] items-center border-separator-grey-line"
+			className="min-h-[40px] bg-no-repeat flex bg-vn-black px-6 py-2 border-b-[2px] items-center border-separator-grey-line"
 		>
 			<div id="left" className="flex ">
 				<button
