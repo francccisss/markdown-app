@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import "./sidebarAnimation.scss";
+import "./sidebar.scss";
 interface ISidebarProps {
 	children: React.ReactNode;
 	sideBarRef: MutableRefObject<HTMLDivElement>;

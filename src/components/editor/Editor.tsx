@@ -42,7 +42,6 @@ const searchQuery = useCallback(
 				// onChange={onChange}
 				minWidth="100%"
 				height="100%"
-				style={{}}
 				extensions={[
 					vim(),
 					markdown({
