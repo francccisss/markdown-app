@@ -1,0 +1,15 @@
+.sidebar-inactive {
+	transition: all 150ms ease-in-out;
+	overflow-y: hidden;
+	width: 0%;
+	& > * {
+		appearance: none;
+	}
+}
+.sidebar-active {
+	transition: all 150ms ease-in-out;
+	width: 384px;
+	& > * {
+		appearance: none;
+	}
+}
