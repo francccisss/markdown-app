@@ -13,7 +13,9 @@ module.exports = {
 			"vn-dshade-green": "#5c8c54",
 			"vn-dshade-white": "#878a8c",
 			"vn-dshade-white2": "#878A8C10",
+			"vn-dshade-white3": "#878A8C30",
 			"vn-dshade-black": "#2D2F33",
+			"vn-outline-black": "#878a8c80",
 		},
 		extend: {
 			backgroundImage: {
@@ -22,6 +24,7 @@ module.exports = {
 				"nav-sb-icon": "url('./src/assets/img/hamburger.svg')",
 				"nav-info-icon": "url('./src/assets/img/info.svg')",
 				"nav-more-icon": "url('./src/assets/img/more.svg')",
+				"nav-search-icon": "url('./src/assets/img/search.svg')",
 			},
 			minWidth: {
 				"form-min": "20%",
