@@ -64,7 +64,10 @@ const App = () => {
 		console.log(e.target.value);
 	}
 	return (
-		<main id="app-page" className=" h-screen flex flex-col relative ">
+		<main
+			id="app-page"
+			className=" h-screen w-screen flex flex-col relative "
+		>
 			<Navbar sideBarRef={sideBarRef} />
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<Sidebar sideBarRef={sideBarRef}>

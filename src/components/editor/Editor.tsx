@@ -5,41 +5,21 @@ import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 
-const Editor = () => {
-	const input = `This is a title
-# Header 1
-## jsCode snippet and some shit that i dont understand
-		This is a code snippet
->Line break  
->Another Line Break
+interface IEdtiorProps {
+	onChange: (value: string) => void;
+	input: string;
+}
 
-### This is a list
-1. Ordered list item 1
-2. Ordered list item 2
-3. Ordered list item 3
-	
-\`\`\`js
-const searchQuery = useCallback(
-	(input: string, noteList: Array<{ title: string }>) => {
-			const filterNotes = noteList.filter((note) => {
-				return note.title.includes(input) && note;
-			});
-			console.log(filterNotes);
-			if (input !== "") {
-				return setNoteLists(filterNotes);
-			}
-			return setNoteLists(originalNotes);
-		},
-		[]
-	);
-\`\`\`\
-	`;
+const Editor = ({ onChange, input }: IEdtiorProps) => {
 	return (
-		<section id="editor-container" className="flex-1 font-serif ">
+		<section
+			id="editor-container"
+			className="border-r-[3px] border-vn-dshade-white3"
+		>
 			<ReactCodeMirror
 				theme={editorAppTheme}
 				value={input}
-				// onChange={onChange}
+				onChange={onChange}
 				minWidth="100%"
 				height="100%"
 				extensions={[
