@@ -30,7 +30,7 @@ const Preview = () => {
 	\`\`\`\
 	`;
 	return (
-		<section id="markdown-preview" className=" min-w-[50%]">
+		<section id="markdown-preview" className=" min-w-[300px]">
 			<ReactMarkdown children={"input"} remarkPlugins={[]} />
 		</section>
 	);

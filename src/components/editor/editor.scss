@@ -1,0 +1,17 @@
+#editor-container {
+	color: #242424;
+	min-width: 50%;
+	display: flex;
+	height: 100%;
+	& > div[class^="cm-theme"] {
+		flex: 1;
+	}
+}
+
+.cm-editor {
+	justify-content: space-between;
+}
+
+.cm-gutters {
+	display: inline;
+}
