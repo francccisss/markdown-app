@@ -1,5 +1,48 @@
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Light.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Medium.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-SemiBold.woff2") format("woff2");
+	font-style: nomal;
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Bold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-ExtraBold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 800;
+}
+
 .App {
 	min-width: 500px;
+	font-family: inter, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 input[type="search"] {

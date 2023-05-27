@@ -44,7 +44,7 @@ const searchQuery = useCallback(
 				height="100%"
 				style={{}}
 				extensions={[
-					// vim(),
+					vim(),
 					markdown({
 						base: markdownLanguage,
 						codeLanguages: languages,
@@ -53,6 +53,7 @@ const searchQuery = useCallback(
 				]}
 				basicSetup={{
 					// lineNumbers: false,
+					foldGutter: false,
 					highlightActiveLine: false,
 				}}
 				onCreateEditor={(view, state) => {
