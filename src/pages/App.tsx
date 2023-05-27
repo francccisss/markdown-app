@@ -12,13 +12,13 @@ const App = () => {
 		{
 			id: "0",
 			title: "Title 1",
-			desc: "[x] This is some random description for this note item",
+			desc: "[x] This is some random description for this note item dwadlkajwdaw",
 			path: "/app/task0",
 		},
 		{
 			id: "1",
 			title: "Title 2",
-			desc: "# This is some random description for this note item",
+			desc: "# This is some random description for this note item dwadjawiodj",
 			path: "/app/task1",
 		},
 
@@ -48,7 +48,7 @@ const App = () => {
 					<SearchBar handleInput={handleSearchInput} />
 					<ul
 						id="notes-list"
-						className="flex flex-col  border-t-[1px] border-t-vn-outline-black "
+						className="flex flex-col  border-t-[1px] border-t-vn-outline-black gap-3 "
 					>
 						{noteItems.map((note) => {
 							return <NoteItem note={note} />;

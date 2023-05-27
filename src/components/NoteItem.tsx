@@ -4,7 +4,7 @@ interface INoteItemProps {
 		id: string;
 		title: string;
 		desc: string;
-		path: "string";
+		path: string;
 	};
 }
 
@@ -13,10 +13,12 @@ const NoteItem = ({ note }: INoteItemProps) => {
 		<Link
 			to={note.path}
 			id={note.id}
-			className="note hover:bg-vn-dshade-white3 hover:border-b-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150 px-3 py-3 text-vn-white w-full border-vn-outline-black border-b-[1px] pb-1"
+			className="note block px-5 box-border hover:bg-vn-dshade-white3 hover:border-l-vn-blue hover:border-l-4 select-none cursor-pointer transition-all ease-in-out duration-150 py-3 text-vn-white max-w-full border-vn-outline-black border-l-[2px] pb-1"
 		>
-			<p className="font-semibold uppercase">{note.title}</p>
-			<p className="max-w-[312px] text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
+			<p className="block box-border font-semibold uppercase">
+				{note.title}
+			</p>
+			<p className="box-border max-w-full text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
 				{note.desc}
 			</p>
 		</Link>
