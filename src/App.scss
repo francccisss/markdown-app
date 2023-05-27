@@ -7,3 +7,9 @@ input[type="search"] {
 	-webkit-appearance: none;
 	border: none;
 }
+
+a.active {
+	background-color: #878a8c30;
+	border-left-color: #6b7ff2;
+	border-left-width: 4px;
+}

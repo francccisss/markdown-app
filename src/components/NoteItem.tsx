@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 interface INoteItemProps {
 	note: {
 		id: string;
@@ -10,7 +10,7 @@ interface INoteItemProps {
 
 const NoteItem = ({ note }: INoteItemProps) => {
 	return (
-		<Link
+		<NavLink
 			to={note.path}
 			id={note.id}
 			className="note block px-5 box-border hover:bg-vn-dshade-white3 hover:border-l-vn-blue hover:border-l-4 select-none cursor-pointer transition-all ease-in-out duration-150 py-3 text-vn-white max-w-full border-vn-outline-black border-l-[2px] pb-1"
@@ -21,7 +21,7 @@ const NoteItem = ({ note }: INoteItemProps) => {
 			<p className="box-border max-w-full text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
 				{note.desc}
 			</p>
-		</Link>
+		</NavLink>
 	);
 };
 
