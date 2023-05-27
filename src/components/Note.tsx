@@ -14,7 +14,7 @@ const Note = () => {
 				className="underline absolute top-3/4 "
 				onClick={(e) => {
 					e.preventDefault();
-					navigate(-1);
+					navigate("/");
 				}}
 			>
 				Back
