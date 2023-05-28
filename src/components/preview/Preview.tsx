@@ -11,7 +11,7 @@ interface IPreviewProps {
 
 const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
-		<section id="markdown-preview" className="markdown-body px-4">
+		<section id="markdown-preview" className="markdown-body px-4 z-10">
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}
@@ -21,7 +21,6 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 						return !inline && match ? (
 							<SyntaxHighlighter
 								{...props}
-								// useInlineStyles={false}
 								className={"syntax-highlighter"}
 								children={String(children).replace(/\n$/, "")}
 								style={previewStyle}

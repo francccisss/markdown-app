@@ -1,9 +1,7 @@
 #editor-container {
 	color: #242424;
-	min-width: 50%;
+	width: 100px;
 	display: flex;
-	height: 100%;
-
 	& > div[class^="cm-theme"] {
 		flex: 1;
 	}

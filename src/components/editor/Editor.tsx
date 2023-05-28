@@ -17,7 +17,8 @@ const Editor = ({ onChange, input }: IEdtiorProps) => {
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
-				minWidth="100%"
+				minWidth="0"
+				// className="markdown-body"
 				height="100%"
 				extensions={[
 					vim(),
