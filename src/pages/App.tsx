@@ -1,4 +1,4 @@
-import Note from "@/components/Note";
+import Note from "@/components/note/Note";
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "@/components/sidebar/Sidebar";

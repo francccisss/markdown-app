@@ -1,13 +1,14 @@
 import { useParams, Outlet, useNavigate } from "react-router-dom";
-import Editor from "./editor/Editor";
-import Preview from "./preview/Preview";
+import Editor from "../editor/Editor";
+import Preview from "../preview/Preview";
 import SplitPane from "split-pane-react/esm/SplitPane";
 import { Pane } from "split-pane-react";
 import { useRef, useState } from "react";
+import "./note.scss";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [editorWidth, setEditorWidth] = useState<number>(50);
+	const [editorWidth, setEditorWidth] = useState<number>(20);
 	const [isResizing, setIsResizing] = useState(false);
 	const editorRef = useRef();
 	const paneRef = useRef();
@@ -47,14 +48,20 @@ const searchQuery = useCallback(
 	}
 
 	function onMovePane(e): void {
-		const pane = e.target;
-		const paneWidth = Number(paneRef.current.style.width.slice(0, 1));
-		const mouseX = e.nativeEvent.offsetX;
-		if (mouseX < paneWidth / 2 && isResizing) {
-			setEditorWidth((prev) => prev - 0.1);
-		} else if (mouseX > paneWidth / 2 && isResizing) {
-			setEditorWidth((prev) => prev + 0.1);
+		const mouseX = e.clientX;
+		const calculatePanePos = (mouseX / window.innerWidth) * 100;
+		const currentPanePos = (calculatePanePos / 100) * window.innerWidth;
+		//  can only read if mouse enters the pane
+		//  cant read if mouse leaves pane and wont calculate less than 1
+		//	1 = mouse entered element
+		// <1 = unreadable
+		if (mouseX < currentPanePos) {
+			console.log("reduce");
+		} else {
+			console.log("increase");
+			setEditorWidth((prev) => prev + 5);
 		}
+		console.log({ pane: currentPanePos });
 		console.log({ x: mouseX });
 	}
 
@@ -65,7 +72,10 @@ const searchQuery = useCallback(
 	return (
 		<section
 			id="note"
-			className="flex flex-1 bg-vn-dshade-black relative text-vn-white "
+			className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
+			onMouseMove={(e) => {
+				console.log({ x: e.clientX });
+			}}
 		>
 			<Editor
 				editorRef={editorRef}

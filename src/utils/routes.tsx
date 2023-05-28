@@ -1,4 +1,4 @@
-import Note from "@/components/Note";
+import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
 import { NavLink, createBrowserRouter } from "react-router-dom";
