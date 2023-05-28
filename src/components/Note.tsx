@@ -9,6 +9,7 @@ const Note = () => {
 	const navigate = useNavigate();
 	const [editorWidth, setEditorWidth] = useState<number>(0);
 	const editorRef = useRef();
+	const paneRef = useRef();
 	const [input, setInput] = useState<string>(`
 This is a title
 # Header 1
@@ -50,6 +51,16 @@ const searchQuery = useCallback(
 		setEditorWidth(width);
 	}
 
+	function onMovePane(e): void {
+		const pane = e.target;
+		const paneWidth = paneRef.current.style.width;
+		console.log(paneWidth);
+		// const mouseX = e.clientX;
+		// const mouseY = e.clientY;
+		// console.log(pane);
+		// console.log({ x: mouseX, y: mouseY });
+	}
+
 	return (
 		<section
 			id="note"
@@ -62,8 +73,11 @@ const searchQuery = useCallback(
 				onChange={handleEditorOnChange}
 			/>
 			<div
+				ref={paneRef}
 				onClick={getCurrentEditorWidth}
-				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize w-[5px] bg-vn-black box-content"
+				onMouseMove={onMovePane}
+				style={{ width: "6px" }}
+				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  bg-vn-black box-content"
 			/>
 			<Preview markdownInput={input} />
 		</section>

@@ -17,8 +17,8 @@ const Editor = ({ onChange, input, editorRef, newWidth }: IEdtiorProps) => {
 		<section
 			id="editor-container"
 			ref={editorRef}
-			className="z-10 h-full"
-			// style={{ width: `${newWidth}%` }}
+			className="z-10 h-full w-1/2"
+			style={{ width: "50%" }}
 		>
 			<ReactCodeMirror
 				theme={editorAppTheme}
