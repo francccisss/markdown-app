@@ -7,7 +7,8 @@ import { useRef, useState } from "react";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [editorWidth, setEditorWidth] = useState<number>(0);
+	const [editorWidth, setEditorWidth] = useState<number>(50);
+	const [isResizing, setIsResizing] = useState(false);
 	const editorRef = useRef();
 	const paneRef = useRef();
 	const [input, setInput] = useState<string>(`
@@ -45,20 +46,20 @@ const searchQuery = useCallback(
 		setInput(editorMarkdownValue);
 	}
 
-	function getCurrentEditorWidth(): void {
-		const width = editorRef.current.style.width;
-		console.log(width);
-		setEditorWidth(width);
-	}
-
 	function onMovePane(e): void {
 		const pane = e.target;
-		const paneWidth = paneRef.current.style.width;
-		console.log(paneWidth);
-		// const mouseX = e.clientX;
-		// const mouseY = e.clientY;
-		// console.log(pane);
-		// console.log({ x: mouseX, y: mouseY });
+		const paneWidth = Number(paneRef.current.style.width.slice(0, 1));
+		const mouseX = e.nativeEvent.offsetX;
+		if (mouseX < paneWidth / 2 && isResizing) {
+			setEditorWidth((prev) => prev - 0.1);
+		} else if (mouseX > paneWidth / 2 && isResizing) {
+			setEditorWidth((prev) => prev + 0.1);
+		}
+		console.log({ x: mouseX });
+	}
+
+	function resizingState() {
+		return isResizing ? setIsResizing(false) : setIsResizing(true);
 	}
 
 	return (
@@ -74,8 +75,9 @@ const searchQuery = useCallback(
 			/>
 			<div
 				ref={paneRef}
-				onClick={getCurrentEditorWidth}
+				onMouseUp={resizingState}
 				onMouseMove={onMovePane}
+				onMouseDown={resizingState}
 				style={{ width: "6px" }}
 				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  bg-vn-black box-content"
 			/>
