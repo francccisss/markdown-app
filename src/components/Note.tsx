@@ -7,6 +7,7 @@ import { useState } from "react";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
+	const [sizes, setSizes] = useState([100, "30%", "auto"]);
 	const [input, setInput] = useState<string>(`
 This is a title
 # Header 1
@@ -48,6 +49,7 @@ const searchQuery = useCallback(
 			className="flex flex-1 bg-vn-dshade-black relative text-vn-white "
 		>
 			<Editor input={input} onChange={handleEditorOnChange} />
+			<div className="pane h-full w-4" />
 			<Preview markdownInput={input} />
 		</section>
 	);

@@ -12,12 +12,12 @@ interface IEdtiorProps {
 
 const Editor = ({ onChange, input }: IEdtiorProps) => {
 	return (
-		<section id="editor-container" className="border-r-[3px] border-vn-black">
+		<section id="editor-container" className="z-10 h-full ">
 			<ReactCodeMirror
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
-				minWidth="0"
+				minWidth="0px"
 				// className="markdown-body"
 				height="100%"
 				extensions={[

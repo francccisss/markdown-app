@@ -1,17 +1,12 @@
 #editor-container {
-	color: #242424;
-	width: 100px;
-	display: flex;
-	& > div[class^="cm-theme"] {
-		flex: 1;
-	}
-	.cm-content {
-		font-weight: 600;
-	}
+	width: 40%;
 }
 
+.cm-content {
+	font-weight: 600;
+}
 .cm-editor {
-	justify-content: space-between;
+	height: 100vh;
 }
 
 .cm-gutters {
