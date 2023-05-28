@@ -8,6 +8,7 @@
 	overflow: auto;
 	pre {
 		background-color: #ffffff15;
+		padding: 0.8em !important;
 	}
 	blockquote {
 		border-left-color: #ffffff50;
@@ -15,6 +16,18 @@
 }
 
 .markdown-body {
+	&::-webkit-scrollbar {
+		width: 0.3em;
+	}
+
+	&::-webkit-scrollbar-track {
+		// box-shadow: ;
+		background-color: #222326;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: #878a8c70;
+	}
 }
 .pane {
 	border-right: #ffffff60 solid 2px;
