@@ -3,11 +3,12 @@ import Editor from "./editor/Editor";
 import Preview from "./preview/Preview";
 import SplitPane from "split-pane-react/esm/SplitPane";
 import { Pane } from "split-pane-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [sizes, setSizes] = useState([100, "30%", "auto"]);
+	const [editorWidth, setEditorWidth] = useState<number>(0);
+	const editorRef = useRef();
 	const [input, setInput] = useState<string>(`
 This is a title
 # Header 1
@@ -43,13 +44,27 @@ const searchQuery = useCallback(
 		setInput(editorMarkdownValue);
 	}
 
+	function getCurrentEditorWidth(): void {
+		const width = editorRef.current.style.width;
+		console.log(width);
+		setEditorWidth(width);
+	}
+
 	return (
 		<section
 			id="note"
 			className="flex flex-1 bg-vn-dshade-black relative text-vn-white "
 		>
-			<Editor input={input} onChange={handleEditorOnChange} />
-			<div className="pane h-full w-4" />
+			<Editor
+				editorRef={editorRef}
+				newWidth={editorWidth}
+				input={input}
+				onChange={handleEditorOnChange}
+			/>
+			<div
+				onClick={getCurrentEditorWidth}
+				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize w-[5px] bg-vn-black box-content"
+			/>
 			<Preview markdownInput={input} />
 		</section>
 	);

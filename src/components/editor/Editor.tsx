@@ -8,11 +8,18 @@ import "./editor.scss";
 interface IEdtiorProps {
 	onChange: (value: string) => void;
 	input: string;
+	editorRef;
+	newWidth: number;
 }
 
-const Editor = ({ onChange, input }: IEdtiorProps) => {
+const Editor = ({ onChange, input, editorRef, newWidth }: IEdtiorProps) => {
 	return (
-		<section id="editor-container" className="z-10 h-full ">
+		<section
+			id="editor-container"
+			ref={editorRef}
+			className="z-10 h-full"
+			// style={{ width: `${newWidth}%` }}
+		>
 			<ReactCodeMirror
 				theme={editorAppTheme}
 				value={input}

@@ -11,10 +11,7 @@ interface IPreviewProps {
 
 const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
-		<section
-			id="markdown-preview"
-			className="markdown-body px-4 z-10 border-l-2 border-vn-black"
-		>
+		<section id="markdown-preview" className="markdown-body px-4 z-10 ">
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}
