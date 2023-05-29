@@ -56,3 +56,9 @@ a.active {
 	border-left-color: #6b7ff2;
 	border-left-width: 4px;
 }
+
+.btn-actions {
+	&:hover {
+		background-color: #878a8c30;
+	}
+}

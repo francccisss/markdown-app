@@ -25,6 +25,7 @@ module.exports = {
 				"nav-info-icon": "url('./src/assets/img/info.svg')",
 				"nav-more-icon": "url('./src/assets/img/more.svg')",
 				"nav-search-icon": "url('./src/assets/img/search.svg')",
+				"add-note-icon": "url('./src/assets/img/add_circle.svg')",
 			},
 			minWidth: {
 				"form-min": "20%",

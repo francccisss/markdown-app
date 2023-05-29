@@ -67,7 +67,7 @@ const searchQuery = useCallback(
 		if (isResizing !== 0) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);
-				if (mouseX < 30) setPaneWidth(0);
+				if (mouseX < 50) setPaneWidth(0);
 			} else if (sideBar?.className.includes("sidebar-active")) {
 				setPaneWidth(mouseX - 384);
 			}
