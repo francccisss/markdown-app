@@ -13,7 +13,7 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
 		<section
 			id="markdown-preview"
-			className="markdown-body px-4 z-10 min-w-fit"
+			className="markdown-body px-4 z-10 min-w-[30%]"
 		>
 			<ReactMarkdown
 				children={markdownInput}

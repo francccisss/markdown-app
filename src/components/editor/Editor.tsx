@@ -36,7 +36,7 @@ const Editor = ({ onChange, input, editorRef, newWidth }: IEdtiorProps) => {
 					}),
 				]}
 				basicSetup={{
-					// lineNumbers: false,
+					lineNumbers: false,
 					foldGutter: false,
 					highlightActiveLine: false,
 				}}

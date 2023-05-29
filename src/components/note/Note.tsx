@@ -11,7 +11,7 @@ const Note = () => {
 	const navigate = useNavigate();
 	const [editorWidth, setEditorWidth] = useState<number>(500);
 	const [currentPanePos, setCurrentPanePos] = useState<number>();
-	const [isResizing, setResizing] = useState<number>(0);
+	const [isResizing, setIsResizing] = useState<number>(0);
 	const editorRef = useRef();
 	const paneRef = useRef();
 	const [input, setInput] = useState<string>(`
@@ -50,7 +50,7 @@ const searchQuery = useCallback(
 	}
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
-		setResizing(e.clientX);
+		setIsResizing(e.clientX);
 	}
 
 	function resizePane(e: React.MouseEvent): void {
@@ -86,13 +86,12 @@ const searchQuery = useCallback(
 				onChange={handleEditorOnChange}
 			/>
 			<div
-				ref={paneRef}
 				onMouseDownCapture={handleOnMouseDown}
 				onMouseUpCapture={() => {
-					setResizing(0);
+					setIsResizing(0);
 				}}
-				style={{ width: "6px" }}
-				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  bg-vn-black box-content"
+				style={{ width: "4px" }}
+				className=" h-full hover:bg-vn-outline-black  transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-8 bg-vn-black box-content"
 			/>
 			<Preview markdownInput={input} />
 		</section>
