@@ -1,5 +1,5 @@
 import ReactCodeMirror from "@uiw/react-codemirror";
-import { editorAppTheme } from "@/assets/themes/editorTheme";
+import { editorAppTheme } from "@/assets/themes/editorThemecopy";
 import { vim } from "@replit/codemirror-vim";
 import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
