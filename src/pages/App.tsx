@@ -5,6 +5,7 @@ import NoteItem from "@/components/NoteItem";
 import { useCallback, useEffect, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
+import { uid } from "uid";
 
 const App = () => {
 	const navigate = useNavigate();
@@ -15,48 +16,48 @@ const App = () => {
 		{
 			id: "0",
 			title: "Title 1",
-			desc: "[x] This is some random description for this note item dwadlkajwdaw",
+			md: "[x] This is some random mdription for this note item dwadlkajwdaw",
 			path: "/app/task0",
 		},
 		{
 			id: "1",
 			title: "Title 2",
-			desc: "# This is some random description for this note item dwadjawiodj",
+			md: "# This is some random mdription for this note item dwadjawiodj",
 			path: "/app/task1",
 		},
 
 		{
 			id: "3",
 			title: "Title 3",
-			desc: "o This is some random description for this note item",
+			md: "o This is some random mdription for this note item",
 			path: "/app/task2",
 		},
 
 		{
 			id: "4",
 			title: "Title 4",
-			desc: "Random description for this note item",
+			md: "Random mdription for this note item",
 			path: "/app/task3",
 		},
 
 		{
 			id: "5",
 			title: "Title 5",
-			desc: "Random description for this note item",
+			md: "Random mdription for this note item",
 			path: "/app/task4",
 		},
 
 		{
 			id: "6",
 			title: "Title 6",
-			desc: "description for this note item",
+			md: "mdription for this note item",
 			path: "/app/task5",
 		},
 
 		{
 			id: "7",
 			title: "Title 7",
-			desc: "> Note item for this note item",
+			md: "> Note item for this note item",
 			path: "/app/task6",
 		},
 	]);
@@ -71,7 +72,7 @@ const App = () => {
 		// Filter the notes state and using the originalNotes array as a referenece on WHAT to filter.
 		// because we're filtering the state and then setting the filtered state as our new state
 		// so if we backspace or delete some parts of the text that STILL matches the requirements of
-		// note.title.includes, all of the notes that currently matches the searchInput wont show up because
+		// note.title.includes, all of the note.title that currently matches the searchInput wont show up because
 		// as stated ;) before, it has been filtered out, so we need a reference to the original state before
 		// it was modified.
 		if (input !== "") {
@@ -89,6 +90,24 @@ const App = () => {
 		searchQuery(searchInput);
 	}, [searchInput]);
 
+	interface INewNote {
+		id: string;
+		title: string;
+		md: string;
+		path: string;
+	}
+	async function addNote(): Promise<void> {
+		const newID = uid(16).toString();
+		const newNote: INewNote = {
+			id: newID,
+			title: "New Note",
+			md: "This is a markdown notetaking app powered by vim keybindings",
+			path: `/app/${newID}`,
+		};
+		setNotes((prev) => [newNote, ...prev]);
+		console.log(newNote);
+	}
+
 	return (
 		<main
 			id="app-page"
@@ -100,6 +119,7 @@ const App = () => {
 					<SidebarActions
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
+						addNote={addNote}
 					/>
 					<ul id="notes-list" className="h-full ">
 						{notes.map((note) => {

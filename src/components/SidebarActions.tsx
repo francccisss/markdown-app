@@ -1,9 +1,14 @@
 interface ISearchBarProps {
 	handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	searchInput: string;
+	addNote: () => void;
 }
 
-const SidebarActions = ({ handleInput, searchInput }: ISearchBarProps) => {
+const SidebarActions = ({
+	handleInput,
+	searchInput,
+	addNote,
+}: ISearchBarProps) => {
 	return (
 		<div
 			id="sidebar-actions"
@@ -17,6 +22,7 @@ const SidebarActions = ({ handleInput, searchInput }: ISearchBarProps) => {
 				value={searchInput}
 			/>
 			<button
+				onClick={addNote}
 				id="add-note"
 				className="btn-actions ml-auto w-[35px] h-[35px] flex justify-center items-center"
 			>

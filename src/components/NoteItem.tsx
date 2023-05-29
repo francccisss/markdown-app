@@ -3,7 +3,7 @@ interface INoteItemProps {
 	note: {
 		id: string;
 		title: string;
-		desc: string;
+		md: string;
 		path: string;
 	};
 }
@@ -19,7 +19,7 @@ const NoteItem = ({ note }: INoteItemProps) => {
 				{note.title}
 			</p>
 			<p className="box-border max-w-full text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
-				{note.desc}
+				{note.md}
 			</p>
 		</NavLink>
 	);
