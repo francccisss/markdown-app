@@ -1,8 +1,9 @@
 interface ISearchBarProps {
 	handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	searchInput: string;
 }
 
-const SidebarActions = ({ handleInput }: ISearchBarProps) => {
+const SidebarActions = ({ handleInput, searchInput }: ISearchBarProps) => {
 	return (
 		<div
 			id="sidebar-actions"
@@ -13,6 +14,7 @@ const SidebarActions = ({ handleInput }: ISearchBarProps) => {
 				type="search"
 				onChange={handleInput}
 				placeholder="Search notes..."
+				value={searchInput}
 			/>
 			<button
 				id="add-note"
@@ -41,30 +43,30 @@ const SidebarActions = ({ handleInput }: ISearchBarProps) => {
 					<path
 						d="M2.125 4.07294H10.2708"
 						stroke="#878A8C"
-						stroke-width="0.882289"
-						stroke-linecap="round"
-						stroke-linejoin="round"
+						strokeWidth="0.882289"
+						strokeLinecap="round"
+						strokeLinejoin="round"
 					/>
 					<path
 						d="M2.125 8.67709H10.2708"
 						stroke="#878A8C"
-						stroke-width="0.882289"
-						stroke-linecap="round"
-						stroke-linejoin="round"
+						strokeWidth="0.882289"
+						strokeLinecap="round"
+						strokeLinejoin="round"
 					/>
 					<path
 						d="M12.75 4.07294V13.2813L14.875 10.8021"
 						stroke="#878A8C"
-						stroke-width="0.882289"
-						stroke-linecap="round"
-						stroke-linejoin="round"
+						strokeWidth="0.882289"
+						strokeLinecap="round"
+						strokeLinejoin="round"
 					/>
 					<path
 						d="M2.125 13.2812H10.2708"
 						stroke="#878A8C"
-						stroke-width="0.882289"
-						stroke-linecap="round"
-						stroke-linejoin="round"
+						strokeWidth="0.882289"
+						strokeLinecap="round"
+						strokeLinejoin="round"
 					/>
 				</svg>
 			</button>
