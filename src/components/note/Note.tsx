@@ -9,7 +9,7 @@ import { connectFirestoreEmulator } from "firebase/firestore";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [editorWidth, setEditorWidth] = useState<number>(500);
+	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [currentPanePos, setCurrentPanePos] = useState<number>();
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const editorRef = useRef();
@@ -63,12 +63,12 @@ const searchQuery = useCallback(
 
 		// does this go against react's principles of not manipulating the original DOM?
 		// im just reading it so.. please tell me.
-
+		console.log(paneWidth);
 		if (isResizing !== 0) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
-				setEditorWidth(mouseX - 0);
+				setPaneWidth(mouseX - 0);
 			} else if (sideBar?.className.includes("sidebar-active")) {
-				setEditorWidth(mouseX - 384);
+				setPaneWidth(mouseX - 384);
 			}
 		}
 	}
@@ -80,8 +80,7 @@ const searchQuery = useCallback(
 			onMouseMove={resizePane}
 		>
 			<Editor
-				editorRef={editorRef}
-				newWidth={editorWidth}
+				newWidth={null}
 				input={input}
 				onChange={handleEditorOnChange}
 			/>
@@ -93,7 +92,7 @@ const searchQuery = useCallback(
 				style={{ width: "4px" }}
 				className=" h-full hover:bg-vn-outline-black  transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-8 bg-vn-black box-content"
 			/>
-			<Preview markdownInput={input} />
+			<Preview newWidth={paneWidth} markdownInput={input} />
 		</section>
 	);
 };

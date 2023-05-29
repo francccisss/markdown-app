@@ -5,20 +5,18 @@ import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 
-interface IEdtiorProps {
+export interface IEdtiorProps {
 	onChange: (value: string) => void;
 	input: string;
-	editorRef;
-	newWidth: number;
+	newWidth: number | null;
 }
 
-const Editor = ({ onChange, input, editorRef, newWidth }: IEdtiorProps) => {
+const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 	return (
 		<section
 			id="editor-container"
-			ref={editorRef}
 			className="z-10 h-full w-1/2"
-			style={{ width: `${newWidth}px` }}
+			style={{ width: `${500 ?? newWidth}px` }}
 		>
 			<ReactCodeMirror
 				theme={editorAppTheme}

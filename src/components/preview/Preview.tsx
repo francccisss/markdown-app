@@ -7,13 +7,15 @@ import { oneDark as previewStyle } from "react-syntax-highlighter/dist/esm/style
 
 interface IPreviewProps {
 	markdownInput: string;
+	newWidth: number | null;
 }
 
-const Preview = ({ markdownInput }: IPreviewProps) => {
+const Preview = ({ markdownInput, newWidth }: IPreviewProps) => {
 	return (
 		<section
 			id="markdown-preview"
-			className="markdown-body px-4 z-10 min-w-[30%]"
+			className={`markdown-body px-4 z-10 `}
+			style={{ width: `${newWidth}px` }}
 		>
 			<ReactMarkdown
 				children={markdownInput}
