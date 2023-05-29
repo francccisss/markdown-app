@@ -78,6 +78,9 @@ const searchQuery = useCallback(
 			id="note"
 			className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
 			onMouseMove={resizePane}
+			onMouseUpCapture={() => {
+				setIsResizing(0);
+			}}
 		>
 			<Editor
 				newWidth={paneWidth}
@@ -86,11 +89,7 @@ const searchQuery = useCallback(
 			/>
 			<div
 				onMouseDownCapture={handleOnMouseDown}
-				onMouseUpCapture={() => {
-					setIsResizing(0);
-				}}
-				style={{ width: "4px" }}
-				className=" h-full hover:bg-vn-outline-black  transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-8 bg-vn-black box-content"
+				className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
 			/>
 			<Preview markdownInput={input} />
 		</section>
