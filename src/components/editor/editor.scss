@@ -9,6 +9,9 @@
 	display: inline;
 }
 .cm-scroller {
+	overflow-y: hidden;
+}
+#editor-container {
 	&::-webkit-scrollbar {
 		width: 0.3em;
 	}

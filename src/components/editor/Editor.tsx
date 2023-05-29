@@ -15,7 +15,7 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 	return (
 		<section
 			id="editor-container"
-			className="z-10 h-full w-1/2"
+			className="z-10 h-full w-1/2 overflow-y-auto"
 			style={{ width: `${newWidth}px` }}
 		>
 			<ReactCodeMirror

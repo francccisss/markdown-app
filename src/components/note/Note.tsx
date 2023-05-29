@@ -9,7 +9,7 @@ import { connectFirestoreEmulator } from "firebase/firestore";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [paneWidth, setPaneWidth] = useState<number>(30);
+	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [currentPanePos, setCurrentPanePos] = useState<number>();
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const editorRef = useRef();

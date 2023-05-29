@@ -27,6 +27,7 @@
 		"@uiw/react-codemirror": "^4.20.2",
 		"electron-updater": "^5.3.0",
 		"firebase": "^9.22.0",
+		"framer-motion": "^10.12.16",
 		"github-markdown-css": "^5.2.0",
 		"react-markdown": "^8.0.7",
 		"react-router-dom": "^6.11.2",
