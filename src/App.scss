@@ -58,7 +58,9 @@ a.active {
 }
 
 .btn-actions {
+	transition: all 150ms ease-in;
 	&:hover {
-		background-color: #878a8c30;
+		filter: invert(44%) sepia(55%) saturate(1036%) hue-rotate(202deg)
+			brightness(102%) contrast(90%);
 	}
 }
