@@ -72,24 +72,19 @@ const searchQuery = useCallback(
 
 	function resizePane(e: React.MouseEvent): void {
 		const mouseX = e.clientX;
-		// calculate again  and instead of using the current position of the mouse
-		// use the initial position that was set on click from getPaneAndMousePosition
-		const calculatePanePos = (currentPanePos / window.innerWidth) * 100;
+		let sideBar = document.getElementById("sidebar");
 
-		// set the new calculate position of pane
-		// no need to use state since we can still get the updated currentPane state
-		// from calculatePanePos
-		setCurrentPanePos((calculatePanePos / 100) * window.innerWidth);
-		console.log({ x: mouseX });
-		console.log({ pane: currentPanePos });
-		// set editors width to mouseX's position
-		if (mouseX < currentPanePos) {
-			console.log("decrement");
-			setEditorWidth((prev) => prev - 50);
-		}
-		if (mouseX > currentPanePos) {
-			console.log("increment");
-			setEditorWidth((prev) => prev + 50);
+		// set editors width to mouseX's position - sidebar width
+		// test need to know if sidebar is active or not cuase if active then we need to take into account
+		// the width of the side bar which is 384px
+
+		// does this go against react's principles of not manipulating the original DOM?
+		// im just reading it so.. please tell me.
+
+		if (sideBar?.className.includes("sidebar-inactive")) {
+			setEditorWidth(mouseX - 0);
+		} else if (sideBar?.className.includes("sidebar-active")) {
+			setEditorWidth(mouseX - 384);
 		}
 	}
 
