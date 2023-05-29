@@ -11,7 +11,7 @@ const Note = () => {
 	const navigate = useNavigate();
 	const [editorWidth, setEditorWidth] = useState<number>(500);
 	const [currentPanePos, setCurrentPanePos] = useState<number>();
-	const [isResizing, setResizing] = useState<boolean>(false);
+	const [isResizing, setResizing] = useState<number>(0);
 	const editorRef = useRef();
 	const paneRef = useRef();
 	const [input, setInput] = useState<string>(`
@@ -49,25 +49,8 @@ const searchQuery = useCallback(
 		setInput(editorMarkdownValue);
 	}
 
-	function getPaneAndMousePosition(e: React.MouseEvent): void {
-		setResizing(true);
-
-		// we can get the initial pane position on click
-		// since we can't actually get position of pane we can use mouse
-		// position to locate where the pane is
-		const mouseX = e.clientX;
-		// get percentage of pane
-		// from current mouse position (which is pane) relative to origin point
-		// of viewport width or X
-		const calculatePanePos = (mouseX / window.innerWidth) * 100;
-
-		// converting to pixel
-		// say pane is  x% of total width
-		// to x is x-px of total width
-		// purpose of this calculation is so that we can compare
-		// if mouse x is greater or less than position of pane
-		// so that we can increment or decrement width of editor by pixels
-		setCurrentPanePos((calculatePanePos / 100) * window.innerWidth);
+	function handleOnMouseDown(e: React.MouseEvent): void {
+		setResizing(e.clientX);
 	}
 
 	function resizePane(e: React.MouseEvent): void {
@@ -81,10 +64,12 @@ const searchQuery = useCallback(
 		// does this go against react's principles of not manipulating the original DOM?
 		// im just reading it so.. please tell me.
 
-		if (sideBar?.className.includes("sidebar-inactive")) {
-			setEditorWidth(mouseX - 0);
-		} else if (sideBar?.className.includes("sidebar-active")) {
-			setEditorWidth(mouseX - 384);
+		if (isResizing !== 0) {
+			if (sideBar?.className.includes("sidebar-inactive")) {
+				setEditorWidth(mouseX - 0);
+			} else if (sideBar?.className.includes("sidebar-active")) {
+				setEditorWidth(mouseX - 384);
+			}
 		}
 	}
 
@@ -102,9 +87,9 @@ const searchQuery = useCallback(
 			/>
 			<div
 				ref={paneRef}
-				onMouseDown={getPaneAndMousePosition}
-				onMouseUp={() => {
-					setResizing(false);
+				onMouseDownCapture={handleOnMouseDown}
+				onMouseUpCapture={() => {
+					setResizing(0);
 				}}
 				style={{ width: "6px" }}
 				className=" h-full hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  bg-vn-black box-content"
