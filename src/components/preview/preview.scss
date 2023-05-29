@@ -16,16 +16,23 @@
 
 .markdown-body {
 	&::-webkit-scrollbar {
-		width: 0.3em;
+		width: 0.6em;
 	}
 
 	&::-webkit-scrollbar-track {
 		// box-shadow: ;
-		background-color: #222326;
+		background-color: #22232600;
 	}
 
 	&::-webkit-scrollbar-thumb {
+		background: #878a8c50;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
 		background: #878a8c70;
+	}
+	&::-webkit-scrollbar-thumb:active {
+		background: #878a8c90;
 	}
 }
 .pane {
