@@ -8,7 +8,7 @@ import "./editor.scss";
 export interface IEdtiorProps {
 	onChange: (value: string) => void;
 	input: string;
-	newWidth: number | null;
+	newWidth?: number;
 }
 
 const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
@@ -16,14 +16,13 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 		<section
 			id="editor-container"
 			className="z-10 h-full w-1/2"
-			style={{ width: `${500 ?? newWidth}px` }}
+			style={{ width: `${newWidth}px` }}
 		>
 			<ReactCodeMirror
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
 				minWidth="0px"
-				// className="markdown-body"
 				height="100%"
 				extensions={[
 					vim(),

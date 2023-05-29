@@ -9,7 +9,7 @@ import { connectFirestoreEmulator } from "firebase/firestore";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const [paneWidth, setPaneWidth] = useState<number>(500);
+	const [paneWidth, setPaneWidth] = useState<number>(30);
 	const [currentPanePos, setCurrentPanePos] = useState<number>();
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const editorRef = useRef();
@@ -66,7 +66,7 @@ const searchQuery = useCallback(
 		console.log(paneWidth);
 		if (isResizing !== 0) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
-				setPaneWidth(mouseX - 0);
+				setPaneWidth(mouseX);
 			} else if (sideBar?.className.includes("sidebar-active")) {
 				setPaneWidth(mouseX - 384);
 			}
@@ -80,7 +80,7 @@ const searchQuery = useCallback(
 			onMouseMove={resizePane}
 		>
 			<Editor
-				newWidth={null}
+				newWidth={paneWidth}
 				input={input}
 				onChange={handleEditorOnChange}
 			/>
@@ -92,7 +92,7 @@ const searchQuery = useCallback(
 				style={{ width: "4px" }}
 				className=" h-full hover:bg-vn-outline-black  transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-8 bg-vn-black box-content"
 			/>
-			<Preview newWidth={paneWidth} markdownInput={input} />
+			<Preview markdownInput={input} />
 		</section>
 	);
 };
