@@ -1,14 +1,7 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import {
-	createContext,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
@@ -19,13 +12,7 @@ const App = () => {
 	const navigate = useNavigate();
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
-	const [notes, setNotes] = useState([
-		{
-			id: "7",
-			title: "Title 7",
-			md: "> Note item for this note item",
-		},
-	]);
+	const [notes, setNotes] = useState<INote[]>([]);
 	// created searchedNotes so that when searching for notes search query function
 	// so that we don't directly set the original notes
 	const [searchedNotes, setSearchedNotes] = useState(notes);
@@ -48,19 +35,10 @@ const App = () => {
 				);
 				return setSearchedNotes(filterNotes);
 			}
-			return setSearchedNotes(notes);
+			return setSearchedNotes(searchedNotes);
 		},
 		[notes]
 	);
-
-	useEffect(() => {
-		console.log(notes);
-		searchQuery(searchInput, notes);
-	}, [searchInput]);
-
-	useEffect(() => {
-		setSearchedNotes(notes);
-	}, [notes]);
 
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
@@ -68,9 +46,23 @@ const App = () => {
 			id: newID,
 			title: "New Note",
 			md: "This is a markdown notetaking app powered by vim keybindings",
+			contents: "",
 		};
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
+	}
+
+	function extractTitleAndContents(characters: number): void {
+		const mapNotes = notes.map((note) => {
+			const noteProperties = {
+				title: note.md.slice(0, characters),
+				contents:
+					note.md.length < characters ? "" : note.md.slice(characters),
+			};
+			return { ...note, ...noteProperties };
+		});
+		console.log(mapNotes);
+		setSearchedNotes(mapNotes);
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
@@ -80,6 +72,13 @@ const App = () => {
 		return navigate("/app/empty-notes");
 	}
 
+	useEffect(() => {
+		searchQuery(searchInput, notes);
+	}, [searchInput]);
+
+	useEffect(() => {
+		setSearchedNotes(notes);
+	}, [notes]);
 	useEffect(() => {
 		redirectToExistingNotes();
 	}, []);
@@ -98,9 +97,10 @@ const App = () => {
 						addNote={addNote}
 					/>
 					<ul id="notes-list" className="h-full ">
-						{searchedNotes.map((note) => {
-							return <NoteItem key={note.id} note={note} />;
-						})}
+						{searchedNotes.length !== 0 &&
+							searchedNotes.map((note) => {
+								return <NoteItem key={note.id} note={note} />;
+							})}
 					</ul>
 				</Sidebar>
 				<NoteContext.Provider value={{ notes }}>

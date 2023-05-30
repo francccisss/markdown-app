@@ -11,7 +11,7 @@ const Note = () => {
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const { notes } = useContext(NoteContext);
 	const [currentNote] = notes.filter((note) => note.id === noteID);
-	const [input, setInput] = useState<string>("");
+	const [input, setInput] = useState<string>();
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;

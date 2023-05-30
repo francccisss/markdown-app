@@ -1,8 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 interface INoteItemProps {
 	note: {
 		id: string;
 		title: string;
+		contents: string;
 		md: string;
 	};
 }
@@ -17,8 +18,8 @@ const NoteItem = ({ note }: INoteItemProps) => {
 			<p className="block box-border font-semibold uppercase">
 				{note.title}
 			</p>
-			<p className="box-border w-[350px] text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
-				{note.md}
+			<p className="text-vn-outline-black box-border max-w-[340px] overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
+				{note.contents}
 			</p>
 		</NavLink>
 	);
