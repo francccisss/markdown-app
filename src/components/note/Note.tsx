@@ -63,7 +63,6 @@ const searchQuery = useCallback(
 
 		// does this go against react's principles of not manipulating the original DOM?
 		// im just reading it so.. please tell me.
-		console.log(paneWidth);
 		if (isResizing !== 0) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);

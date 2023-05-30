@@ -1,11 +1,11 @@
-import Note from "@/components/note/Note";
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
+import { INote } from "@/utils/Note";
 
 const App = () => {
 	const navigate = useNavigate();
@@ -61,44 +61,33 @@ const App = () => {
 			path: "/app/task6",
 		},
 	]);
-	const originalNotes = useRef([...notes]);
+
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
 		setSearchInput(e.target.value);
 	}
 
 	const searchQuery = useCallback((input: string) => {
-		// Proud of this
-		// Filter the notes state and using the originalNotes array as a referenece on WHAT to filter.
-		// because we're filtering the state and then setting the filtered state as our new state
-		// so if we backspace or delete some parts of the text that STILL matches the requirements of
-		// note.title.includes, all of the note.title that currently matches the searchInput wont show up because
-		// as stated ;) before, it has been filtered out, so we need a reference to the original state before
-		// it was modified.
 		if (input !== "") {
-			const filterNotes = originalNotes.current.filter((note) =>
-				note.title.includes(input)
-			);
+			// on each state changes the application rerenders so that it keeps
+			// the UI in sync, notes in filter notes is referencing
+			// the previous state before the re-render or state changes happened
+			// so on each search query calls the state of notes still persist
+			// even after rerendering and filtering its state
+			const filterNotes = notes.filter((note) => note.title.includes(input));
 			return setNotes(filterNotes);
-		} else {
-			return setNotes(originalNotes.current);
 		}
+		return setNotes(notes);
 	}, []);
+
 	useEffect(() => {
-		console.log(searchInput);
 		console.log(notes);
 		searchQuery(searchInput);
 	}, [searchInput]);
 
-	interface INewNote {
-		id: string;
-		title: string;
-		md: string;
-		path: string;
-	}
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
-		const newNote: INewNote = {
+		const newNote: INote = {
 			id: newID,
 			title: "New Note",
 			md: "This is a markdown notetaking app powered by vim keybindings",
