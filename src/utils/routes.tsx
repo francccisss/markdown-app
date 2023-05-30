@@ -1,3 +1,4 @@
+import { EmptyNotes } from "@/components/EmptyNotes";
 import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
@@ -27,8 +28,8 @@ export const ROUTES = createBrowserRouter([
 				element: <Note />,
 			},
 			{
-				path: "no-note",
-				element: <h1>no notes</h1>,
+				path: "empty-notes",
+				element: <EmptyNotes />,
 			},
 		],
 	},

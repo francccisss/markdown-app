@@ -17,7 +17,6 @@ import { INote } from "@/utils/Note";
 export const NoteContext = createContext([]);
 const App = () => {
 	const navigate = useNavigate();
-	const { noteID } = useParams();
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
 	const [notes, setNotes] = useState([
@@ -94,6 +93,10 @@ const App = () => {
 		searchQuery(searchInput, notes);
 	}, [searchInput]);
 
+	useEffect(() => {
+		setSearchedNotes(notes);
+	}, [notes]);
+
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
 		const newNote: INote = {
@@ -104,6 +107,17 @@ const App = () => {
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
 	}
+
+	async function redirectToExistingNotes(): Promise<void> {
+		if (notes.length !== 0) {
+			return navigate(`/app/${notes[0].id}`);
+		}
+		return navigate("/app/empty-notes");
+	}
+
+	useEffect(() => {
+		redirectToExistingNotes();
+	}, []);
 
 	return (
 		<main
