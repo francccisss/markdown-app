@@ -6,6 +6,7 @@ import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
+import { usePersistState } from "@/utils/hooks/usePersistState";
 
 const App = () => {
 	const navigate = useNavigate();
@@ -61,28 +62,36 @@ const App = () => {
 			path: "/app/task6",
 		},
 	]);
+	// created searchedNotes so that when searching for notes search query function
+	// so that we don't directly set the original notes
+	const [searchedNotes, setSearchedNotes] = useState(notes);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
 		setSearchInput(e.target.value);
 	}
 
-	const searchQuery = useCallback((input: string) => {
-		if (input !== "") {
-			// on each state changes the application rerenders so that it keeps
-			// the UI in sync, notes in filter notes is referencing
-			// the previous state before the re-render or state changes happened
-			// so on each search query calls the state of notes still persist
-			// even after rerendering and filtering its state
-			const filterNotes = notes.filter((note) => note.title.includes(input));
-			return setNotes(filterNotes);
-		}
-		return setNotes(notes);
-	}, []);
+	const searchQuery = useCallback(
+		(input: string, notesArr: Array<INote>) => {
+			if (input !== "") {
+				// on each state changes the application rerenders so that it keeps
+				// the UI in sync, notes in filter notes is referencing
+				// the previous state before the re-render or state changes happened
+				// so on each search query calls the state of notes still persist
+				// even after rerendering and filtering its state
+				const filterNotes = notesArr.filter((note) =>
+					note.title.includes(input)
+				);
+				return setSearchedNotes(filterNotes);
+			}
+			return setSearchedNotes(notes);
+		},
+		[notes]
+	);
 
 	useEffect(() => {
 		console.log(notes);
-		searchQuery(searchInput);
+		searchQuery(searchInput, notes);
 	}, [searchInput]);
 
 	async function addNote(): Promise<void> {
@@ -111,7 +120,7 @@ const App = () => {
 						addNote={addNote}
 					/>
 					<ul id="notes-list" className="h-full ">
-						{notes.map((note) => {
+						{searchedNotes.map((note) => {
 							return <NoteItem key={note.id} note={note} />;
 						})}
 					</ul>
