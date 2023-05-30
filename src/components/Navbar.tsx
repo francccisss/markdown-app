@@ -31,23 +31,23 @@ const Navbar = ({ sideBarRef }) => {
 						<path
 							d="M5.61484 8.44H28.2161"
 							stroke="#878A8C"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 						/>
 						<path
 							d="M5.61484 16.9155H28.2161"
 							stroke="#878A8C"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 						/>
 						<path
 							d="M5.61484 25.3909H28.2161"
 							stroke="#878A8C"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 						/>
 					</svg>
 				</button>

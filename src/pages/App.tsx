@@ -1,13 +1,20 @@
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	createContext,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
-import { usePersistState } from "@/utils/hooks/usePersistState";
 
+export const NoteContext = createContext([]);
 const App = () => {
 	const navigate = useNavigate();
 	const { noteID } = useParams();
@@ -18,48 +25,41 @@ const App = () => {
 			id: "0",
 			title: "Title 1",
 			md: "[x] This is some random mdription for this note item dwadlkajwdaw",
-			path: "/app/task0",
 		},
 		{
 			id: "1",
 			title: "Title 2",
 			md: "# This is some random mdription for this note item dwadjawiodj",
-			path: "/app/task1",
 		},
 
 		{
 			id: "3",
 			title: "Title 3",
 			md: "o This is some random mdription for this note item",
-			path: "/app/task2",
 		},
 
 		{
 			id: "4",
 			title: "Title 4",
 			md: "Random mdription for this note item",
-			path: "/app/task3",
 		},
 
 		{
 			id: "5",
 			title: "Title 5",
 			md: "Random mdription for this note item",
-			path: "/app/task4",
 		},
 
 		{
 			id: "6",
 			title: "Title 6",
 			md: "mdription for this note item",
-			path: "/app/task5",
 		},
 
 		{
 			id: "7",
 			title: "Title 7",
 			md: "> Note item for this note item",
-			path: "/app/task6",
 		},
 	]);
 	// created searchedNotes so that when searching for notes search query function
@@ -100,7 +100,6 @@ const App = () => {
 			id: newID,
 			title: "New Note",
 			md: "This is a markdown notetaking app powered by vim keybindings",
-			path: `/app/${newID}`,
 		};
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
@@ -125,7 +124,9 @@ const App = () => {
 						})}
 					</ul>
 				</Sidebar>
-				<Outlet />
+				<NoteContext.Provider value={{ notes }}>
+					<Outlet />
+				</NoteContext.Provider>
 			</section>
 		</main>
 	);

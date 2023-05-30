@@ -26,6 +26,10 @@ export const ROUTES = createBrowserRouter([
 				path: ":noteID",
 				element: <Note />,
 			},
+			{
+				path: "no-note",
+				element: <h1>no notes</h1>,
+			},
 		],
 	},
 ]);
