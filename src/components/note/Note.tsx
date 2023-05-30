@@ -9,9 +9,9 @@ const Note = () => {
 	const navigate = useNavigate();
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
-	const [input, setInput] = useState<string>(``);
-	const [note, setNote] = useState();
 	const { notes } = useContext(NoteContext);
+	const [currentNote] = notes.filter((note) => note.id === noteID);
+	const [input, setInput] = useState<string>("");
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
@@ -22,14 +22,12 @@ const Note = () => {
 		setIsResizing(e.clientX);
 	}
 
-	console.log(noteID);
 	async function getNote() {
-		const filterNotes = notes.filter((note) => note.id === noteID);
-		console.log(filterNotes);
+		console.log(noteID);
 	}
 
 	useEffect(() => {
-		getNote();
+		setInput(currentNote.md);
 	}, [noteID]);
 
 	function resizePane(e: React.MouseEvent): void {
