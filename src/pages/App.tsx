@@ -21,41 +21,6 @@ const App = () => {
 	const sideBarRef = useRef<HTMLDivElement>();
 	const [notes, setNotes] = useState([
 		{
-			id: "0",
-			title: "Title 1",
-			md: "[x] This is some random mdription for this note item dwadlkajwdaw",
-		},
-		{
-			id: "1",
-			title: "Title 2",
-			md: "# This is some random mdription for this note item dwadjawiodj",
-		},
-
-		{
-			id: "3",
-			title: "Title 3",
-			md: "o This is some random mdription for this note item",
-		},
-
-		{
-			id: "4",
-			title: "Title 4",
-			md: "Random mdription for this note item",
-		},
-
-		{
-			id: "5",
-			title: "Title 5",
-			md: "Random mdription for this note item",
-		},
-
-		{
-			id: "6",
-			title: "Title 6",
-			md: "mdription for this note item",
-		},
-
-		{
 			id: "7",
 			title: "Title 7",
 			md: "> Note item for this note item",

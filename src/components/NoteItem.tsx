@@ -17,7 +17,7 @@ const NoteItem = ({ note }: INoteItemProps) => {
 			<p className="block box-border font-semibold uppercase">
 				{note.title}
 			</p>
-			<p className="box-border max-w-full text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
+			<p className="box-border w-[350px] text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
 				{note.md}
 			</p>
 		</NavLink>

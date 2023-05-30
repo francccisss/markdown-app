@@ -9,7 +9,7 @@
 	display: inline;
 }
 .cm-scroller {
-	overflow-y: hidden;
+	// overflow-y: hidden;
 	&::-webkit-scrollbar {
 		height: 0.6em;
 	}
