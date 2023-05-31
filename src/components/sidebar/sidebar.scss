@@ -33,3 +33,20 @@
 		animation: notelistActiveAnim 150ms forwards ease-in-out;
 	}
 }
+
+#sidebar {
+	ul {
+		&::-webkit-scrollbar {
+			width: 0.3em;
+		}
+
+		&::-webkit-scrollbar-track {
+			background-color: #222326;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: #878a8c80;
+			// background-color: #6b7ff2;
+		}
+	}
+}

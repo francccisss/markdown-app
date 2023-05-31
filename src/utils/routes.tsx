@@ -1,4 +1,5 @@
-import Note from "@/components/Note";
+import { EmptyNotes } from "@/components/EmptyNotes";
+import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
 import { NavLink, createBrowserRouter } from "react-router-dom";
@@ -25,6 +26,10 @@ export const ROUTES = createBrowserRouter([
 			{
 				path: ":noteID",
 				element: <Note />,
+			},
+			{
+				path: "empty-notes",
+				element: <EmptyNotes />,
 			},
 		],
 	},

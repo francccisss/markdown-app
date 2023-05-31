@@ -43,7 +43,9 @@ const indexHtml = join(process.env.DIST, "index.html");
 
 async function createWindow() {
 	win = new BrowserWindow({
+		minWidth: 480,
 		title: "Main window",
+		center: true,
 		autoHideMenuBar: true,
 		icon: join(process.env.PUBLIC, "favicon.ico"),
 		webPreferences: {
@@ -110,6 +112,7 @@ app.on("activate", () => {
 // New window example arg: new windows url
 ipcMain.handle("open-win", (_, arg) => {
 	const childWindow = new BrowserWindow({
+		minWidth: 480,
 		webPreferences: {
 			preload,
 			nodeIntegration: true,

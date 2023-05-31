@@ -1,15 +1,68 @@
-.App {
-	min-width: 500px;
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Light.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 300;
 }
 
-input[type="search"] {
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Medium.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-SemiBold.woff2") format("woff2");
+	font-style: nomal;
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-Bold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: "inter";
+	src: url("../src/assets/fonts/Inter-ExtraBold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 800;
+}
+
+.App {
+	min-width: 500px;
+	font-family: inter, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+input[type="search"],
+input[type="search"]::-webkit-search-cancel-button {
 	appearance: none;
 	-webkit-appearance: none;
 	border: none;
 }
 
 a.active {
+	transition: all 100ms ease-in-out;
 	background-color: #878a8c30;
 	border-left-color: #6b7ff2;
 	border-left-width: 4px;
+}
+
+.btn-actions {
+	transition: all 150ms ease-in;
+	&:hover {
+		filter: invert(44%) sepia(55%) saturate(1036%) hue-rotate(202deg)
+			brightness(102%) contrast(90%);
+	}
 }

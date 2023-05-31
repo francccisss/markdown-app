@@ -1,25 +1,29 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 interface INoteItemProps {
 	note: {
 		id: string;
-		title: string;
-		desc: string;
-		path: string;
+		contents: string;
 	};
 }
 
 const NoteItem = ({ note }: INoteItemProps) => {
+	const characterLimit = 32;
+
 	return (
 		<NavLink
-			to={note.path}
+			to={`/app/${note.id}`}
 			id={note.id}
-			className="note block px-5 mb-3 box-border hover:bg-vn-dshade-white3 hover:border-l-vn-blue hover:border-l-4 select-none cursor-pointer transition-all ease-in-out duration-100 py-3 text-vn-white max-w-full border-vn-outline-black border-l-[2px] pb-1"
+			className="note min-w-[384px] box-border h-[80px] block px-5 py-3 mb-3 hover:bg-vn-dshade-white3 hover:border-l-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150  text-vn-white border-vn-outline-black border-l-[2px] "
 		>
-			<p className="block box-border font-semibold uppercase">
-				{note.title}
+			<p className="block box-content max-w-[210px] overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold ">
+				{note.contents === ""
+					? "New Note"
+					: note.contents.slice(0, characterLimit)}
 			</p>
-			<p className="box-border max-w-full text-vn-outline-black overflow-hidden whitespace-nowrap overflow-ellipsis inline-block">
-				{note.desc}
+			<p className="block text-vn-outline-black box-border max-w-[370px] overflow-hidden whitespace-nowrap overflow-ellipsis">
+				{note.contents === ""
+					? "No contents yet"
+					: note.contents.slice(characterLimit)}
 			</p>
 		</NavLink>
 	);

@@ -1,0 +1,40 @@
+#markdown-preview {
+	color: rgb(223, 223, 223);
+	background-color: #2d2f33 !important;
+	flex: 1;
+	padding: 2em;
+	height: 100%;
+	overflow: auto;
+	pre {
+		background-color: #ffffff15;
+		padding: 0.8em !important;
+	}
+	blockquote {
+		border-left-color: #ffffff50;
+	}
+}
+
+.markdown-body {
+	&::-webkit-scrollbar {
+		width: 0.6em;
+	}
+
+	&::-webkit-scrollbar-track {
+		// box-shadow: ;
+		background-color: #22232600;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: #878a8c50;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background: #878a8c70;
+	}
+	&::-webkit-scrollbar-thumb:active {
+		background: #878a8c90;
+	}
+}
+.pane {
+	border-right: #ffffff60 solid 2px;
+}
