@@ -4,18 +4,19 @@ import Preview from "../preview/Preview";
 import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
 import { NoteContext } from "@/pages/App";
+import { INote } from "@/utils/Note";
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const { notes, setNotes } = useContext(NoteContext);
-	const [currentNote] = notes.filter((note) => note.id === noteID);
 	const [loadNote, setLoadNote] = useState(false);
+	const [nowNote, setNowNote] = useState();
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
-		const mapNotes = notes.map((note) => {
+		const mapNotes = notes.map((note: INote) => {
 			if (note.id === noteID) {
 				return { ...note, contents: editorMarkdownValue };
 			}
@@ -26,7 +27,7 @@ const Note = () => {
 
 	useEffect(() => {
 		setLoadNote(true);
-	}, [currentNote]);
+	}, [noteID]);
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
