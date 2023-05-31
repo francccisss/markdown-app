@@ -1,21 +1,26 @@
 .cm-content {
 	font-weight: 600;
 }
-.cm-editor {
-	height: 100vh;
+.cm-theme {
+	height: 100%;
+	// padding-top: 2em;
 }
 
 .cm-gutters {
 	display: inline;
 }
 .cm-scroller {
-	// overflow-y: hidden;
 	&::-webkit-scrollbar {
-		height: 0.6em;
+		height: 1em;
+		width: 1em;
 	}
 
 	&::-webkit-scrollbar-track {
 		// box-shadow: ;
+		background-color: #22232600;
+	}
+
+	&::-webkit-scrollbar-corner {
 		background-color: #22232600;
 	}
 
@@ -31,23 +36,23 @@
 	}
 }
 #editor-container {
-	&::-webkit-scrollbar {
-		width: 0.6em;
-	}
+	// &::-webkit-scrollbar {
+	// 	width: 0.6em;
+	// }
 
-	&::-webkit-scrollbar-track {
-		// box-shadow: ;
-		background-color: #22232600;
-	}
+	// &::-webkit-scrollbar-track {
+	// 	// box-shadow: ;
+	// 	background-color: #22232600;
+	// }
 
-	&::-webkit-scrollbar-thumb {
-		background: #878a8c50;
-	}
+	// &::-webkit-scrollbar-thumb {
+	// 	background: #878a8c50;
+	// }
 
-	&::-webkit-scrollbar-thumb:hover {
-		background: #878a8c70;
-	}
-	&::-webkit-scrollbar-thumb:active {
-		background: #878a8c90;
-	}
+	// &::-webkit-scrollbar-thumb:hover {
+	// 	background: #878a8c70;
+	// }
+	// &::-webkit-scrollbar-thumb:active {
+	// 	background: #878a8c90;
+	// }
 }

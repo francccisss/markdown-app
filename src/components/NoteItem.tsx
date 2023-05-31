@@ -13,7 +13,7 @@ const NoteItem = ({ note }: INoteItemProps) => {
 		<NavLink
 			to={`/app/${note.id}`}
 			id={note.id}
-			className="note min-w-[384px] box-border h-[80px] block px-5 py-3 mb-3 hover:bg-vn-dshade-white3 hover:border-l-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150  text-vn-white border-vn-outline-black border-l-[2px] "
+			className="note min-w-[384px] box-border border-l-vn-dshade-white h-[80px] block px-5 py-3 mb-[2px] hover:bg-vn-dshade-white3 hover:border-l-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150 text-vn-white border-l-[2px] "
 		>
 			<p className="block box-content max-w-[210px] overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold ">
 				{note.contents === ""

@@ -17,7 +17,6 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 			theme={editorAppTheme}
 			value={input}
 			onChange={onChange}
-			style={{ padding: "32px 0px" }}
 			width={`${newWidth}px`}
 			height="100%"
 			extensions={[

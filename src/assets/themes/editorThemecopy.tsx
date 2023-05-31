@@ -8,7 +8,7 @@ export const editorAppTheme = createTheme({
 		caret: "#AEAFAD",
 		selection: "#878A8C50",
 		selectionMatch: "#878A8C40",
-		gutterBackground: "#22232600",
+		gutterBackground: "#2d2f33",
 		gutterForeground: "#878A8C80",
 		gutterBorder: "#6B7FF200",
 		gutterActiveForeground: "#000000",

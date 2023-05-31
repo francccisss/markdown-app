@@ -6,7 +6,6 @@ import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
-import { EmptyNotes } from "@/components/EmptyNotes";
 
 export const NoteContext = createContext([]);
 const App = () => {
