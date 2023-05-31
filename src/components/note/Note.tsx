@@ -17,14 +17,12 @@ const Note = () => {
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
 		// filter this instead of mapping and append updated note
-		const mapNotes = notes.map((note: INote) => {
-			if (note.id === currentNote.id) {
-				return { ...note, contents: editorMarkdownValue };
-			}
-			return note;
-		});
-		console.log(mapNotes);
-		setNotes(mapNotes);
+		const updateNote = {
+			...currentNote,
+			contents: editorMarkdownValue,
+		};
+		const filterNotes = notes.filter((note: INote) => note.id !== noteID);
+		setNotes([updateNote, ...filterNotes]);
 	}
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
