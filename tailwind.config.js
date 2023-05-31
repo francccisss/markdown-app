@@ -20,6 +20,7 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				"auth-left-waves": "url('./src/assets/img/waves.svg')",
+				"just-waves": "url('./src/assets/img/just-waves.svg')",
 				"auth-left-mini-app": "url('./src/assets/img/mini-app.svg')",
 				"nav-sb-icon": "url('./src/assets/img/hamburger.svg')",
 				"nav-info-icon": "url('./src/assets/img/info.svg')",

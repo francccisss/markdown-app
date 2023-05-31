@@ -1,11 +1,11 @@
 export const EmptyNotes = () => {
-	const spanContents = `flex justify-between`;
+	const spanContents = `flex justify-between mb-2`;
 
 	return (
 		<div className="bg-vn-dshade-black text-vn-dshade-white flex flex-1 flex-col justify-center items-center">
-			<h1 className="text-6xl text-vn-blue uppercase font-bold">Vimnotes</h1>
-			<div className="empty-notes-contents">
-				<div className="w-56">
+			<h1 className="text-8xl text-vn-blue uppercase font-bold">Vimnotes</h1>
+			<div className="empty-notes-contents mt-2">
+				<div className="w-72 ">
 					<span className={spanContents}>
 						<p>Add notes</p>
 						<svg
@@ -46,7 +46,7 @@ export const EmptyNotes = () => {
 						</svg>
 					</span>
 					<span className={spanContents}>
-						<p>To open note actions</p>
+						<p>Open note actions</p>
 
 						<svg
 							width="25"

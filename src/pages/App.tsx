@@ -85,9 +85,15 @@ const App = () => {
 						addNote={addNote}
 					/>
 					<ul id="notes-list" className="h-full w-full ">
-						{searchedNotes.map((note) => {
-							return <NoteItem key={note.id} note={note} />;
-						})}
+						{notes.length !== 0 ? (
+							searchedNotes.map((note) => {
+								return <NoteItem key={note.id} note={note} />;
+							})
+						) : (
+							<p className="text-center mt-6 text-sm text-vn-dshade-white">
+								You don't have any notes, click on the '+' icon.{" "}
+							</p>
+						)}
 					</ul>
 				</Sidebar>
 				<NoteContext.Provider value={{ notes, setNotes }}>
