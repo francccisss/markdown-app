@@ -45,7 +45,8 @@
 	font-family: inter, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
-input[type="search"] {
+input[type="search"],
+input[type="search"]::-webkit-search-cancel-button {
 	appearance: none;
 	-webkit-appearance: none;
 	border: none;

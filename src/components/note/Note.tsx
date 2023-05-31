@@ -16,6 +16,7 @@ const Note = () => {
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
+		// filter this instead of mapping and append updated note
 		const mapNotes = notes.map((note: INote) => {
 			if (note.id === currentNote.id) {
 				return { ...note, contents: editorMarkdownValue };
