@@ -14,8 +14,6 @@ const Note = () => {
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
 
-	// BUG HERE NOT READING ID AFTER CHANGING
-	// currentNote id not changing whenever noteID changes??
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
 		const mapNotes = notes.map((note: INote) => {
@@ -27,17 +25,6 @@ const Note = () => {
 		console.log(mapNotes);
 		setNotes(mapNotes);
 	}
-
-	function saveNote() {
-		if (currentNote) {
-		}
-	}
-
-	// data needs to be loaded before everything mounts
-	useEffect(() => {
-		console.log(currentNote);
-		saveNote();
-	}, [noteID]);
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
@@ -55,6 +42,7 @@ const Note = () => {
 				if (mouseX < 50) setPaneWidth(0);
 			} else if (sideBar?.className.includes("sidebar-active")) {
 				setPaneWidth(mouseX - 384);
+				if (mouseX - 384 < 50) setPaneWidth(0);
 			}
 		}
 	}
