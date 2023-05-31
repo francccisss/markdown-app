@@ -27,7 +27,7 @@
 
 .sidebar-active {
 	transition: all 150ms ease-in-out;
-	max-width: 384px;
+	min-width: 384px;
 	#notes-list,
 	input {
 		animation: notelistActiveAnim 150ms forwards ease-in-out;

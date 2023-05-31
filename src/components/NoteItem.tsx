@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 interface INoteItemProps {
 	note: {
 		id: string;
-		title: string;
 		contents: string;
 	};
 }

@@ -31,7 +31,7 @@ const App = () => {
 				// so on each search query calls the state of notes still persist
 				// even after rerendering and filtering its state
 				const filterNotes = notesArr.filter((note) =>
-					note.title.includes(input)
+					note.contents.includes(input)
 				);
 				return setSearchedNotes(filterNotes);
 			}
@@ -44,13 +44,13 @@ const App = () => {
 		const newID = uid(16).toString();
 		const newNote: INote = {
 			id: newID,
-			title: "New Note",
 			contents:
 				"This is a markdown notetaking app powered by vim keybindings",
 		};
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
 	}
+
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
@@ -62,9 +62,11 @@ const App = () => {
 		searchQuery(searchInput, notes);
 	}, [searchInput]);
 
+	// hasnt searched notes updated yet to display note items when notes is updated
 	useEffect(() => {
 		setSearchedNotes(notes);
 	}, [notes]);
+
 	useEffect(() => {
 		redirectToExistingNotes();
 	}, []);
@@ -83,7 +85,7 @@ const App = () => {
 						addNote={addNote}
 					/>
 					<ul id="notes-list" className="h-full ">
-						{searchedNotes.length !== 0 &&
+						{notes.length !== 0 &&
 							searchedNotes.map((note) => {
 								return <NoteItem key={note.id} note={note} />;
 							})}
