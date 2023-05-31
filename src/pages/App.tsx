@@ -45,8 +45,7 @@ const App = () => {
 		const newID = uid(16).toString();
 		const newNote: INote = {
 			id: newID,
-			contents:
-				"This is a markdown notetaking app powered by vim keybindings",
+			contents: "",
 		};
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
@@ -85,11 +84,10 @@ const App = () => {
 						handleInput={handleSearchInput}
 						addNote={addNote}
 					/>
-					<ul id="notes-list" className="h-full ">
-						{notes.length !== 0 &&
-							searchedNotes.map((note) => {
-								return <NoteItem key={note.id} note={note} />;
-							})}
+					<ul id="notes-list" className="h-full w-full ">
+						{searchedNotes.map((note) => {
+							return <NoteItem key={note.id} note={note} />;
+						})}
 					</ul>
 				</Sidebar>
 				<NoteContext.Provider value={{ notes, setNotes }}>

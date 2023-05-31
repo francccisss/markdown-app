@@ -52,6 +52,7 @@ input[type="search"] {
 }
 
 a.active {
+	transition: all 100ms ease-in-out;
 	background-color: #878a8c30;
 	border-left-color: #6b7ff2;
 	border-left-width: 4px;

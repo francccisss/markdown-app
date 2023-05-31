@@ -13,16 +13,16 @@ const NoteItem = ({ note }: INoteItemProps) => {
 		<NavLink
 			to={`/app/${note.id}`}
 			id={note.id}
-			className="note min-h-[50px] block pl-5 py-3 mb-3 box-content hover:bg-vn-dshade-white3 hover:border-l-vn-blue hover:border-l-4 select-none cursor-pointer transition-all ease-in-out duration-100  text-vn-white max-w-full border-vn-outline-black border-l-[2px] "
+			className="note min-w-[384px] box-border h-[80px] block px-5 py-3 mb-3 hover:bg-vn-dshade-white3 hover:border-l-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150  text-vn-white border-vn-outline-black border-l-[2px] "
 		>
-			<p className="inline-block box-content max-w-[210px] overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold ">
+			<p className="block box-content max-w-[210px] overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold ">
 				{note.contents === ""
-					? "Blank"
+					? "New Note"
 					: note.contents.slice(0, characterLimit)}
 			</p>
-			<p className="text-vn-outline-black box-border max-w-[380px] overflow-hidden whitespace-nowrap overflow-ellipsis block">
+			<p className="block text-vn-outline-black box-border max-w-[370px] overflow-hidden whitespace-nowrap overflow-ellipsis">
 				{note.contents === ""
-					? "no contents..."
+					? "No contents yet"
 					: note.contents.slice(characterLimit)}
 			</p>
 		</NavLink>
