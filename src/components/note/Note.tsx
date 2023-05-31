@@ -15,18 +15,18 @@ const Note = () => {
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
-		setNotes((prev) => {
-			const mapNotes = prev.map((note) => {
-				if (note.id === noteID) {
-					return { ...note, contents: editorMarkdownValue };
-				}
-			});
+		const mapNotes = notes.map((note) => {
+			if (note.id === noteID) {
+				return { ...note, contents: editorMarkdownValue };
+			}
 		});
+		console.log(mapNotes);
+		setNotes(mapNotes);
 	}
 
 	useEffect(() => {
 		setLoadNote(true);
-	}, [noteID]);
+	}, [currentNote]);
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);

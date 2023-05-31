@@ -12,7 +12,7 @@ export const editorAppTheme = createTheme({
 		gutterForeground: "#878A8C80",
 		gutterBorder: "#6B7FF200",
 		gutterActiveForeground: "#000000",
-		lineHighlight: "#F2C46D",
+		lineHighlight: "#6B7FF2",
 	},
 	styles: [
 		{ tag: t.comment, color: "#787b80" },
