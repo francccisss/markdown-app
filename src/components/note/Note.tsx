@@ -11,6 +11,7 @@ const Note = () => {
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const { notes, setNotes } = useContext(NoteContext);
 	const [currentNote] = notes.filter((note) => note.id === noteID);
+	const [loadNote, setLoadNote] = useState(false);
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
@@ -22,6 +23,10 @@ const Note = () => {
 			});
 		});
 	}
+
+	useEffect(() => {
+		setLoadNote(true);
+	}, [noteID]);
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
@@ -48,25 +53,29 @@ const Note = () => {
 	}
 
 	return (
-		<section
-			id="note"
-			className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
-			onMouseMove={resizePane}
-			onMouseUpCapture={() => {
-				setIsResizing(0);
-			}}
-		>
-			<Editor
-				newWidth={paneWidth}
-				input={currentNote.contents}
-				onChange={handleEditorOnChange}
-			/>
-			<div
-				onMouseDownCapture={handleOnMouseDown}
-				className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
-			/>
-			<Preview markdownInput={currentNote.contents} />
-		</section>
+		<>
+			{loadNote && (
+				<section
+					id="note"
+					className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
+					onMouseMove={resizePane}
+					onMouseUpCapture={() => {
+						setIsResizing(0);
+					}}
+				>
+					<Editor
+						newWidth={paneWidth}
+						input={currentNote.contents}
+						onChange={handleEditorOnChange}
+					/>
+					<div
+						onMouseDownCapture={handleOnMouseDown}
+						className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
+					/>
+					<Preview markdownInput={currentNote.contents} />
+				</section>
+			)}
+		</>
 	);
 };
 

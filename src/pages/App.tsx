@@ -52,12 +52,12 @@ const App = () => {
 		console.log(newNote);
 	}
 
-	// async function redirectToExistingNotes(): Promise<void> {
-	// 	if (notes.length !== 0) {
-	// 		return navigate(`/app/${notes[0].id}`);
-	// 	}
-	// 	return navigate("/app/empty-notes");
-	// }
+	async function redirectToExistingNotes(): Promise<void> {
+		if (notes.length !== 0) {
+			return navigate(`/app/${notes[0].id}`);
+		}
+		return navigate("/app/empty-notes");
+	}
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
@@ -69,7 +69,7 @@ const App = () => {
 	}, [notes]);
 
 	useEffect(() => {
-		// redirectToExistingNotes();
+		redirectToExistingNotes();
 	}, []);
 
 	return (
@@ -93,7 +93,7 @@ const App = () => {
 					</ul>
 				</Sidebar>
 				<NoteContext.Provider value={{ notes, setNotes }}>
-					{notes.length !== 0 ? <Outlet /> : <EmptyNotes />}
+					<Outlet />
 				</NoteContext.Provider>
 			</section>
 		</main>
