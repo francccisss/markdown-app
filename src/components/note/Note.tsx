@@ -9,26 +9,23 @@ const Note = () => {
 	const navigate = useNavigate();
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
-	const { notes } = useContext(NoteContext);
+	const { notes, setNotes } = useContext(NoteContext);
 	const [currentNote] = notes.filter((note) => note.id === noteID);
-	const [input, setInput] = useState<string>();
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
-		setInput(editorMarkdownValue);
+		setNotes((prev) => {
+			const mapNotes = prev.map((note) => {
+				if (note.id === noteID) {
+					return { ...note, contents: editorMarkdownValue };
+				}
+			});
+		});
 	}
 
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
 	}
-
-	async function getNote() {
-		console.log(noteID);
-	}
-
-	useEffect(() => {
-		setInput(currentNote.contents);
-	}, [noteID]);
 
 	function resizePane(e: React.MouseEvent): void {
 		const mouseX = e.clientX;
@@ -61,14 +58,14 @@ const Note = () => {
 		>
 			<Editor
 				newWidth={paneWidth}
-				input={input}
+				input={currentNote.contents}
 				onChange={handleEditorOnChange}
 			/>
 			<div
 				onMouseDownCapture={handleOnMouseDown}
 				className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
 			/>
-			<Preview markdownInput={input} />
+			<Preview markdownInput={currentNote.contents} />
 		</section>
 	);
 };

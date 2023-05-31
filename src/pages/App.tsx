@@ -6,6 +6,7 @@ import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
+import { EmptyNotes } from "@/components/EmptyNotes";
 
 export const NoteContext = createContext([]);
 const App = () => {
@@ -51,12 +52,12 @@ const App = () => {
 		console.log(newNote);
 	}
 
-	async function redirectToExistingNotes(): Promise<void> {
-		if (notes.length !== 0) {
-			return navigate(`/app/${notes[0].id}`);
-		}
-		return navigate("/app/empty-notes");
-	}
+	// async function redirectToExistingNotes(): Promise<void> {
+	// 	if (notes.length !== 0) {
+	// 		return navigate(`/app/${notes[0].id}`);
+	// 	}
+	// 	return navigate("/app/empty-notes");
+	// }
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
@@ -68,7 +69,7 @@ const App = () => {
 	}, [notes]);
 
 	useEffect(() => {
-		redirectToExistingNotes();
+		// redirectToExistingNotes();
 	}, []);
 
 	return (
@@ -91,8 +92,8 @@ const App = () => {
 							})}
 					</ul>
 				</Sidebar>
-				<NoteContext.Provider value={{ notes }}>
-					<Outlet />
+				<NoteContext.Provider value={{ notes, setNotes }}>
+					{notes.length !== 0 ? <Outlet /> : <EmptyNotes />}
 				</NoteContext.Provider>
 			</section>
 		</main>
