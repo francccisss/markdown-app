@@ -27,7 +27,7 @@ const Note = () => {
 	}
 
 	useEffect(() => {
-		setInput(currentNote.md);
+		setInput(currentNote.contents);
 	}, [noteID]);
 
 	function resizePane(e: React.MouseEvent): void {

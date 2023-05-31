@@ -45,26 +45,12 @@ const App = () => {
 		const newNote: INote = {
 			id: newID,
 			title: "New Note",
-			md: "This is a markdown notetaking app powered by vim keybindings",
-			contents: "",
+			contents:
+				"This is a markdown notetaking app powered by vim keybindings",
 		};
 		setNotes((prev) => [newNote, ...prev]);
 		console.log(newNote);
 	}
-
-	function extractTitleAndContents(characters: number): void {
-		const mapNotes = notes.map((note) => {
-			const noteProperties = {
-				title: note.md.slice(0, characters),
-				contents:
-					note.md.length < characters ? "" : note.md.slice(characters),
-			};
-			return { ...note, ...noteProperties };
-		});
-		console.log(mapNotes);
-		setSearchedNotes(mapNotes);
-	}
-
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
