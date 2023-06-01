@@ -1,7 +1,6 @@
 .sidebar-inactive {
 	transition: all 130ms ease-in-out;
 	width: 0%;
-	width: 0%;
 	box-shadow: none;
 	#notes-list {
 		display: none;
@@ -34,12 +33,6 @@
 	#notes-list,
 	input {
 		animation: notelistActiveAnim 150ms forwards ease-in-out;
-	}
-	#sidebar-actions {
-		display: flex;
-		button {
-			display: block;
-		}
 	}
 	#sidebar-actions {
 		display: flex;
