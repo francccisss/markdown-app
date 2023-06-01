@@ -18,6 +18,7 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 			value={input}
 			onChange={onChange}
 			width={`${newWidth}px`}
+			className="focus-within:border-t-[3px] focus-within:border-vn-blue border-solid outline-none"
 			height="100%"
 			extensions={[
 				vim(),
