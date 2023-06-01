@@ -4,13 +4,8 @@
 	width: 0%;
 	box-shadow: none;
 	#notes-list {
-	#notes-list {
 		display: none;
 		opacity: 0;
-	}
-	#sidebar-actions {
-		border: none;
-		display: none;
 	}
 	#sidebar-actions {
 		border: none;
@@ -56,7 +51,6 @@
 
 #sidebar {
 	z-index: 10;
-	sidebar-fix ul {
 	ul {
 		&::-webkit-scrollbar {
 			width: 0.3em;
