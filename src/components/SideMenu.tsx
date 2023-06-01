@@ -15,7 +15,7 @@ const SideMenu = ({ sideBarRef }) => {
 	}
 
 	return (
-		<div className="h-full py-3 flex gap-3 flex-col justify-start items-center text-vn-dshade-white w-10 z-20 border-l-0 bg-vn-black border-[3px] border-vn-dshade-white2 ">
+		<div className="h-full py-3 flex gap-3 flex-col justify-start items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[3px] border-t-[3px] border-vn-dshade-white2 ">
 			<button onClick={sideBarActivitiy} className={actionsStyle}>
 				<svg
 					viewBox="0 0 34 34"
