@@ -10,7 +10,7 @@ const Sidebar = ({ children, sideBarRef }: ISidebarProps) => {
 		<div
 			id="sidebar"
 			ref={sideBarRef}
-			className="sidebar-active bg-vn-black flex flex-col"
+			className="sidebar-inactive bg-vn-black flex flex-col"
 		>
 			{children}
 		</div>
