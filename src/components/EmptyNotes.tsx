@@ -35,19 +35,19 @@ export const EmptyNotes = () => {
 							<path
 								d="M5.64999 4.23751C5.64999 3.45741 6.28239 2.82501 7.06249 2.82501H21.1875L28.25 9.88751V29.6625C28.25 30.4426 27.6176 31.075 26.8375 31.075H7.06249C6.28239 31.075 5.64999 30.4426 5.64999 29.6625V4.23751Z"
 								stroke="#878A8C"
-								stroke-linejoin="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								d="M11.3 14.125H22.6"
 								stroke="#878A8C"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								d="M11.3 19.775H22.6"
 								stroke="#878A8C"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 					</span>
