@@ -6,6 +6,7 @@ import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
+import SideMenu from "@/components/SideMenu";
 
 export const NoteContext = createContext([]);
 const App = () => {
@@ -75,8 +76,9 @@ const App = () => {
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
-			<Navbar sideBarRef={sideBarRef} />
+			<Navbar />
 			<section id="content-section" className="flex-1 flex h-[0%]">
+				<SideMenu sideBarRef={sideBarRef} />
 				<Sidebar sideBarRef={sideBarRef}>
 					<SidebarActions
 						searchInput={searchInput}

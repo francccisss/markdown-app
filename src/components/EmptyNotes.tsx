@@ -8,6 +8,38 @@ export const EmptyNotes = () => {
 			<div className="empty-notes-contents mt-2">
 				<div className="w-72 ">
 					<span className={spanContents}>
+						<p>Open Sidebar </p>
+						<svg
+							width="28"
+							height="25"
+							viewBox="0 0 34 34"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M5.61484 8.44H28.2161"
+								stroke="#878A8C"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M5.61484 16.9155H28.2161"
+								stroke="#878A8C"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M5.61484 25.3909H28.2161"
+								stroke="#878A8C"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</span>
+					<span className={spanContents}>
 						<p>Add notes</p>
 						<svg
 							className="self-center"
