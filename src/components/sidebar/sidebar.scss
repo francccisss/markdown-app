@@ -1,11 +1,14 @@
 .sidebar-inactive {
 	transition: all 130ms ease-in-out;
-	width: 0px;
+	width: 0%;
 	box-shadow: none;
-	#notes-list,
-	input {
+	#notes-list {
 		display: none;
 		opacity: 0;
+	}
+	#sidebar-actions {
+		border: none;
+		display: none;
 	}
 }
 
@@ -31,12 +34,17 @@
 	input {
 		animation: notelistActiveAnim 150ms forwards ease-in-out;
 	}
+	#sidebar-actions {
+		display: flex;
+		button {
+			display: block;
+		}
+	}
 }
 
 #sidebar {
 	z-index: 10;
-
-	ul {
+	sidebar-fix ul {
 		&::-webkit-scrollbar {
 			width: 0.3em;
 		}
