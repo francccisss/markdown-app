@@ -12,7 +12,7 @@ const SidebarActions = ({
 	return (
 		<div
 			id="sidebar-actions"
-			className="p-3 shadowgap-2 flex items-center mb-3 border-b-[3px]  border-b-separator-grey-line"
+			className="p-3 shadow gap-2 flex items-center mb-3 border-b-[3px]  border-b-separator-grey-line"
 		>
 			<input
 				className="w-[100%] shadow-inner hover:outline-vn-blue px-4 py-2 block text-sm placeholder:text-center placeholder:text-vn-outline-black outline-none border-none text-[#d9d9d9] outline-1 rounded outline transition-all duration-150 ease-in-out  focus-within:outline-vn-blue bg-vn-dshade-black"
