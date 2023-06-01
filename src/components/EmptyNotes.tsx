@@ -3,6 +3,7 @@ export const EmptyNotes = () => {
 
 	return (
 		<div className="bg-vn-dshade-black text-vn-dshade-white flex flex-1 flex-col justify-center items-center">
+			<p>Welcome to </p>
 			<h1 className="text-8xl text-vn-blue uppercase font-bold">Vimnotes</h1>
 			<div className="empty-notes-contents mt-2">
 				<div className="w-72 ">
