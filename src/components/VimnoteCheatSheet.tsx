@@ -1,5 +1,4 @@
 import { MouseEvent, MouseEventHandler } from "react";
-
 const shell = require("electron").shell;
 
 const VimnoteCheatSheet = () => {
@@ -80,7 +79,7 @@ const VimnoteCheatSheet = () => {
 		},
 	};
 
-	function mapContents(contents: {}): React.ReactNode {
+	function mapContents(contents: any): React.ReactNode {
 		let tmpArray: Array<string> = [];
 		for (const item in contents) {
 			tmpArray.push(contents[item]);
@@ -99,7 +98,7 @@ const VimnoteCheatSheet = () => {
 		return extractJSXContents;
 	}
 
-	function onLinkClick(event: React.MouseEvent): void {
+	function onLinkClick(event: any): void {
 		event?.preventDefault();
 		const link = event.target.href.toString();
 		shell.openExternal(link);

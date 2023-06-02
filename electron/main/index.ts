@@ -43,7 +43,6 @@ const indexHtml = join(process.env.DIST, "index.html");
 
 async function createWindow() {
 	win = new BrowserWindow({
-		minWidth: 480,
 		title: "Main window",
 		center: true,
 		autoHideMenuBar: true,
@@ -80,6 +79,9 @@ async function createWindow() {
 		if (url.startsWith("https:")) shell.openExternal(url);
 		return { action: "deny" };
 	});
+
+	win.setSize(1280, 720);
+	win.setMinimumSize(1024, 720);
 
 	// Apply electron-updater
 	update(win);

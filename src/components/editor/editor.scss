@@ -2,8 +2,12 @@
 	font-weight: 600;
 }
 .cm-theme {
+	border-top: 3px transparent;
 	height: 100%;
-	// padding-top: 2em;
+	// max-width: 50%;
+}
+.cm-editor {
+	padding-top: 2em;
 }
 
 .cm-gutters {

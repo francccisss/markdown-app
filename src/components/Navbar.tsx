@@ -4,7 +4,7 @@ const Navbar = () => {
 	return (
 		<nav
 			id="navbar"
-			className="min-h-[35px] bg-no-repeat flex bg-vn-black px-2 py-2 items-center border-separator-grey-line z-20"
+			className="min-h-[35px] bg-no-repeat flex min-w-full bg-vn-black px-2 py-2 items-center border-separator-grey-line z-20"
 		>
 			<div id="left" className="text-vn-blue font-semibold text-sm">
 				Vimnotes

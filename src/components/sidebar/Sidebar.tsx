@@ -2,7 +2,7 @@ import { MutableRefObject } from "react";
 import "./sidebar.scss";
 interface ISidebarProps {
 	children: React.ReactNode;
-	sideBarRef: MutableRefObject<HTMLDivElement>;
+	sideBarRef: any;
 }
 
 const Sidebar = ({ children, sideBarRef }: ISidebarProps) => {

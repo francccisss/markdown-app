@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const SideMenu = ({ sideBarRef }) => {
+const SideMenu = ({ sideBarRef }: any) => {
 	const actionsStyle = `side-menut-actions w-[22px] h-[22px] p-2 inline-block box-content bg-center transition-all duration-150 ease-in-out
      hover:bg-vn-dshade-white3 rounded-sm`;
 
