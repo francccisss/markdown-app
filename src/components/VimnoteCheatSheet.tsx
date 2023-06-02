@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const VimnoteCheatSheet = () => {
 	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 shrink-0  `;
 	const sectionTitles = `text-2xl font-semibold `;
@@ -103,7 +101,7 @@ const VimnoteCheatSheet = () => {
 				<h1 className="font-bold text-4xl">Vim Cheatsheet</h1>
 				<p>To help you get started</p>
 			</section>
-			<section className="grid grid-cols-3 gap-5">
+			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] grid-rows-[repeat(2,1fr)] gap-5">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}

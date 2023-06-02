@@ -85,7 +85,7 @@ const App = () => {
 						handleInput={handleSearchInput}
 						addNote={addNote}
 					/>
-					<ul id="notes-list" className="h-full w-full ">
+					<ul id="notes-list" className="h-full w-[384px] ">
 						{notes.length !== 0 ? (
 							searchedNotes.map((note) => {
 								return <NoteItem key={note.id} note={note} />;
