@@ -1,6 +1,10 @@
+import { MouseEvent, MouseEventHandler } from "react";
+
+const shell = require("electron").shell;
+
 const VimnoteCheatSheet = () => {
 	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 shrink-0  `;
-	const sectionTitles = `text-2xl font-semibold `;
+	const sectionTitles = `text-2xl font-semibold mb-2`;
 	const shortcuts = {
 		global: {
 			help: `:h[elp] keyword - open vim Cheatsheeet`,
@@ -95,13 +99,35 @@ const VimnoteCheatSheet = () => {
 		return extractJSXContents;
 	}
 
+	function onLinkClick(event: React.MouseEvent): void {
+		event?.preventDefault();
+		const link = event.target.href.toString();
+		shell.openExternal(link);
+	}
+
 	return (
-		<main className="text-vn-white appearance-none bg-vn-dshade-black w-full flex gap-5 flex-col h-full overflow-auto p-[2em]">
+		<main className="text-vn-white appearance-none bg-vn-dshade-black w-full flex flex-1 gap-6 flex-col h-full overflow-auto p-[2em]">
 			<section className="">
-				<h1 className="font-bold text-4xl">Vim Cheatsheet</h1>
-				<p>To help you get started</p>
+				<p className="text-base">To help you get started using Vimnotes</p>
+				<h1 className="font-bold text-4xl">
+					Vim Cheatsheet by{" "}
+					<span className="text-vn-blue hover:text-vn-dark-blue">
+						rtorr
+					</span>{" "}
+				</h1>
+				<p className="text-sm text-vn-dshade-white ">
+					For more keyboard shortcuts click {""}
+					<a
+						onClick={onLinkClick}
+						href="https://vim.rtorr.com/"
+						className="text-vn-blue underline hover:text-vn-dark-blue"
+					>
+						Here
+					</a>
+				</p>
+				{/* </p> */}
 			</section>
-			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] grid-rows-[repeat(2,1fr)] gap-5">
+			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] flex-1 grid-rows-[repeat(autofill,1fr)] gap-5">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}
@@ -114,7 +140,7 @@ const VimnoteCheatSheet = () => {
 					<h2 className={sectionTitles}>Visual Commands</h2>
 					{mapContents(shortcuts.visualCommands)}
 				</div>
-				<div>
+				<div className="">
 					<h2 className={sectionTitles}>Insert Commands</h2>
 					{mapContents(shortcuts.insertCommands)}
 				</div>
