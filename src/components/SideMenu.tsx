@@ -48,7 +48,7 @@ const SideMenu = ({ sideBarRef }) => {
 
 			<NavLink
 				id="vim-cheatsheet"
-				to={"/app/info/vim-shortcuts"}
+				to={"/app/vim-cheatsheet"}
 				className={actionsStyle}
 			>
 				<svg
