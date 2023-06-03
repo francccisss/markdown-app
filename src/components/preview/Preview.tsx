@@ -11,7 +11,7 @@ interface IPreviewProps {
 
 const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
-		<section id="markdown-preview" className={`markdown-body min-w-[500px] `}>
+		<section id="markdown-preview" className={`markdown-body w-[500px] `}>
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}

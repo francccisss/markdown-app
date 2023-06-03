@@ -35,7 +35,9 @@ const Note = () => {
 		// set editors width to mouseX's position - sidebar width
 		// test need to know if sidebar is active or not cuase if active then we need to take into account
 		// the width of the side bar which is 384px
-		if (isResizing !== 0) {
+		// const maxWidth = (mouseX / window.innerWidth) * 100;
+		const maxWidth = Math.floor(0.7 * window.innerWidth);
+		if (isResizing !== 0 && mouseX < maxWidth) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);
 				if (mouseX < 50) setPaneWidth(0);
