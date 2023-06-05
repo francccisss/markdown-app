@@ -8,6 +8,34 @@
 	blockquote {
 		border-left-color: #ffffff50;
 	}
+	h1,
+	h2,
+	h3 {
+		border: none;
+		margin: 10px 0px;
+		font-weight: 800;
+	}
+	a {
+		color: #6b7ff2;
+	}
+	td,
+	th,
+	tr {
+		background-color: transparent !important;
+		color: #d9d9d9 !important;
+		border: #6b7ff2 2px solid !important;
+	}
+	th {
+		text-align: left;
+	}
+
+	section.footnotes,
+	li[id^="user-content-fn-"] {
+		color: #d9d9d9;
+	}
+	section.footnotes {
+		border-top: #d9d9d980 2px solid;
+	}
 }
 
 .markdown-body {

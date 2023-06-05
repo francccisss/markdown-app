@@ -20,7 +20,37 @@ const App = () => {
 	const navigate = useNavigate();
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
-	const [notes, setNotes] = useState<INote[]>([]);
+	const [notes, setNotes] = useState<INote[]>([
+		{
+			id: uid(16),
+			contents: `# Header
+If I am a prestigious son of a bitch then what are you?...
+
+## Header 2
+Do not pay him
+### Header 3
+#### Header 4
+
+[link to somewheere]()  
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
+
+> Break Here
+
+Here's a sentence with a footnote. [^1]  
+Here's a sentence with a footnote. [^2]
+[^1]: This is the footnote.   
+[^2]: This is the footnote.   
+
+~~The world is flat.~~  
+I need to highlight these ==very important words==.  
+H~2~O  
+X^2^
+`,
+		},
+	]);
 	// created searchedNotes so that when searching for notes search query function
 	// so that we don't directly set the original notes
 	const [searchedNotes, setSearchedNotes] = useState(notes);
