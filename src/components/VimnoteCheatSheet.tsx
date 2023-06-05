@@ -2,14 +2,13 @@ import { MouseEvent, MouseEventHandler } from "react";
 const shell = require("electron").shell;
 
 const VimnoteCheatSheet = () => {
-	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 shrink-0  `;
-	const sectionTitles = `text-2xl font-semibold mb-2`;
+	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg shrink-0  `;
+	const sectionTitles = `text-4xl font-semibold mb-2`;
 	const shortcuts = {
 		global: {
-			help: `:h[elp] keyword - open vim Cheatsheeet`,
-			save: `:w file - save file as `,
-			close: `:q - close current pane`,
-			terminal: `:ter - open a terminal window `,
+			help: `:h - open vim Cheatsheeet`,
+			save: `:w - save file as `,
+			close: `:q - close editor pane`,
 		},
 		cursorMovement: {
 			h: `h - move cursor left`,
@@ -88,8 +87,10 @@ const VimnoteCheatSheet = () => {
 		const extractJSXContents = tmpArray.map((content, i) => {
 			const firstChar = content.slice(0, 1);
 			return (
-				<li key={i} className="text-sm">
-					<span className="text-vn-blue font-bold">{firstChar}</span>
+				<li key={i} className="text-base">
+					<span className="text-vn-blue text-lg font-bold">
+						{firstChar}
+					</span>
 					{content.slice(1)}
 				</li>
 			);
@@ -105,7 +106,7 @@ const VimnoteCheatSheet = () => {
 	}
 
 	return (
-		<main className="text-vn-white appearance-none bg-vn-dshade-black w-full flex flex-1 gap-6 flex-col h-full overflow-auto p-[2em]">
+		<main className="text-vn-white appearance-none bg-vn-dshade-black  flex flex-1 gap-6 flex-col h-full overflow-auto p-[2em]">
 			<section className="">
 				<p className="text-base">To help you get started using Vimnotes</p>
 				<h1 className="font-bold text-4xl">
@@ -126,7 +127,7 @@ const VimnoteCheatSheet = () => {
 				</p>
 				{/* </p> */}
 			</section>
-			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] flex-1 grid-rows-[repeat(autofill,1fr)] gap-5">
+			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 ">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}
