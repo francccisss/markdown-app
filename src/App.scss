@@ -45,6 +45,30 @@
 	font-family: inter, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 	text-decoration: none;
 	list-style: none;
+	*::-webkit-scrollbar {
+		height: 0.6em;
+		width: 0.6em;
+	}
+
+	*::-webkit-scrollbar-track {
+		// box-shadow: ;
+		background-color: #22232600;
+	}
+
+	*::-webkit-scrollbar-corner {
+		background-color: #22232600;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: #878a8c50;
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background: #878a8c70;
+	}
+	*::-webkit-scrollbar-thumb:active {
+		background: #878a8c90;
+	}
 }
 
 input[type="search"],

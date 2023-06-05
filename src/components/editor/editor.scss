@@ -13,29 +13,3 @@
 .cm-gutters {
 	display: inline;
 }
-.cm-scroller {
-	&::-webkit-scrollbar {
-		height: 1em;
-		width: 1em;
-	}
-
-	&::-webkit-scrollbar-track {
-		// box-shadow: ;
-		background-color: #22232600;
-	}
-
-	&::-webkit-scrollbar-corner {
-		background-color: #22232600;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background: #878a8c50;
-	}
-
-	&::-webkit-scrollbar-thumb:hover {
-		background: #878a8c70;
-	}
-	&::-webkit-scrollbar-thumb:active {
-		background: #878a8c90;
-	}
-}
