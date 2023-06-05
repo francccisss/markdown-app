@@ -11,11 +11,14 @@ interface IPreviewProps {
 
 const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
-		<section id="markdown-preview" className={`markdown-body min-w-[300px]`}>
+		<section
+			id="markdown-preview"
+			className={`overflow-auto p-8 h-full z-10 markdown-body flex-1 w-0`}
+		>
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}
-				className="z-10 min-w-[300px]"
+				className="z-10 max-w-[100%]"
 				components={{
 					code({ node, inline, className, children, ...props }) {
 						const match = /language-(\w+)/.exec(className || "");
