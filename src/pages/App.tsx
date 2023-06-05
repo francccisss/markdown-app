@@ -8,7 +8,14 @@ import { uid } from "uid";
 import { INote } from "@/utils/Note";
 import SideMenu from "@/components/SideMenu";
 
-export const NoteContext = createContext([]);
+export interface IContextType {
+	notes: Array<INote>;
+	setNotes: (prev: Array<INote>) => void;
+}
+
+export const NoteContext = createContext<IContextType>(
+	null as unknown as IContextType
+);
 const App = () => {
 	const navigate = useNavigate();
 	const [searchInput, setSearchInput] = useState<string>("");

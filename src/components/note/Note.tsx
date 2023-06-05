@@ -3,8 +3,12 @@ import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
-import { NoteContext } from "@/pages/App";
+import { IContextType, NoteContext } from "@/pages/App";
 import { INote } from "@/utils/Note";
+interface INoteContext {
+	setNotes: (prev: Array<INote>) => any;
+	notes: Array<INote>;
+}
 
 const Note = () => {
 	const { noteID } = useParams();
@@ -36,7 +40,7 @@ const Note = () => {
 		// test need to know if sidebar is active or not cuase if active then we need to take into account
 		// the width of the side bar which is 384px
 		// const maxWidth = (mouseX / window.innerWidth) * 100;
-		const maxWidth = Math.floor(0.7 * window.innerWidth);
+		const maxWidth = Math.floor(0.6 * window.innerWidth);
 		if (isResizing !== 0 && mouseX < maxWidth) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);
