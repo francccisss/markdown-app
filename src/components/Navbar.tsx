@@ -1,3 +1,5 @@
+import setComponentActivity from "@/utils/SetComponentActivity";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface INavbarProps {
@@ -5,6 +7,10 @@ interface INavbarProps {
 }
 
 const Navbar = ({ deleteNote }: INavbarProps) => {
+	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
+	useEffect(() => {
+		console.log(navBarActionsActive);
+	}, [navBarActionsActive]);
 	return (
 		<nav
 			id="navbar"
@@ -15,7 +21,12 @@ const Navbar = ({ deleteNote }: INavbarProps) => {
 			</div>
 			<div id="right" className="ml-auto flex items-center">
 				<button
-					onClick={deleteNote}
+					onClick={(e) => {
+						setComponentActivity(
+							navBarActionsActive,
+							setNavbarActionsActive
+						);
+					}}
 					id="note-actions"
 					className="btn-actions w-[25px] h-[25px] inline-block"
 				>
