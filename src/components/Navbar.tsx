@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ deleteNote }) => {
 	return (
 		<nav
 			id="navbar"
@@ -11,6 +11,7 @@ const Navbar = () => {
 			</div>
 			<div id="right" className="ml-auto flex items-center">
 				<button
+					onClick={deleteNote}
 					id="note-actions"
 					className="btn-actions w-[25px] h-[25px] inline-block"
 				>

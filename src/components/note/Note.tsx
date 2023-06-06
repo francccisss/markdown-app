@@ -13,7 +13,7 @@ interface INoteContext {
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const { notes, setNotes } = useContext(NoteContext);
+	const { notes, setNotes, noteIDRef } = useContext(NoteContext);
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
@@ -51,6 +51,10 @@ const Note = () => {
 			}
 		}
 	}
+
+	useEffect(() => {
+		noteIDRef.current = noteID?.toString();
+	}, [noteID]);
 
 	return (
 		<section

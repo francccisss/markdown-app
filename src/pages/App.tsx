@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
@@ -11,6 +11,7 @@ import SideMenu from "@/components/SideMenu";
 export interface IContextType {
 	notes: Array<INote>;
 	setNotes: (prev: Array<INote>) => void;
+	noteIDRef: { current: undefined | string };
 }
 
 export const NoteContext = createContext<IContextType>(
@@ -18,13 +19,14 @@ export const NoteContext = createContext<IContextType>(
 );
 const App = () => {
 	const navigate = useNavigate();
+	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
 	const [notes, setNotes] = useState<INote[]>([
 		{
 			id: uid(16),
 			contents: `# Header
-If I am a prestigious son of a bitch then what are you?...
+This is a place holder header for vimnotes note
 
 ## Header 2
 Do not pay him
@@ -88,6 +90,15 @@ X^2^
 		console.log(newNote);
 	}
 
+	async function deleteNote(e: React.MouseEvent): Promise<void> {
+		e.preventDefault();
+		console.log(noteIDRef);
+		// const filterCurrentNote = notes.filter(
+		// 	(note) => note.id !== noteIDRef.current
+		// );
+		// setNotes(filterCurrentNote);
+	}
+
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
@@ -113,7 +124,7 @@ X^2^
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
-			<Navbar />
+			<Navbar deleteNote={deleteNote} />
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu sideBarRef={sideBarRef} />
 				<Sidebar sideBarRef={sideBarRef}>
@@ -134,7 +145,7 @@ X^2^
 						)}
 					</ul>
 				</Sidebar>
-				<NoteContext.Provider value={{ notes, setNotes }}>
+				<NoteContext.Provider value={{ notes, setNotes, noteIDRef }}>
 					<Outlet />
 				</NoteContext.Provider>
 			</section>
