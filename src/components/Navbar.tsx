@@ -1,20 +1,21 @@
 import setComponentActivity from "@/utils/SetComponentActivity";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavbarActions from "./navbar-actions/NavbarActions";
 
 interface INavbarProps {
 	deleteNote: (e: React.MouseEvent) => void;
 }
 
 const Navbar = ({ deleteNote }: INavbarProps) => {
-	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
+	const [navBarActionsActive, setNavbarActionsActive] = useState(true);
 	useEffect(() => {
 		console.log(navBarActionsActive);
 	}, [navBarActionsActive]);
 	return (
 		<nav
 			id="navbar"
-			className="min-h-[35px] bg-no-repeat flex bg-vn-black px-2 py-2 items-center border-separator-grey-line z-20"
+			className="min-h-[35px] bg-no-repeat flex relative bg-vn-black px-2 py-2 items-center border-separator-grey-line z-20"
 		>
 			<div id="left" className="text-vn-blue font-semibold text-sm">
 				Vimnotes
@@ -50,6 +51,7 @@ const Navbar = ({ deleteNote }: INavbarProps) => {
 					</svg>
 				</button>
 			</div>
+			{navBarActionsActive && <NavbarActions />}
 		</nav>
 	);
 };
