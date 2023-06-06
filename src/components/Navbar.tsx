@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Navbar = ({ deleteNote }) => {
+interface INavbarProps {
+	deleteNote: (e: React.MouseEvent) => void;
+}
+
+const Navbar = ({ deleteNote }: INavbarProps) => {
 	return (
 		<nav
 			id="navbar"
