@@ -1,20 +1,38 @@
+import React from "react";
+
 const NavbarActions = () => {
 	// separate actions
 	const actions = {
-		info: "Note info",
-		save: "Save note",
-		removeNote: "Remove note",
+		info: {
+			title: "Note Information",
+			onClick: (e: React.MouseEvent) => {
+				console.log("info clicked");
+			},
+		},
+		save: {
+			title: "Save Note",
+			onClick: (e: React.MouseEvent) => {
+				console.log("save clicked");
+			},
+		},
+		remove: {
+			title: "Remove Note",
+			onClick: (e: React.MouseEvent) => {
+				console.log("remove clicked");
+			},
+		},
 	};
 
 	// same as vimnoteCheatSheet
 	const mapActions = Object.values(actions).map((action) => {
 		return (
-			<li key={action} className="border-b-vn-dshade-white block">
+			<li key={action.title} className="border-b-vn-dshade-white block">
 				<button
+					onClick={action.onClick}
 					className="px-2 py-3 transition-all duration-100 ease-in-out hover:bg-vn-dshade-white3 w-full text-left "
-					key={action}
+					key={action.title}
 				>
-					{action}
+					{action.title}
 				</button>
 			</li>
 		);
