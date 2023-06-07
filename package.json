@@ -21,6 +21,7 @@
 	"dependencies": {
 		"@codemirror/lang-markdown": "^6.1.1",
 		"@codemirror/language-data": "^6.3.1",
+		"@firebase/database-types": "^0.10.4",
 		"@lezer/highlight": "^1.1.6",
 		"@replit/codemirror-vim": "^6.0.14",
 		"@uiw/codemirror-themes": "^4.20.2",

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import "./App.scss";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { Firestore, getFirestore } from "firebase/firestore";
+import { getAuth, Auth } from "firebase/auth";
 import { RouterProvider } from "react-router-dom";
 import { ROUTES } from "./utils/routes";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -28,10 +28,21 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+interface IFirebaseContextProp {
+	auth: Auth;
+	db: Firestore;
+}
+
+export const FirebaseContext = createContext(
+	null as unknown as IFirebaseContextProp
+);
+
 function App() {
 	return (
 		<div className="App">
-			<RouterProvider router={ROUTES} />
+			<FirebaseContext.Provider value={{ db, auth }}>
+				<RouterProvider router={ROUTES} />
+			</FirebaseContext.Provider>
 		</div>
 	);
 }

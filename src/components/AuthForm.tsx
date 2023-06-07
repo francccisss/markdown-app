@@ -1,13 +1,12 @@
 import { useEffect, useMemo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
-import { IAuthProps, mapFormInputs } from "@/utils/formInputs";
+import { mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
 	action: "/" | "/sign-up";
-	// handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const AuthForm = ({ action }: IAuthFormProps) => {
+const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 	const navigate = useNavigate();
 	const text = {
 		signIn: {
@@ -33,10 +32,7 @@ const AuthForm = ({ action }: IAuthFormProps) => {
 			</div>
 			<form
 				className="text-vn-white flex flex-col gap-9 mt-6 "
-				onSubmit={(e) => {
-					e.preventDefault();
-					navigate("/app");
-				}}
+				onSubmit={handleSubmit}
 			>
 				{mapFormInputs(action)}
 				<button
