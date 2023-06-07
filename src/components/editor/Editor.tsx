@@ -29,8 +29,7 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 				}),
 			]}
 			basicSetup={{
-				// lineNumbers: false,
-				// foldGutter: false,
+				foldGutter: false,
 				highlightActiveLine: false,
 			}}
 			onCreateEditor={(view, state) => {

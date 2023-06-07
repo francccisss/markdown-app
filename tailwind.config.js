@@ -8,6 +8,7 @@ module.exports = {
 			"vn-black": "#222326",
 			"vn-green": "#75BF69",
 			"vn-white": "#D9D9D9",
+			"vn-red": "#F28390",
 			"vn-dshade1-blue": "#323859",
 			"vn-dshade2-blue": "#2c2f40",
 			"vn-dshade-green": "#5c8c54",

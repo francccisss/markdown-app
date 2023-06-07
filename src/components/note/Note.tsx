@@ -3,13 +3,17 @@ import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
-import { NoteContext } from "@/pages/App";
+import { IContextType, NoteContext } from "@/pages/App";
 import { INote } from "@/utils/Note";
+interface INoteContext {
+	setNotes: (prev: Array<INote>) => any;
+	notes: Array<INote>;
+}
 
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const { notes, setNotes } = useContext(NoteContext);
+	const { notes, setNotes, noteIDRef } = useContext(NoteContext);
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
@@ -35,7 +39,9 @@ const Note = () => {
 		// set editors width to mouseX's position - sidebar width
 		// test need to know if sidebar is active or not cuase if active then we need to take into account
 		// the width of the side bar which is 384px
-		if (isResizing !== 0) {
+		// const maxWidth = (mouseX / window.innerWidth) * 100;
+		const maxWidth = Math.floor(0.65 * window.innerWidth);
+		if (isResizing !== 0 && mouseX < maxWidth) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);
 				if (mouseX < 50) setPaneWidth(0);
@@ -45,6 +51,10 @@ const Note = () => {
 			}
 		}
 	}
+
+	useEffect(() => {
+		noteIDRef.current = noteID?.toString();
+	}, [noteID]);
 
 	return (
 		<section
