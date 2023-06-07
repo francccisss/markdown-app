@@ -10,7 +10,6 @@ interface IActionProps {
 }
 
 const NavbarActions = () => {
-	// separate actions
 	const actions: IActionProps = {
 		info: {
 			title: "Note Information",
@@ -46,7 +45,6 @@ const NavbarActions = () => {
 		},
 	};
 
-	// same as vimnoteCheatSheet
 	const mapActions = Object.values(actions).map((action) => {
 		return (
 			<li key={action.title} className="border-b-vn-dshade-white block">
