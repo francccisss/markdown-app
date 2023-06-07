@@ -20,7 +20,6 @@ const Note = () => {
 
 	function handleEditorOnChange(value: string): void {
 		const editorMarkdownValue: string = value;
-		// filter this instead of mapping and append updated note
 		const updateNote = {
 			...currentNote,
 			contents: editorMarkdownValue,
@@ -36,10 +35,6 @@ const Note = () => {
 	function resizePane(e: React.MouseEvent): void {
 		const mouseX = e.clientX;
 		let sideBar = document.getElementById("sidebar");
-		// set editors width to mouseX's position - sidebar width
-		// test need to know if sidebar is active or not cuase if active then we need to take into account
-		// the width of the side bar which is 384px
-		// const maxWidth = (mouseX / window.innerWidth) * 100;
 		const maxWidth = Math.floor(0.65 * window.innerWidth);
 		if (isResizing !== 0 && mouseX < maxWidth) {
 			if (sideBar?.className.includes("sidebar-inactive")) {

@@ -5,18 +5,21 @@ import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
 import { NavLink, createBrowserRouter } from "react-router-dom";
 
+interface ILoaderProp {
+	loader: () => { action: string };
+}
 export const ROUTES = createBrowserRouter([
 	{
 		path: "/",
 		element: <RootAuth />,
-		loader: () => {
+		loader: (): { action: string } => {
 			return { action: "/" };
 		},
 	},
 	{
 		path: "/sign-up",
 		element: <RootAuth />,
-		loader: () => {
+		loader: (): { action: string } => {
 			return { action: "/sign-up" };
 		},
 	},

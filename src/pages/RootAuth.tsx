@@ -3,7 +3,7 @@ import AuthForm from "@/components/AuthForm";
 import { useParams, NavLink, useLoaderData } from "react-router-dom";
 
 const RootAuth = () => {
-	const { action } = useLoaderData();
+	const { action } = useLoaderData() as ReturnType<any>;
 
 	return (
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">

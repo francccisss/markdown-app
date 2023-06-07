@@ -4,10 +4,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IAuthProps, mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
 	action: "/" | "/sign-up";
-	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	// handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
+const AuthForm = ({ action }: IAuthFormProps) => {
 	const navigate = useNavigate();
 	const text = {
 		signIn: {
@@ -52,7 +52,10 @@ const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
 						id="forgot-redirect"
 						className="flex content-center justify-center mt-4 mb-4"
 					>
-						<Link className="hover:underline inline-block text-[#d9d9d970]">
+						<Link
+							to={"/"}
+							className="hover:underline inline-block text-[#d9d9d970]"
+						>
 							{text.signIn.forgot}
 						</Link>
 					</div>
