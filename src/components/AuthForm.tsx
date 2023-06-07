@@ -4,9 +4,14 @@ import { mapFormInputs } from "@/utils/formInputs";
 interface IAuthFormProps {
 	action: "/" | "/sign-up";
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	validateOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AuthForm = ({ action, handleSubmit }: IAuthFormProps) => {
+const AuthForm = ({
+	action,
+	handleSubmit,
+	validateOnChange,
+}: IAuthFormProps) => {
 	const navigate = useNavigate();
 	const text = {
 		signIn: {

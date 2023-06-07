@@ -3,6 +3,7 @@ import AuthContents from "@/components/AuthContents";
 import AuthForm from "@/components/AuthForm";
 import { useContext } from "react";
 import { useParams, NavLink, useLoaderData } from "react-router-dom";
+import { validateUserCredentialsOnChange } from "@/utils/userFormValidationInput";
 
 const RootAuth = () => {
 	const { action } = useLoaderData() as ReturnType<any>;
@@ -41,6 +42,7 @@ const RootAuth = () => {
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
 				<AuthForm
+					validateOnChange={validateUserCredentialsOnChange}
 					handleSubmit={action === "/" ? signInUser : signUpUser}
 					action={action}
 				/>
