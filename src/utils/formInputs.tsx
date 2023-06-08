@@ -1,6 +1,14 @@
 import React from "react";
 
-export const formInputs = [
+interface IFormInputsProps {
+	name: string;
+	htmlFor: string;
+	label: string;
+	id: string;
+	type: string;
+	minLength?: number;
+}
+export const formInputs: IFormInputsProps[] = [
 	{
 		name: "email",
 		htmlFor: "email",
@@ -19,11 +27,11 @@ export const formInputs = [
 	},
 
 	{
-		name: "pass-conf",
-		htmlFor: "pass-conf",
+		name: "passConf",
+		htmlFor: "passConf",
 		label: "Confirm Password",
 		type: "password",
-		id: "pass-conf",
+		id: "passConf",
 		minLength: 8,
 	},
 ];
@@ -46,15 +54,14 @@ export interface IAuthProps {
 	action: string;
 }
 
-export function showRelevantInputs(action: string) {
+export function showRelevantInputs(): IFormInputsProps[] {
 	if (window.location.pathname === "/sign-in") {
 		const filterInputs = formInputs.filter(
-			(input) => input.id !== "pass-conf"
+			(input) => input.id !== "passConf"
 		);
 		console.log(filterInputs);
 		return filterInputs;
-	} else if (window.location.pathname === "/sign-up") {
-		console.log(formInputs);
-		return formInputs;
 	}
+	console.log(formInputs);
+	return formInputs;
 }

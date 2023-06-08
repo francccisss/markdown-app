@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
 import { useRef, useState } from "react";
 interface IAuthFormProps {
-	action: "/sign-in" | "/sign-up";
+	action: "/sign-in" | "/sign-up" | string;
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
 	validateOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error: string;
@@ -15,10 +15,8 @@ const AuthForm = ({
 	error,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
-	const mapFormInputs: (action: string) => React.ReactNode = function (
-		action
-	) {
-		return showRelevantInputs(action).map((input) => {
+	const mapFormInputs: () => React.ReactNode = function () {
+		return showRelevantInputs().map((input) => {
 			return (
 				<div key={input.id} className="inputs-container flex flex-col ">
 					<label
@@ -59,7 +57,7 @@ const AuthForm = ({
 				onSubmit={handleSubmit}
 				noValidate
 			>
-				{mapFormInputs(action)}
+				{mapFormInputs()}
 				<button
 					type="submit"
 					className="text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
