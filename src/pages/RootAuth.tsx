@@ -1,16 +1,16 @@
 import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
 import AuthForm from "@/components/AuthForm";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams, NavLink, useLoaderData } from "react-router-dom";
-import { validateUserCredentialsOnChange } from "@/utils/userFormValidationInput";
 
 const RootAuth = () => {
 	const { action } = useLoaderData() as ReturnType<any>;
 	const { db, auth } = useContext(FirebaseContext);
+	const [error, setError] = useState<string>("");
 
 	async function signUpUser(
-		e: React.FormEvent<HTMLFormElement>
+		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {
 		e.preventDefault();
 		const form = new FormData(e.currentTarget);
@@ -20,13 +20,37 @@ const RootAuth = () => {
 	}
 
 	async function signInUser(
-		e: React.FormEvent<HTMLFormElement>
+		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {
 		e.preventDefault();
-		const form = new FormData(e.currentTarget);
-		const formEntries = Object.fromEntries(form.entries());
-		console.log(formEntries);
-		console.log("signed in");
+		const formValidation = e.target;
+		if (formValidation.checkValidity()) {
+			const form = new FormData(e.currentTarget);
+			const formEntries = Object.fromEntries(form.entries());
+			console.log(formEntries);
+			console.log("signed in");
+		} else {
+			console.log("wrong credentials");
+		}
+	}
+
+	function validateUserCredentialsOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	): void {
+		const input = e.target;
+		if (input.validity.tooShort) {
+			console.log("minimum passowrd should be 8 characters");
+			setError("Users password needs to have a minimum of 8 characters");
+			input.setCustomValidity("password Mismatched");
+		} else if (input.validity.typeMismatch) {
+			console.log("pattern mismatch");
+			setError("Input needs to be an email address");
+		} else if (input.validity.valueMissing) {
+			setError("You need to enter your email and password");
+			console.log("You need to enter your email and password");
+		} else {
+			input.value === "" ? setError("") : setError(error);
+		}
 	}
 
 	return (
@@ -43,6 +67,7 @@ const RootAuth = () => {
 			>
 				<AuthForm
 					validateOnChange={validateUserCredentialsOnChange}
+					error={error}
 					handleSubmit={action === "/" ? signInUser : signUpUser}
 					action={action}
 				/>
