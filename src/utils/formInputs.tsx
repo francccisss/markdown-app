@@ -47,13 +47,13 @@ export interface IAuthProps {
 }
 
 export function showRelevantInputs(action: string) {
-	if (action === "/") {
+	if (window.location.pathname === "/sign-in") {
 		const filterInputs = formInputs.filter(
 			(input) => input.id !== "pass-conf"
 		);
 		console.log(filterInputs);
 		return filterInputs;
-	} else {
+	} else if (window.location.pathname === "/sign-up") {
 		console.log(formInputs);
 		return formInputs;
 	}

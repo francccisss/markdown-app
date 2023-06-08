@@ -3,7 +3,7 @@ import AuthForm from "@/components/AuthForm";
 const SignIn = () => {
 	return (
 		<>
-			<AuthForm />
+			<AuthForm action={window.location.pathname} />
 		</>
 	);
 };

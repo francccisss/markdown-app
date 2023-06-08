@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
 import { useRef, useState } from "react";
 interface IAuthFormProps {
-	action: "/" | "/sign-up";
+	action: "/sign-in" | "/sign-up";
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
 	validateOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error: string;
@@ -45,7 +45,7 @@ const AuthForm = ({
 		<div id="auth-form" className="flex w-2/3 flex-col z-10 text-[#ffffff]">
 			<div id="instruct-user-txt">
 				<h1 className="font-semibold mb-[8px] sm:text-2xl lg:text-3xl xl:text-4xl">
-					{action === "/"
+					{action === "/sign-in"
 						? authText.signIn.header
 						: authText.signUp.header}
 				</h1>
@@ -64,17 +64,17 @@ const AuthForm = ({
 					type="submit"
 					className="text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
 				>
-					{action === "/" ? "Sign in" : "Sign up"}
+					{action === "/sign-in" ? "Sign in" : "Sign up"}
 				</button>
 			</form>
 			<div id="form-actions">
-				{action === "/" ? (
+				{action === "/sign-in" ? (
 					<div
 						id="forgot-redirect"
 						className="flex content-center justify-center mt-4 mb-4"
 					>
 						<Link
-							to={"/"}
+							to={"/sign-in"}
 							className="hover:underline inline-block text-[#d9d9d970]"
 						>
 							{authText.signIn.forgot}
@@ -87,16 +87,16 @@ const AuthForm = ({
 				>
 					<span className="inline-block">
 						<p className="text-[#D9D9D970]">
-							{action === "/"
+							{action === "/sign-in"
 								? authText.signIn.noAcc
 								: authText.signUp.exist}
 						</p>
 					</span>
 					<Link
-						to={action === "/" ? "/sign-up" : "/"}
+						to={action === "/sign-in" ? "/sign-up" : "/sign-in"}
 						className="hover:bg-[#D9D9D920] hover:transition-colors duration-150 ease-in-out px-7 py-3 inline-block bg-[#D9D9D910]"
 					>
-						{action === "/"
+						{action === "/sign-in"
 							? authText.signIn.linkBtnText
 							: authText.signUp.linkBtnText}
 					</Link>
