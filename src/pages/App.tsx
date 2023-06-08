@@ -1,13 +1,22 @@
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import { createContext, useCallback, useEffect, useRef, useState } from "react";
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/Note";
 import SideMenu from "@/components/SideMenu";
 import NavbarActions from "@/components/navbar-actions/NavbarActions";
+import { signOut } from "firebase/auth";
+import { FirebaseContext } from "@/App";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -20,6 +29,7 @@ export const NoteContext = createContext<IContextType>(
 );
 const App = () => {
 	const navigate = useNavigate();
+	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
@@ -186,6 +196,14 @@ are the components that decide what view to display and what information is goin
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
+			<button
+				className="absolute z-40"
+				onClick={() => {
+					signOut(auth);
+				}}
+			>
+				sign out
+			</button>
 			<Navbar deleteNote={deleteNote} />
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu sideBarRef={sideBarRef} />

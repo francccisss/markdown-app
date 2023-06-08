@@ -1,6 +1,7 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
@@ -18,7 +19,18 @@ const SignUp = () => {
 			formValidation.checkValidity() &&
 			formEntries.password === formEntries.passConf
 		) {
-			console.log("signed up");
+			try {
+				const createUser = await createUserWithEmailAndPassword(
+					auth,
+					formEntries.email.toString(),
+					formEntries.password.toString()
+				);
+				console.log(createUser.user);
+				console.log("signed up");
+			} catch (err) {
+				setError("*invalid email address");
+				console.log(err);
+			}
 		}
 		if (!formValidation.checkValidity()) {
 			setError("*Please check your email and password");

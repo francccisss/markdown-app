@@ -1,9 +1,12 @@
+import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RootAuth = () => {
 	const navigate = useNavigate();
+	const { auth, db } = useContext(FirebaseContext);
 
 	useEffect(() => {
 		navigate("/sign-in");
