@@ -1,57 +1,9 @@
-import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
-import AuthForm from "@/components/AuthForm";
 import { useState, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RootAuth = () => {
-	const { db, auth } = useContext(FirebaseContext);
-	const [error, setError] = useState<string>("");
 	const navigate = useNavigate();
-
-	async function signUpUser(
-		e: React.InvalidEvent<HTMLFormElement>
-	): Promise<void> {
-		e.preventDefault();
-		const form = new FormData(e.currentTarget);
-		const formEntries = Object.fromEntries(form.entries());
-		console.log(formEntries);
-		console.log("signed up");
-	}
-
-	async function signInUser(
-		e: React.InvalidEvent<HTMLFormElement>
-	): Promise<void> {
-		e.preventDefault();
-		const formValidation = e.target;
-		if (formValidation.checkValidity()) {
-			const form = new FormData(e.currentTarget);
-			const formEntries = Object.fromEntries(form.entries());
-			console.log(formEntries);
-			console.log("signed in");
-		} else {
-			console.log("wrong credentials");
-		}
-	}
-
-	function validateUserCredentialsOnChange(
-		e: React.ChangeEvent<HTMLInputElement>
-	): void {
-		const input = e.target;
-		if (input.validity.tooShort) {
-			console.log("minimum passowrd should be 8 characters");
-			setError("Users password needs to have a minimum of 8 characters");
-			input.setCustomValidity("password Mismatched");
-		} else if (input.validity.typeMismatch) {
-			console.log("pattern mismatch");
-			setError("Input needs to be an email address");
-		} else if (input.validity.valueMissing) {
-			setError("You need to enter your email and password");
-			console.log("You need to enter your email and password");
-		} else {
-			input.value === "" ? setError("") : setError(error);
-		}
-	}
 
 	useEffect(() => {
 		navigate("/sign-up");

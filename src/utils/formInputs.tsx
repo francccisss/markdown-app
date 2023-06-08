@@ -59,9 +59,7 @@ export function showRelevantInputs(): IFormInputsProps[] {
 		const filterInputs = formInputs.filter(
 			(input) => input.id !== "passConf"
 		);
-		console.log(filterInputs);
 		return filterInputs;
 	}
-	console.log(formInputs);
 	return formInputs;
 }

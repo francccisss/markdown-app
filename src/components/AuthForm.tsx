@@ -1,20 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
-import { useRef, useState } from "react";
+import { SetStateAction } from "react";
 interface IAuthFormProps {
 	action: "/sign-in" | "/sign-up" | string;
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
-	validateOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error: string;
+	setError: React.Dispatch<SetStateAction<string>>;
 }
 
 const AuthForm = ({
 	action,
 	handleSubmit,
-	validateOnChange,
 	error,
+	setError,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
+
+	function validateUserCredentialsOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	): void {
+		const input = e.target;
+		if (input.validity.tooShort) {
+			console.log("minimum passowrd should be 8 characters");
+			setError("Users password needs to have a minimum of 8 characters");
+			input.setCustomValidity("password Mismatched");
+		} else if (input.validity.typeMismatch) {
+			console.log("pattern mismatch");
+			setError("Input needs to be an email address");
+		} else if (input.validity.valueMissing) {
+			setError("You need to enter your email and password");
+			console.log("You need to enter your email and password");
+		} else {
+			input.value === "" ? setError("") : setError(error);
+		}
+	}
 	const mapFormInputs: () => React.ReactNode = function () {
 		return showRelevantInputs().map((input) => {
 			return (
@@ -27,7 +46,7 @@ const AuthForm = ({
 					</label>
 					<input
 						required
-						onChange={validateOnChange}
+						onChange={validateUserCredentialsOnChange}
 						type={input.type}
 						className="hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]"
 						id={input.id}

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const AuthContents = () => {
-	console.log(window.location.pathname);
 	return (
 		<div
 			id="auth-contents"
