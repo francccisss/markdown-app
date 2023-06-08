@@ -1,13 +1,13 @@
 import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
 import AuthForm from "@/components/AuthForm";
-import { useState, useContext } from "react";
-import { useParams, NavLink, useLoaderData } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const RootAuth = () => {
-	const { action } = useLoaderData() as ReturnType<any>;
 	const { db, auth } = useContext(FirebaseContext);
 	const [error, setError] = useState<string>("");
+	const navigate = useNavigate();
 
 	async function signUpUser(
 		e: React.InvalidEvent<HTMLFormElement>
@@ -53,10 +53,14 @@ const RootAuth = () => {
 		}
 	}
 
+	useEffect(() => {
+		navigate("/sign-up");
+	}, []);
+
 	return (
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">
 			<section id="left-auth-contents" className="flex-1 flex w-full ">
-				<AuthContents action={action} />
+				<AuthContents />
 			</section>
 			<section
 				style={{
@@ -65,12 +69,7 @@ const RootAuth = () => {
 				id="auth-form"
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
-				<AuthForm
-					validateOnChange={validateUserCredentialsOnChange}
-					error={error}
-					handleSubmit={action === "/" ? signInUser : signUpUser}
-					action={action}
-				/>
+				<Outlet />
 			</section>
 		</main>
 	);

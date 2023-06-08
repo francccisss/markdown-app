@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-const AuthContents = ({ action }: { action: "/" | "/sign-up" }) => {
+const AuthContents = () => {
+	console.log(window.location.pathname);
 	return (
 		<div
 			id="auth-contents"
@@ -19,10 +20,16 @@ const AuthContents = ({ action }: { action: "/" | "/sign-up" }) => {
 					</p>
 				</div>
 				<Link
-					to={action === "/" ? "/sign-up" : "/"}
+					to={
+						window.location.pathname === "/sign-in"
+							? "/sign-up"
+							: "/sign-in"
+					}
 					className="z-0 hover:bg-[#7086FF] ease-out duration-150 transition-all grow-0 font-bold text-[#ffffff] bg-vn-blue px-10 py-4 text-lg inline-block mt-[19px] drop-shadow-md"
 				>
-					{action === "/" ? "Create account" : "Do Something"}
+					{window.location.pathname === "/sign-in"
+						? "Create account"
+						: "Do Something"}
 				</Link>
 			</div>
 		</div>
