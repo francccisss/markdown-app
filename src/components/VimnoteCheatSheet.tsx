@@ -1,8 +1,9 @@
-import { MouseEvent, MouseEventHandler } from "react";
-const shell = require("electron").shell;
+// this won't work if the runtime is in nodejs and electron
+// we wont have access to electron/nodejs methods
+// const shell = typeof window === "object" ? require("electron").shell : null;
 
 const VimnoteCheatSheet = () => {
-	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg shrink-0  `;
+	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg shrink-0`;
 	const sectionTitles = `text-4xl font-semibold mb-2`;
 	const shortcuts = {
 		global: {
@@ -102,7 +103,7 @@ const VimnoteCheatSheet = () => {
 	function onLinkClick(event: any): void {
 		event?.preventDefault();
 		const link = event.target.href.toString();
-		shell.openExternal(link);
+		navigator.clipboard.writeText(link);
 	}
 
 	return (
