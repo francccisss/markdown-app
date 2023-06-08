@@ -5,7 +5,6 @@ import { FirebaseContext } from "@/App";
 const SignIn = () => {
 	const { db, auth } = useContext(FirebaseContext);
 	const [error, setError] = useState<string>("");
-	const [isValid, setIsValid] = useState<null | boolean>(null);
 	async function signInUser(
 		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {
@@ -24,7 +23,6 @@ const SignIn = () => {
 	return (
 		<>
 			<AuthForm
-				isValid={isValid}
 				setError={setError}
 				handleSubmit={signInUser}
 				error={error}

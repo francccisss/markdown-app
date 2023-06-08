@@ -16,7 +16,7 @@ const SignUp = () => {
 			console.log(formEntries);
 			console.log("signed up");
 		} else {
-			setError("Please check your email and password");
+			setError("* Please check your email and password");
 		}
 	}
 	return (

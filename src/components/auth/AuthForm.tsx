@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
 import { SetStateAction, useState } from "react";
+import "./auth.scss";
 interface IAuthFormProps {
 	action: "/sign-in" | "/sign-up" | string;
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
 	error: string;
 	setError: React.Dispatch<SetStateAction<string>>;
-	isValid: boolean | null;
 }
 
 const AuthForm = ({
@@ -14,7 +14,6 @@ const AuthForm = ({
 	handleSubmit,
 	error,
 	setError,
-	isValid,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
 
@@ -23,10 +22,8 @@ const AuthForm = ({
 	): void {
 		const input = e.target;
 		if (input.validity.tooShort) {
-			console.log("*minimum passowrd should be 8 characters");
-			setError("Users password needs to have a minimum of 8 characters");
+			setError("* Users password needs to have a minimum of 8 characters");
 		} else if (input.validity.typeMismatch) {
-			console.log("pattern mismatch");
 			setError("*Input needs to be an email address");
 		} else {
 			setError("");
@@ -46,9 +43,7 @@ const AuthForm = ({
 						required
 						onChange={validateUserCredentialsOnChange}
 						type={input.type}
-						className={`${
-							isValid ? "is-valid" : "not-valid"
-						} valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
+						className={`valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
 						id={input.id}
 						name={input.name}
 						minLength={input.minLength ? input.minLength : 0}
@@ -69,7 +64,9 @@ const AuthForm = ({
 				<p className="font-light">Enter your account details below</p>
 			</div>
 			{error !== "" && (
-				<p className="lg:text-xs xl:text-base text-vn-red">{error}</p>
+				<p className="error-message lg:text-xs xl:text-base text-vn-red">
+					{error}
+				</p>
 			)}
 			<form
 				className="text-vn-white flex flex-col gap-9 mt-6 "
