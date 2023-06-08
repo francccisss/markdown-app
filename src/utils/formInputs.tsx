@@ -18,8 +18,8 @@ export const formInputs: IFormInputsProps[] = [
 	},
 
 	{
-		name: "pass",
-		htmlFor: "pass",
+		name: "password",
+		htmlFor: "password",
 		label: "Password",
 		id: "password",
 		type: "password",

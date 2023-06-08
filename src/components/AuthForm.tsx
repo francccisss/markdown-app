@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
 interface IAuthFormProps {
 	action: "/sign-in" | "/sign-up" | string;
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
@@ -15,23 +15,20 @@ const AuthForm = ({
 	setError,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
+	const [isClicked, setIsClicked] = useState(false);
 
 	function validateUserCredentialsOnChange(
 		e: React.ChangeEvent<HTMLInputElement>
 	): void {
 		const input = e.target;
 		if (input.validity.tooShort) {
-			console.log("minimum passowrd should be 8 characters");
+			console.log("*minimum passowrd should be 8 characters");
 			setError("Users password needs to have a minimum of 8 characters");
-			input.setCustomValidity("password Mismatched");
 		} else if (input.validity.typeMismatch) {
 			console.log("pattern mismatch");
-			setError("Input needs to be an email address");
-		} else if (input.validity.valueMissing) {
-			setError("You need to enter your email and password");
-			console.log("You need to enter your email and password");
+			setError("*Input needs to be an email address");
 		} else {
-			input.value === "" ? setError("") : setError(error);
+			setError("");
 		}
 	}
 	const mapFormInputs: () => React.ReactNode = function () {
@@ -39,7 +36,7 @@ const AuthForm = ({
 			return (
 				<div key={input.id} className="inputs-container flex flex-col ">
 					<label
-						className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-150 ease-in-out"
+						className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-100 ease-in-out"
 						htmlFor={input.htmlFor}
 					>
 						{input.label}
@@ -48,7 +45,7 @@ const AuthForm = ({
 						required
 						onChange={validateUserCredentialsOnChange}
 						type={input.type}
-						className="hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]"
+						className={`valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
 						id={input.id}
 						name={input.name}
 						minLength={input.minLength ? input.minLength : 0}

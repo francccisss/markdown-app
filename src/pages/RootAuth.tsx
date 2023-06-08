@@ -6,7 +6,7 @@ const RootAuth = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		navigate("/sign-up");
+		navigate("/sign-in");
 	}, []);
 
 	return (
