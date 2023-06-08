@@ -6,6 +6,7 @@ interface IAuthFormProps {
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
 	error: string;
 	setError: React.Dispatch<SetStateAction<string>>;
+	isValid: boolean | null;
 }
 
 const AuthForm = ({
@@ -13,9 +14,9 @@ const AuthForm = ({
 	handleSubmit,
 	error,
 	setError,
+	isValid,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
-	const [isClicked, setIsClicked] = useState(false);
 
 	function validateUserCredentialsOnChange(
 		e: React.ChangeEvent<HTMLInputElement>
@@ -36,7 +37,7 @@ const AuthForm = ({
 			return (
 				<div key={input.id} className="inputs-container flex flex-col ">
 					<label
-						className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-100 ease-in-out"
+						className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-150 ease-in-out"
 						htmlFor={input.htmlFor}
 					>
 						{input.label}
@@ -45,7 +46,9 @@ const AuthForm = ({
 						required
 						onChange={validateUserCredentialsOnChange}
 						type={input.type}
-						className={`valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
+						className={`${
+							isValid ? "is-valid" : "not-valid"
+						} valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
 						id={input.id}
 						name={input.name}
 						minLength={input.minLength ? input.minLength : 0}

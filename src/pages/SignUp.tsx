@@ -1,4 +1,4 @@
-import AuthForm from "@/components/AuthForm";
+import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
 
@@ -9,10 +9,15 @@ const SignUp = () => {
 		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {
 		e.preventDefault();
-		const form = new FormData(e.currentTarget);
-		const formEntries = Object.fromEntries(form.entries());
-		console.log(formEntries);
-		console.log("signed up");
+		const formValidation = e.target;
+		if (formValidation.checkValidity()) {
+			const form = new FormData(e.currentTarget);
+			const formEntries = Object.fromEntries(form.entries());
+			console.log(formEntries);
+			console.log("signed up");
+		} else {
+			setError("Please check your email and password");
+		}
 	}
 	return (
 		<>

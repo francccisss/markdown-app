@@ -1,10 +1,11 @@
-import AuthForm from "@/components/AuthForm";
+import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
 
 const SignIn = () => {
-	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
+	const [error, setError] = useState<string>("");
+	const [isValid, setIsValid] = useState<null | boolean>(null);
 	async function signInUser(
 		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {
@@ -17,11 +18,13 @@ const SignIn = () => {
 			console.log("signed in");
 		} else {
 			console.log("wrong credentials");
+			setError("Please check your email and password");
 		}
 	}
 	return (
 		<>
 			<AuthForm
+				isValid={isValid}
 				setError={setError}
 				handleSubmit={signInUser}
 				error={error}
