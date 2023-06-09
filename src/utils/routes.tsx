@@ -4,8 +4,8 @@ import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
 import { NavLink, createBrowserRouter } from "react-router-dom";
-import SignIn from "@/pages/SignIn";
-import SignUp from "@/pages/SignUp";
+import SignIn from "@/components/auth/SignIn";
+import SignUp from "@/components/auth/SignUp";
 
 export const ROUTES = createBrowserRouter([
 	{

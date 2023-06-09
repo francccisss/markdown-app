@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.scss";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -24,7 +24,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app)
 const db = getFirestore(app);
 const auth = getAuth(app);
 
@@ -38,10 +38,18 @@ export const FirebaseContext = createContext(
 );
 
 function App() {
+	const [init, setInit] = useState(false);
+
+	// error cant render Root before the app initializes using HMR
+	// will remove this after deployment
+	useEffect(() => {
+		setInit(true);
+	}, []);
+
 	return (
 		<div className="App">
 			<FirebaseContext.Provider value={{ db, auth }}>
-				<RouterProvider router={ROUTES} />
+				{init && <RouterProvider router={ROUTES} />}
 			</FirebaseContext.Provider>
 		</div>
 	);

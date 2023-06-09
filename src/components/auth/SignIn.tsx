@@ -1,10 +1,13 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const SignIn = () => {
 	const { db, auth } = useContext(FirebaseContext);
 	const [error, setError] = useState<string>("");
+	const provider = new GoogleAuthProvider();
+
 	async function signInUser(
 		e: React.InvalidEvent<HTMLFormElement>
 	): Promise<void> {

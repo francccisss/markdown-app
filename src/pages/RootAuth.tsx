@@ -8,9 +8,9 @@ const RootAuth = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
 
-	useEffect(() => {
-		navigate("/sign-in");
-	}, []);
+	// useEffect(() => {
+	// 	navigate("/sign-in");
+	// }, []);
 
 	return (
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">
