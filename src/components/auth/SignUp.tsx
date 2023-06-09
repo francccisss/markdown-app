@@ -12,7 +12,6 @@ import { collection, setDoc, addDoc, doc } from "firebase/firestore";
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
-	const [signedUp, setSignedUp] = useState(false);
 
 	async function setUserInDatabase(user: User | null) {
 		if (user === null) {
@@ -38,7 +37,6 @@ const SignUp = () => {
 		const formValidation = e.target;
 		const form = new FormData(e.currentTarget);
 		const formEntries = Object.fromEntries(form.entries());
-		console.log(formEntries);
 		if (
 			formValidation.checkValidity() &&
 			formEntries.password === formEntries.passConf
@@ -50,11 +48,10 @@ const SignUp = () => {
 					formEntries.password.toString()
 				);
 				console.log(createUser.user);
-				console.log("signed up");
-				await setUserInDatabase(auth.currentUser);
-				return formEntries;
 			} catch (err) {
-				setError("*invalid email address");
+				const deleteCurrentUser =
+					auth.currentUser !== null && deleteUser(auth.currentUser);
+				setError("* invalid email address");
 				console.log(err);
 			}
 		}

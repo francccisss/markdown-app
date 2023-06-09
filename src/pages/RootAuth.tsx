@@ -8,18 +8,6 @@ const RootAuth = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
 
-	// useEffect(() => {
-	// 	const redirectIfUserIsLoggedIn = onAuthStateChanged(auth, (user) => {
-	// 		if (user) {
-	// 			console.log("is signed in");
-	// 			navigate("/app");
-	// 		} else {
-	// 			console.log("not signed in");
-	// 			navigate("/sign-in");
-	// 		}
-	// 	});
-	// }, []);
-
 	useEffect(() => {
 		navigate("/sign-in");
 	}, []);
