@@ -1,15 +1,40 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+	User,
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+} from "firebase/auth";
+import { collection, setDoc, doc } from "firebase/firestore";
 
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
 
-	async function signUpUser(
-		e: React.InvalidEvent<HTMLFormElement>
-	): Promise<void> {
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			setUserInDatabase(user);
+		} else {
+			console.log("no users");
+		}
+	});
+
+	async function setUserInDatabase(user: User) {
+		try {
+			const usersRef = doc(collection(db, "users"));
+			const setUser = await setDoc(usersRef, {
+				email: user === null ? "" : user.email,
+				dateAdded: new Date(),
+			});
+			console.log("Store user in firestore");
+		} catch (err) {
+			setError("Something went wrong please comeback another time");
+			throw err;
+		}
+	}
+
+	async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const formValidation = e.target;
 		const form = new FormData(e.currentTarget);
@@ -27,6 +52,7 @@ const SignUp = () => {
 				);
 				console.log(createUser.user);
 				console.log("signed up");
+				return formEntries;
 			} catch (err) {
 				setError("*invalid email address");
 				console.log(err);
@@ -39,6 +65,7 @@ const SignUp = () => {
 			setError("*Password doesn't match");
 		}
 	}
+
 	return (
 		<>
 			<AuthForm
