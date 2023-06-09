@@ -8,6 +8,7 @@ import {
 	onAuthStateChanged,
 } from "firebase/auth";
 import { collection, setDoc, addDoc, doc } from "firebase/firestore";
+import { IFormEntries } from "@/utils/types/FormEntries";
 
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
@@ -34,33 +35,42 @@ const SignUp = () => {
 
 	async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
 		e.preventDefault();
-		const formValidation = e.target;
+		const formElement = e.target;
 		const form = new FormData(e.currentTarget);
 		const formEntries = Object.fromEntries(form.entries());
-		if (
-			formValidation.checkValidity() &&
-			formEntries.password === formEntries.passConf
-		) {
+		if (showError(e, formEntries)) {
 			try {
-				const createUser = await createUserWithEmailAndPassword(
-					auth,
-					formEntries.email.toString(),
-					formEntries.password.toString()
-				);
-				console.log(createUser.user);
+				// const createUser = await createUserWithEmailAndPassword(
+				// 	auth,
+				// 	formEntries.email.toString(),
+				// 	formEntries.password.toString()
+				// );
+				// console.log(createUser.user);
+				console.log("success");
 			} catch (err) {
 				const deleteCurrentUser =
 					auth.currentUser !== null && deleteUser(auth.currentUser);
-				setError("* invalid email address");
+				setError("* Invalid email / already existing email");
 				console.log(err);
 			}
 		}
-		if (!formValidation.checkValidity()) {
+	}
+
+	function showError(
+		e: React.InvalidEvent<HTMLFormElement>,
+		{ email, password, passConf }: IFormEntries
+	): boolean {
+		const formElement = e.target;
+
+		if (password.toString() !== passConf.toString()) {
+			// custom validation constraint
+			setError("*Password doesn't match");
+			return false;
+		}
+		if (!formElement.checkValidity()) {
 			setError("*Please check your email and password");
 		}
-		if (formEntries.password !== formEntries.passConf) {
-			setError("*Password doesn't match");
-		}
+		return formElement.reportValidity();
 	}
 
 	return (

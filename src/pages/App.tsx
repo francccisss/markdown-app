@@ -12,7 +12,7 @@ import {
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
-import { INote } from "@/utils/Note";
+import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
 import NavbarActions from "@/components/navbar-actions/NavbarActions";
 import { signOut } from "firebase/auth";

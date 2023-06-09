@@ -4,7 +4,7 @@ import Preview from "../preview/Preview";
 import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
 import { IContextType, NoteContext } from "@/pages/App";
-import { INote } from "@/utils/Note";
+import { INote } from "@/utils/types/Note";
 interface INoteContext {
 	setNotes: (prev: Array<INote>) => any;
 	notes: Array<INote>;
