@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { showRelevantInputs, authText } from "@/utils/formInputs";
 import { SetStateAction, useState } from "react";
 import "./auth.scss";
+import "../../assets/styles/loadingSpinner.scss";
 interface IAuthFormProps {
 	action: "/sign-in" | "/sign-up" | string;
 	handleSubmit: (e: React.InvalidEvent<HTMLFormElement>) => void;
 	error: string;
 	setError: React.Dispatch<SetStateAction<string>>;
+	processingAuth: boolean;
 }
 
 const AuthForm = ({
@@ -14,6 +16,7 @@ const AuthForm = ({
 	handleSubmit,
 	error,
 	setError,
+	processingAuth,
 }: IAuthFormProps) => {
 	const navigate = useNavigate();
 
@@ -74,10 +77,13 @@ const AuthForm = ({
 				noValidate
 			>
 				{mapFormInputs()}
+
 				<button
 					type="submit"
-					className="text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
+					disabled={processingAuth}
+					className="grid place-items-center disabled:bg-vn-dark-blue disabled:text-[#ffffff60] text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
 				>
+					{" "}
 					{action === "/sign-in" ? "Sign in" : "Sign up"}
 				</button>
 			</form>

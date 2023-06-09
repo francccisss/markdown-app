@@ -1,6 +1,7 @@
 import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
-import { onAuthStateChanged } from "firebase/auth";
+import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
+import { doc, collection, getDoc } from "firebase/firestore";
 import { useState, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -9,8 +10,28 @@ const RootAuth = () => {
 	const { auth, db } = useContext(FirebaseContext);
 
 	useEffect(() => {
-		navigate("/sign-in");
+		onAuthStateChanged(auth, async (user) => {
+			if (user && (await checkIfUserExists(user))) {
+				navigate("/app");
+				console.log("yes");
+			} else {
+				navigate("/sign-in");
+				auth.currentUser ? deleteUser(auth.currentUser) : 0;
+				console.log("no");
+			}
+		});
 	}, []);
+
+	async function checkIfUserExists(user: User): Promise<boolean> {
+		try {
+			const useRef = doc(db, "users", user.uid);
+			const userDoc = await getDoc(useRef);
+			return userDoc.exists() ? true : false;
+		} catch (err) {
+			console.log(err);
+			return false;
+		}
+	}
 
 	return (
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">

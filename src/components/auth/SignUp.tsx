@@ -13,6 +13,7 @@ import { IFormEntries } from "@/utils/types/FormEntries";
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
+	const [isSigninUp, setIsSigningUp] = useState(false);
 
 	async function setUserInDatabase(user: User | null) {
 		if (user === null) {
@@ -35,18 +36,22 @@ const SignUp = () => {
 
 	async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
 		e.preventDefault();
-		const formElement = e.target;
 		const form = new FormData(e.currentTarget);
 		const formEntries = Object.fromEntries(form.entries());
 		if (showError(e, formEntries)) {
+			setIsSigningUp(true);
 			try {
-				// const createUser = await createUserWithEmailAndPassword(
-				// 	auth,
-				// 	formEntries.email.toString(),
-				// 	formEntries.password.toString()
-				// );
-				// console.log(createUser.user);
+				const createUser = await createUserWithEmailAndPassword(
+					auth,
+					formEntries.email.toString(),
+					formEntries.password.toString()
+				);
+				console.log(createUser.user);
+				setIsSigningUp(false);
 				console.log("success");
+				// setTimeout(async () => {
+				// 	console.log("timed out");
+				// }, 600);
 			} catch (err) {
 				const deleteCurrentUser =
 					auth.currentUser !== null && deleteUser(auth.currentUser);
@@ -66,8 +71,7 @@ const SignUp = () => {
 			// custom validation constraint
 			setError("*Password doesn't match");
 			return false;
-		}
-		if (!formElement.checkValidity()) {
+		} else if (!formElement.checkValidity()) {
 			setError("*Please check your email and password");
 		}
 		return formElement.reportValidity();
@@ -76,6 +80,7 @@ const SignUp = () => {
 	return (
 		<>
 			<AuthForm
+				processingAuth={isSigninUp}
 				setError={setError}
 				handleSubmit={signUpUser}
 				error={error}
