@@ -1,36 +1,35 @@
 import AuthForm from "@/components/auth/AuthForm";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FirebaseContext } from "@/App";
 import {
 	User,
 	createUserWithEmailAndPassword,
+	deleteUser,
 	onAuthStateChanged,
 } from "firebase/auth";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, addDoc, doc } from "firebase/firestore";
 
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
+	const [signedUp, setSignedUp] = useState(false);
 
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-			setUserInDatabase(user);
+	async function setUserInDatabase(user: User | null) {
+		if (user === null) {
+			setError("Error");
+			throw "Unable to add user to database";
 		} else {
-			console.log("no users");
-		}
-	});
-
-	async function setUserInDatabase(user: User) {
-		try {
-			const usersRef = doc(collection(db, "users"));
-			const setUser = await setDoc(usersRef, {
-				email: user === null ? "" : user.email,
-				dateAdded: new Date(),
-			});
-			console.log("Store user in firestore");
-		} catch (err) {
-			setError("Something went wrong please comeback another time");
-			throw err;
+			try {
+				const usersRef = doc(db, "users", user.uid);
+				const setUser = await setDoc(usersRef, {
+					email: user === null ? "" : user.email,
+					dateAdded: new Date(),
+				});
+				console.log("Store user in firestore");
+			} catch (err) {
+				setError("Something went wrong please comeback another time");
+				throw err;
+			}
 		}
 	}
 
@@ -52,6 +51,7 @@ const SignUp = () => {
 				);
 				console.log(createUser.user);
 				console.log("signed up");
+				await setUserInDatabase(auth.currentUser);
 				return formEntries;
 			} catch (err) {
 				setError("*invalid email address");
