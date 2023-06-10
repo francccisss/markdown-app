@@ -13,11 +13,9 @@ const RootAuth = () => {
 		onAuthStateChanged(auth, async (user) => {
 			if (user && (await checkIfUserExists(user))) {
 				navigate("/app");
-				console.log("yes");
-			} else {
+			} else if (user === null) {
 				navigate("/sign-in");
 				auth.currentUser ? deleteUser(auth.currentUser) : 0;
-				console.log("no");
 			}
 		});
 	}, []);

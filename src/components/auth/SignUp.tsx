@@ -47,12 +47,10 @@ const SignUp = () => {
 					formEntries.password.toString()
 				);
 				console.log(createUser.user);
+				setUserInDatabase(auth.currentUser);
 				setIsSigningUp(false);
-				console.log("success");
-				// setTimeout(async () => {
-				// 	console.log("timed out");
-				// }, 600);
 			} catch (err) {
+				setIsSigningUp(false);
 				const deleteCurrentUser =
 					auth.currentUser !== null && deleteUser(auth.currentUser);
 				setError("* Invalid email / already existing email");

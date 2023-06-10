@@ -18,18 +18,13 @@ const SignIn = () => {
 		if (showError(e, formEntries)) {
 			setIsSigningUp(true);
 			try {
-				// const signIn = await signInWithEmailAndPassword(
-				// 	auth,
-				// 	formEntries.email.toString(),
-				// 	formEntries.password.toString()
-				// );
-				// console.log("logged in");
-				setTimeout(async () => {
-					console.log("timed out");
-					console.log("success");
-					setIsSigningUp(false);
-				}, 1200);
+				const signIn = await signInWithEmailAndPassword(
+					auth,
+					formEntries.email.toString(),
+					formEntries.password.toString()
+				);
 			} catch (err) {
+				setIsSigningUp(false);
 				setError("*invalid email and password");
 				console.log(err);
 			}
