@@ -28,6 +28,13 @@ export interface IContextType {
 export const NoteContext = createContext<IContextType>(
 	null as unknown as IContextType
 );
+export interface INavbarActions {
+	[k: string]: (e: React.MouseEvent) => Promise<void>;
+}
+
+export const NavbarActionsContext = createContext<INavbarActions>(
+	null as unknown as INavbarActions
+);
 const App = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
@@ -35,8 +42,8 @@ const App = () => {
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
 	const [notes, setNotes] = useState<INote[]>(placeholders);
-	// created searchedNotes so that when searching for notes search query function
-	// so that we don't directly set the original notes
+	// created searchedNotes so that when searching for notes in search query function
+	// we don't directly set the original notes
 	const [searchedNotes, setSearchedNotes] = useState(notes);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -75,16 +82,16 @@ const App = () => {
 	async function deleteNote(e: React.MouseEvent): Promise<void> {
 		e.preventDefault();
 		console.log(noteIDRef);
-		// const filterCurrentNote = notes.filter(
-		// 	(note) => note.id !== noteIDRef.current
-		// );
-		// setNotes(filterCurrentNote);
+		const filterCurrentNote = notes.filter(
+			(note) => note.id !== noteIDRef.current
+		);
+		setNotes(filterCurrentNote);
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
-		// if (notes.length !== 0) {
-		// 	return navigate(`/app/${notes[0].id}`);
-		// }
+		if (notes.length !== 0) {
+			return navigate(`/app/${notes[0].id}`);
+		}
 		return navigate("/app/empty-notes");
 	}
 
@@ -98,7 +105,7 @@ const App = () => {
 
 	useEffect(() => {
 		redirectToExistingNotes();
-	}, []);
+	}, [notes]);
 
 	return (
 		<main
@@ -113,7 +120,9 @@ const App = () => {
 			>
 				sign out
 			</button>
-			<Navbar deleteNote={deleteNote} />
+			<NavbarActionsContext.Provider value={{ deleteNote }}>
+				<Navbar />
+			</NavbarActionsContext.Provider>
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu sideBarRef={sideBarRef} />
 				<Sidebar sideBarRef={sideBarRef}>
