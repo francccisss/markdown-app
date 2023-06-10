@@ -9,9 +9,7 @@ interface INavbarProps {
 
 const Navbar = ({ deleteNote }: INavbarProps) => {
 	const [navBarActionsActive, setNavbarActionsActive] = useState(true);
-	useEffect(() => {
-		console.log(navBarActionsActive);
-	}, [navBarActionsActive]);
+	useEffect(() => {}, [navBarActionsActive]);
 	return (
 		<nav
 			id="navbar"

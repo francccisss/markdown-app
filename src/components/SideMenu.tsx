@@ -11,7 +11,6 @@ const SideMenu = ({ sideBarRef }: any) => {
 		} else {
 			sideBar.classList.replace("sidebar-inactive", "sidebar-active");
 		}
-		console.log(sideBar.classList);
 	}
 
 	return (

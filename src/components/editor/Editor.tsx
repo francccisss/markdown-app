@@ -33,8 +33,8 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 				highlightActiveLine: false,
 			}}
 			onCreateEditor={(view, state) => {
-				console.log(state.doc);
-				console.log("vim");
+				// console.log(state.doc);
+				// console.log("vim");
 			}}
 		/>
 	);

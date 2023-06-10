@@ -84,7 +84,6 @@ const VimnoteCheatSheet = () => {
 		for (const item in contents) {
 			tmpArray.push(contents[item]);
 		}
-		console.log(tmpArray);
 		const extractJSXContents = tmpArray.map((content, i) => {
 			const firstChar = content.slice(0, 1);
 			return (
