@@ -15,9 +15,10 @@ import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
 import NavbarActions from "@/components/navbar-actions/NavbarActions";
-import { signOut } from "firebase/auth";
+import { User, signOut } from "firebase/auth";
 import { FirebaseContext } from "@/App";
 import { placeholders } from "@/utils/placeholderNotes";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -73,10 +74,26 @@ const App = () => {
 		const newID = uid(16).toString();
 		const newNote: INote = {
 			id: newID,
+			authorID: auth.currentUser?.uid,
+			dateAdded: new Date(),
+			lastUpdated: null,
 			contents: "",
 		};
-		setNotes((prev) => [newNote, ...prev]);
-		console.log(newNote);
+		try {
+			const newNoteDocRef = doc(
+				db,
+				"users",
+				auth.currentUser?.uid as string,
+				"notes",
+				newID
+			);
+			const setNewNote = await setDoc(newNoteDocRef, newNote);
+			setNotes((prev) => [newNote, ...prev]);
+			console.log(newNote);
+		} catch (err) {
+			console.log("unable to add note ");
+			throw err;
+		}
 	}
 
 	async function deleteNote(e: React.MouseEvent): Promise<void> {

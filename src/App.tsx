@@ -3,9 +3,15 @@ import "./App.scss";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { Firestore, getFirestore } from "firebase/firestore";
-import { getAuth, Auth, onAuthStateChanged } from "firebase/auth";
-import { RouterProvider } from "react-router-dom";
+import { Firestore, getFirestore, doc, getDoc } from "firebase/firestore";
+import {
+	getAuth,
+	Auth,
+	onAuthStateChanged,
+	deleteUser,
+	User,
+} from "firebase/auth";
+import { RouterProvider, useNavigate } from "react-router-dom";
 import { ROUTES } from "./utils/routes";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
