@@ -1,5 +1,10 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import {
+	Outlet,
+	useLoaderData,
+	useNavigate,
+	useParams,
+} from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import {
 	createContext,
@@ -18,7 +23,14 @@ import NavbarActions from "@/components/navbar-actions/NavbarActions";
 import { User, signOut } from "firebase/auth";
 import { FirebaseContext } from "@/App";
 import { placeholders } from "@/utils/placeholderNotes";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import {
+	DocumentData,
+	QueryDocumentSnapshot,
+	addDoc,
+	collection,
+	doc,
+	setDoc,
+} from "firebase/firestore";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -38,7 +50,7 @@ export const NavbarActionsContext = createContext<INavbarActions>(
 );
 const App = () => {
 	const navigate = useNavigate();
-	// const {}
+	const fetchedNotes = useLoaderData() as QueryDocumentSnapshot[];
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
@@ -70,6 +82,14 @@ const App = () => {
 		},
 		[notes]
 	);
+
+	function setLocalStateNotes() {
+		const userNotes = fetchedNotes.map((doc) => {
+			return doc.data();
+		});
+		// setNotes((prev) => [userNotes, ...prev]);
+		console.log(userNotes);
+	}
 
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
@@ -112,6 +132,10 @@ const App = () => {
 		}
 		return navigate("/app/empty-notes");
 	}
+
+	useEffect(() => {
+		setLocalStateNotes();
+	}, []);
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
