@@ -3,15 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarActions from "./navbar-actions/NavbarActions";
 
-interface INavbarProps {
-	deleteNote: (e: React.MouseEvent) => void;
-}
-
-const Navbar = ({ deleteNote }: INavbarProps) => {
-	const [navBarActionsActive, setNavbarActionsActive] = useState(true);
-	useEffect(() => {
-		console.log(navBarActionsActive);
-	}, [navBarActionsActive]);
+const Navbar = ({}) => {
+	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
+	useEffect(() => {}, [navBarActionsActive]);
 	return (
 		<nav
 			id="navbar"

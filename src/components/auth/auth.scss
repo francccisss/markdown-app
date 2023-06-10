@@ -1,0 +1,23 @@
+@keyframes errorMessage {
+	0% {
+		opacity: 0;
+		transform: translate(0px);
+	}
+	15% {
+		opacity: 0.5;
+		transform: translate(-10px);
+	}
+	75% {
+		opacity: 1;
+		transform: translate(15px);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(0px);
+	}
+}
+
+.error-message {
+	animation: errorMessage forwards normal 250ms ease-out;
+	display: block;
+}

@@ -1,15 +1,17 @@
-import React from "react";
+import { NavbarActionsContext } from "@/pages/App";
+import React, { useContext } from "react";
 
 interface IActionProps {
 	[key: string]: {
 		title: string;
-		onClick: (e: React.MouseEvent) => void;
+		onClick: (e: React.MouseEvent) => void | Promise<void>;
 		bgColor?: string;
 		textColor?: string;
 	};
 }
 
 const NavbarActions = () => {
+	const { deleteNote } = useContext(NavbarActionsContext);
 	const actions: IActionProps = {
 		info: {
 			title: "Note Information",
@@ -37,9 +39,7 @@ const NavbarActions = () => {
 		},
 		remove: {
 			title: "Remove Note",
-			onClick: (e: React.MouseEvent) => {
-				console.log("remove clicked");
-			},
+			onClick: deleteNote,
 			bgColor: "",
 			textColor: "text-vn-red",
 		},
@@ -63,7 +63,7 @@ const NavbarActions = () => {
 	return (
 		<div
 			id="navbar-actions"
-			className="w-60 absolute right-4 z-0 top-[50px] text-[.9rem] text-vn-white bg-vn-black shadow-lg rounded border-vn-dshade-white border-2"
+			className="w-60 absolute right-4 z-0 top-[50px] text-[.9rem] text-vn-white bg-vn-black shadow-xl rounded-sm border-vn-dshade-white border"
 		>
 			<ul className="w-full">{mapActions}</ul>
 		</div>
