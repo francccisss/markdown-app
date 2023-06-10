@@ -6,6 +6,7 @@ import RootAuth from "@/pages/RootAuth";
 import { NavLink, createBrowserRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
+import { fetchUserNotesLoader } from "@/loader/fetchUserNotes";
 
 export const ROUTES = createBrowserRouter([
 	{
@@ -25,6 +26,7 @@ export const ROUTES = createBrowserRouter([
 	{
 		path: "/app",
 		element: <App />,
+		loader: fetchUserNotesLoader,
 		children: [
 			{
 				path: ":noteID",

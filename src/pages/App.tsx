@@ -38,6 +38,7 @@ export const NavbarActionsContext = createContext<INavbarActions>(
 );
 const App = () => {
 	const navigate = useNavigate();
+	// const {}
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
