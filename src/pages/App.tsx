@@ -22,6 +22,7 @@ import {
 	setDoc,
 	QueryDocumentSnapshot,
 	DocumentData,
+	deleteDoc,
 } from "firebase/firestore";
 
 export interface IContextType {
@@ -78,8 +79,8 @@ const App = () => {
 
 	async function setLocalStateNotes() {
 		const userNotes = fetchedNotes.map((doc) => {
-			// console.log(doc.data().dateAdded);
-			return doc.data();
+			const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
+			return { ...doc.data(), dateAdded: convertDateFormat };
 		}) as INote[];
 		setNotes([...userNotes, ...notes]);
 		console.log(userNotes);
@@ -113,11 +114,26 @@ const App = () => {
 
 	async function deleteNote(e: React.MouseEvent): Promise<void> {
 		e.preventDefault();
-		console.log(noteIDRef);
-		const filterCurrentNote = notes.filter(
-			(note) => note.id !== noteIDRef.current
-		);
-		setNotes(filterCurrentNote);
+		// const [noteRef] = notes.filter((note) => note.id === noteIDRef.current);
+		const noteRef = notes.find(
+			(note) => note.id === noteIDRef.current
+		) as INote;
+		console.log(noteRef);
+		try {
+			const noteDocumentRef = doc(
+				db,
+				"users",
+				auth.currentUser.uid,
+				"notes",
+				noteRef.id
+			);
+			const deleteNoteDocument = await deleteDoc(noteDocumentRef);
+			const filterNotes = notes.filter((note) => note.id !== noteRef.id);
+			setNotes(filterNotes);
+		} catch (err) {
+			console.log(err);
+			console.log("unable to delete note document:" + noteRef.id);
+		}
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
