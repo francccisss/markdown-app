@@ -77,14 +77,15 @@ const App = () => {
 		[notes]
 	);
 
-	async function setLocalStateNotes() {
+	const setLocalStateNotes = useCallback(() => {
+		console.log("lol");
 		const userNotes = fetchedNotes.map((doc) => {
 			const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
 			return { ...doc.data(), dateAdded: convertDateFormat };
 		}) as INote[];
 		setNotes([...userNotes, ...notes]);
 		console.log(userNotes);
-	}
+	}, []);
 
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
@@ -114,7 +115,6 @@ const App = () => {
 
 	async function deleteNote(e: React.MouseEvent): Promise<void> {
 		e.preventDefault();
-		// const [noteRef] = notes.filter((note) => note.id === noteIDRef.current);
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;

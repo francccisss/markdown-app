@@ -12,7 +12,6 @@ export async function fetchUserNotesLoader(): Promise<
 			"notes"
 		);
 		const userNotes = await getDocs(userNoteCollectionRef);
-		console.log(userNotes.docs);
 		return userNotes.docs;
 	} catch (err) {
 		console.log(err);
