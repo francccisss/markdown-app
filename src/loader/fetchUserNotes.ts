@@ -1,16 +1,15 @@
-import { auth, db } from "@/App";
-import { INote } from "@/utils/types/Note";
+import { Auth } from "firebase/auth";
 import {
 	collection,
+	Firestore,
 	getDocs,
-	QuerySnapshot,
-	DocumentData,
 	QueryDocumentSnapshot,
 } from "firebase/firestore";
 
-export async function fetchUserNotesLoader(): Promise<
-	Array<QueryDocumentSnapshot>
-> {
+export async function fetchUserNotesLoader(
+	auth: Auth,
+	db: Firestore
+): Promise<Array<QueryDocumentSnapshot>> {
 	try {
 		const userNoteCollectionRef = collection(
 			db,

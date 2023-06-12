@@ -1,5 +1,5 @@
-import { FirebaseContext } from "@/App";
 import AuthContents from "@/components/AuthContents";
+import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { doc, collection, getDoc } from "firebase/firestore";
 import { useState, useContext, useEffect } from "react";
