@@ -1,10 +1,5 @@
 import Navbar from "@/components/Navbar";
-import {
-	Outlet,
-	useLoaderData,
-	useNavigate,
-	useParams,
-} from "react-router-dom";
+import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import {
 	createContext,
@@ -19,11 +14,15 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
-import { User, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
-import { doc, setDoc } from "firebase/firestore";
-import { fetchUserNotesLoader } from "@/loader/fetchUserNotes";
+import {
+	doc,
+	setDoc,
+	QueryDocumentSnapshot,
+	DocumentData,
+} from "firebase/firestore";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -43,7 +42,7 @@ export const NavbarActionsContext = createContext<INavbarActions>(
 );
 const App = () => {
 	const navigate = useNavigate();
-	// const fetchedNotes = useLoaderData() as QueryDocumentSnapshot[];
+	const fetchedNotes = useLoaderData() as QueryDocumentSnapshot[];
 	const [fetching, setFetching] = useState(false);
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
@@ -78,14 +77,12 @@ const App = () => {
 	);
 
 	async function setLocalStateNotes() {
-		// setFetching(true);
-		// const userNotes = (await fetchUserNotesLoader(auth, db)).map((doc) => {
-		// 	console.log(doc.data().dateAdded);
-		// 	return doc.data();
-		// });
-		// setFetching(false);
-		// setNotes((prev) => [userNotes, ...prev]);
-		// console.log(userNotes);
+		const userNotes = fetchedNotes.map((doc) => {
+			// console.log(doc.data().dateAdded);
+			return doc.data();
+		}) as INote[];
+		setNotes((prev) => [...userNotes, ...prev]);
+		console.log(userNotes);
 	}
 
 	async function addNote(): Promise<void> {
@@ -155,6 +152,7 @@ const App = () => {
 				className="absolute z-40"
 				onClick={() => {
 					signOut(auth);
+					navigate("/");
 				}}
 			>
 				sign out

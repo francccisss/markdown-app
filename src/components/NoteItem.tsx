@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { UserInfo } from "firebase/auth";
 interface INoteItemProps {
 	note: {
 		id: string;
+		authorID?: UserInfo["uid"] | null;
+		dateAdded?: Date;
+		lastUpdated?: Date | null;
 		contents: string;
 	};
 }

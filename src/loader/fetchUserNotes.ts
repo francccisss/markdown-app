@@ -1,15 +1,10 @@
-import { Auth } from "firebase/auth";
-import {
-	collection,
-	Firestore,
-	getDocs,
-	QueryDocumentSnapshot,
-} from "firebase/firestore";
+import { db, auth } from "@/utils/contexts/firebaseContext";
+import { collection, getDocs, QueryDocumentSnapshot } from "firebase/firestore";
 
-export async function fetchUserNotesLoader(
-	auth: Auth,
-	db: Firestore
-): Promise<Array<QueryDocumentSnapshot>> {
+export async function fetchUserNotesLoader(): Promise<
+	Array<QueryDocumentSnapshot>
+> {
+	console.log("call");
 	try {
 		const userNoteCollectionRef = collection(
 			db,
@@ -18,6 +13,7 @@ export async function fetchUserNotesLoader(
 			"notes"
 		);
 		const userNotes = await getDocs(userNoteCollectionRef);
+		console.log(userNotes.docs);
 		return userNotes.docs;
 	} catch (err) {
 		console.log(err);
