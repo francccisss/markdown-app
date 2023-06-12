@@ -2,7 +2,11 @@ import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext } from "react";
 import { FirebaseContext } from "@/App";
 import { IFormEntries } from "@/utils/types/FormEntries";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+	browserSessionPersistence,
+	setPersistence,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const SignIn = () => {
 	const { db, auth } = useContext(FirebaseContext);
@@ -18,6 +22,7 @@ const SignIn = () => {
 		if (showError(e, formEntries)) {
 			setIsSigningUp(true);
 			try {
+				await setPersistence(auth, browserSessionPersistence);
 				const signIn = await signInWithEmailAndPassword(
 					auth,
 					formEntries.email.toString(),
