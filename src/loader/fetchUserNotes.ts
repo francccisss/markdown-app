@@ -4,7 +4,6 @@ import { collection, getDocs, QueryDocumentSnapshot } from "firebase/firestore";
 export async function fetchUserNotesLoader(): Promise<
 	Array<QueryDocumentSnapshot>
 > {
-	console.log("call");
 	try {
 		const userNoteCollectionRef = collection(
 			db,

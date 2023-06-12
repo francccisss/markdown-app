@@ -81,7 +81,7 @@ const App = () => {
 			// console.log(doc.data().dateAdded);
 			return doc.data();
 		}) as INote[];
-		setNotes((prev) => [...userNotes, ...prev]);
+		setNotes([...userNotes, ...notes]);
 		console.log(userNotes);
 	}
 
