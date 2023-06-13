@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { IFormEntries } from "@/utils/types/FormEntries";
 import {
-	browserSessionPersistence,
+	browserLocalPersistence,
 	setPersistence,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -22,7 +22,7 @@ const SignIn = () => {
 		if (showError(e, formEntries)) {
 			setIsSigningUp(true);
 			try {
-				await setPersistence(auth, browserSessionPersistence);
+				await setPersistence(auth, browserLocalPersistence);
 				const signIn = await signInWithEmailAndPassword(
 					auth,
 					formEntries.email.toString(),
