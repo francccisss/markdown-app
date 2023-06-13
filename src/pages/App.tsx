@@ -15,7 +15,7 @@ import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
 import { signOut } from "firebase/auth";
-import { FirebaseContext } from "@/utils/contexts/firebaseContext";
+import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
 import {
 	doc,
@@ -24,6 +24,7 @@ import {
 	DocumentData,
 	deleteDoc,
 } from "firebase/firestore";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -80,18 +81,6 @@ const App = () => {
 		[notes]
 	);
 
-	// const setLocalStateNotes = useCallback(() => {
-	// 	console.log("lol");
-	// 	const userNotes = fetchedNotes.map((doc) => {
-	// 		const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
-	// 		return { ...doc.data(), dateAdded: convertDateFormat };
-	// 	}) as INote[];
-	// 	setNotes([...userNotes, ...notes]);
-	// 	console.log(userNotes);
-	// }, [fetching]);
-	// using placeholder  because even if setting it empty, it is still updating and invoking when typing on editor
-	// because of state updating every input on the editor, the fetchNotes loader is being called on every user input
-
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
 		const newNote: INote = {
@@ -141,16 +130,25 @@ const App = () => {
 		}
 	}
 
+	async function deleteNoteCollection(): Promise<void> {
+		const functionsInstance = getFunctions();
+		const deleteFn = httpsCallable(functionsInstance, "recursiveDelete");
+		deleteFn({ path: `users/${auth.currentUser.uid}/notes` })
+			.then((results) => {
+				console.log(results);
+			})
+			.catch((err) => {
+				console.log(err);
+				throw err;
+			});
+	}
+
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
 		}
 		return navigate("/app/empty-notes");
 	}
-
-	// useEffect(() => {
-	// 	setLocalStateNotes();
-	// }, []);
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
@@ -174,6 +172,14 @@ const App = () => {
 				}}
 			>
 				sign out
+			</button>
+			<button
+				className="absolute z-40 left-20 text-vn-white"
+				onClick={() => {
+					deleteNoteCollection();
+				}}
+			>
+				Delete Notes
 			</button>
 			<NavbarActionsContext.Provider value={{ deleteNote }}>
 				<Navbar />
