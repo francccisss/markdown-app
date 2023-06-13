@@ -35,7 +35,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
 	const [notes, setNotes] = useState<INote[]>([
-		// ...fetchedNotes,
+		...fetchedNotes,
 		...placeholders,
 	]);
 	// created searchedNotes so that when searching for notes in search query function
@@ -82,7 +82,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				"notes",
 				newID
 			);
-			const setNewNote = await setDoc(newNoteDocRef, newNote);
 			setNotes((prev) => [newNote, ...prev]);
 			console.log(newNote);
 		} catch (err) {
@@ -105,7 +104,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				"notes",
 				noteRef.id
 			);
-			const deleteNoteDocument = await deleteDoc(noteDocumentRef);
 			const filterNotes = notes.filter((note) => note.id !== noteRef.id);
 			setNotes(filterNotes);
 		} catch (err) {

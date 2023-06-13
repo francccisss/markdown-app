@@ -3,14 +3,10 @@ import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
-import { IContextType, NoteContext } from "@/pages/App";
+import { NoteContext } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
 import { Vim, vim } from "@replit/codemirror-vim";
 import { closeEditorPane, writeNote } from "@/utils/vimCustomBindings";
-interface INoteContext {
-	setNotes: (prev: Array<INote>) => any;
-	notes: Array<INote>;
-}
 
 const Note = () => {
 	const { noteID } = useParams();

@@ -38,16 +38,15 @@ const App = () => {
 		}
 	}
 
-	onAuthStateChanged(auth, async (user) => {
-		if (user) {
-			setIsLoading(false);
-			// getFetchedNotes();
-			return;
-		}
-
-		setIsLoading(true);
-	});
-
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setIsLoading(false);
+				return;
+			}
+			setIsLoading(true);
+		});
+	}, []);
 	useEffect(() => {
 		if (!isLoading) {
 			getFetchedNotes();

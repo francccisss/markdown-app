@@ -26,7 +26,7 @@ export const ROUTES = createBrowserRouter([
 	{
 		path: "/app",
 		element: <App />,
-		loader: fetchUserNotesLoader,
+		// loader: fetchUserNotesLoader,
 		shouldRevalidate: () => false,
 		children: [
 			{
