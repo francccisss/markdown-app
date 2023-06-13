@@ -1,9 +1,13 @@
 import { db, auth } from "@/utils/contexts/firebaseContext";
-import { collection, getDocs, QueryDocumentSnapshot } from "firebase/firestore";
+import {
+	collection,
+	DocumentData,
+	getDocs,
+	QueryDocumentSnapshot,
+} from "firebase/firestore";
 
-export async function fetchUserNotesLoader(): Promise<
-	Array<QueryDocumentSnapshot>
-> {
+export async function fetchUserNotesLoader(): Promise<Array<DocumentData>> {
+	console.log("called");
 	try {
 		const userNoteCollectionRef = collection(
 			db,
@@ -12,7 +16,11 @@ export async function fetchUserNotesLoader(): Promise<
 			"notes"
 		);
 		const userNotes = await getDocs(userNoteCollectionRef);
-		return userNotes.docs;
+		const mapNoteDocument = userNotes.docs.map((doc) => {
+			const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
+			return { ...doc.data(), dateAdded: convertDateFormat };
+		});
+		return mapNoteDocument;
 	} catch (err) {
 		console.log(err);
 		return [];
