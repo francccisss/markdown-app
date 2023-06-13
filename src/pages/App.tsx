@@ -43,13 +43,16 @@ export const NavbarActionsContext = createContext<INavbarActions>(
 );
 const App = () => {
 	const navigate = useNavigate();
-	const fetchedNotes = useLoaderData() as QueryDocumentSnapshot[];
+	const fetchedNotes = useLoaderData() as INote[];
 	const [fetching, setFetching] = useState(false);
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
-	const [notes, setNotes] = useState<INote[]>(placeholders);
+	const [notes, setNotes] = useState<INote[]>([
+		...fetchedNotes,
+		...placeholders,
+	]);
 	// created searchedNotes so that when searching for notes in search query function
 	// we don't directly set the original notes
 	const [searchedNotes, setSearchedNotes] = useState(notes);
@@ -77,15 +80,17 @@ const App = () => {
 		[notes]
 	);
 
-	const setLocalStateNotes = useCallback(() => {
-		console.log("lol");
-		const userNotes = fetchedNotes.map((doc) => {
-			const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
-			return { ...doc.data(), dateAdded: convertDateFormat };
-		}) as INote[];
-		setNotes([...userNotes, ...notes]);
-		console.log(userNotes);
-	}, []);
+	// const setLocalStateNotes = useCallback(() => {
+	// 	console.log("lol");
+	// 	const userNotes = fetchedNotes.map((doc) => {
+	// 		const convertDateFormat = new Date(doc.data().dateAdded.nanoseconds);
+	// 		return { ...doc.data(), dateAdded: convertDateFormat };
+	// 	}) as INote[];
+	// 	setNotes([...userNotes, ...notes]);
+	// 	console.log(userNotes);
+	// }, [fetching]);
+	// using placeholder  because even if setting it empty, it is still updating and invoking when typing on editor
+	// because of state updating every input on the editor, the fetchNotes loader is being called on every user input
 
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
@@ -143,9 +148,9 @@ const App = () => {
 		return navigate("/app/empty-notes");
 	}
 
-	useEffect(() => {
-		setLocalStateNotes();
-	}, []);
+	// useEffect(() => {
+	// 	setLocalStateNotes();
+	// }, []);
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
@@ -153,9 +158,6 @@ const App = () => {
 
 	useEffect(() => {
 		setSearchedNotes(notes);
-	}, [notes]);
-
-	useEffect(() => {
 		redirectToExistingNotes();
 	}, [notes]);
 
