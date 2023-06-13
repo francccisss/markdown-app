@@ -17,14 +17,7 @@ import SideMenu from "@/components/SideMenu";
 import { signOut } from "firebase/auth";
 import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
-import {
-	doc,
-	setDoc,
-	QueryDocumentSnapshot,
-	DocumentData,
-	deleteDoc,
-} from "firebase/firestore";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
 
 export interface IContextType {
 	notes: Array<INote>;
@@ -130,19 +123,6 @@ const App = () => {
 		}
 	}
 
-	async function deleteNoteCollection(): Promise<void> {
-		const functionsInstance = getFunctions();
-		const deleteFn = httpsCallable(functionsInstance, "recursiveDelete");
-		deleteFn({ path: `users/${auth.currentUser.uid}/notes` })
-			.then((results) => {
-				console.log(results);
-			})
-			.catch((err) => {
-				console.log(err);
-				throw err;
-			});
-	}
-
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
@@ -172,14 +152,6 @@ const App = () => {
 				}}
 			>
 				sign out
-			</button>
-			<button
-				className="absolute z-40 left-20 text-vn-white"
-				onClick={() => {
-					deleteNoteCollection();
-				}}
-			>
-				Delete Notes
 			</button>
 			<NavbarActionsContext.Provider value={{ deleteNote }}>
 				<Navbar />

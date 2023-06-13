@@ -5,6 +5,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "./note.scss";
 import { IContextType, NoteContext } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
+import { Vim, vim } from "@replit/codemirror-vim";
+import { closeEditorPane, writeNote } from "@/utils/vimCustomBindings";
 interface INoteContext {
 	setNotes: (prev: Array<INote>) => any;
 	notes: Array<INote>;
@@ -12,7 +14,6 @@ interface INoteContext {
 
 const Note = () => {
 	const { noteID } = useParams();
-	const navigate = useNavigate();
 	const { notes, setNotes, noteIDRef } = useContext(NoteContext);
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
@@ -27,7 +28,6 @@ const Note = () => {
 		const filterNotes = notes.filter((note: INote) => note.id !== noteID);
 		setNotes([updateNote, ...filterNotes]);
 	}
-
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
 	}
@@ -46,6 +46,14 @@ const Note = () => {
 			}
 		}
 	}
+
+	Vim.defineEx("write", "w", () => {
+		writeNote(currentNote);
+	});
+
+	Vim.defineEx("quit", "q", () => {
+		closeEditorPane(setPaneWidth);
+	});
 
 	useEffect(() => {
 		noteIDRef.current = noteID?.toString();
