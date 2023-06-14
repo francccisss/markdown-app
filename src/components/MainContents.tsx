@@ -10,7 +10,7 @@ import SideMenu from "@/components/SideMenu";
 import { signOut } from "firebase/auth";
 import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, addDoc, setDoc } from "firebase/firestore";
 import { NavbarActionsContext } from "@/pages/App";
 
 interface IMainContentsProp {
@@ -70,6 +70,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				"notes",
 				newID
 			);
+			await setDoc(newNoteDocRef, newNote);
 			setNotes((prev) => [newNote, ...prev]);
 			console.log(newNote);
 		} catch (err) {
@@ -79,7 +80,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	}
 
 	async function deleteNote(e: React.MouseEvent): Promise<void> {
-		e.preventDefault();
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
@@ -102,6 +102,31 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		} catch (err) {
 			console.log(err);
 			console.log("unable to delete note document:" + noteRef.id);
+		}
+	}
+
+	async function writeNote(): Promise<void> {
+		const noteRef = notes.find(
+			(note) => note.id === noteIDRef.current
+		) as INote;
+		console.log(noteRef);
+		try {
+			if (auth.currentUser) {
+				const noteDocRef = doc(
+					db,
+					"users",
+					auth.currentUser?.uid,
+					"notes",
+					noteRef.id
+				);
+				const updateNote = await updateDoc(noteDocRef, {
+					contents: noteRef.contents,
+				});
+				console.log(`current note is saved: ${noteRef.id}`);
+			}
+		} catch (err) {
+			console.log(err);
+			throw err;
 		}
 	}
 
@@ -139,7 +164,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 			>
 				sign out
 			</button>
-			<NavbarActionsContext.Provider value={{ deleteNote }}>
+			<NavbarActionsContext.Provider value={{ deleteNote, writeNote }}>
 				<Navbar
 					navActionSetter={setNavbarActionsActive}
 					navActionState={navBarActionsActive}
@@ -165,7 +190,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						)}
 					</ul>
 				</Sidebar>
-				<Outlet context={{ notes, setNotes, noteIDRef }} />
+				<Outlet context={{ notes, setNotes, noteIDRef, writeNote }} />
 			</section>
 		</main>
 	);

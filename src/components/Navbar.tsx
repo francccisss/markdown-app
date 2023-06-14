@@ -8,9 +8,6 @@ interface INavbarProps {
 	navActionState: boolean;
 }
 const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
-	useEffect(() => {
-		console.log(navActionState);
-	}, [navActionState]);
 	return (
 		<nav
 			id="navbar"

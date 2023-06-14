@@ -9,6 +9,7 @@ export interface IContextType {
 	notes: INote[];
 	setNotes: (prev: Array<INote>) => void;
 	noteIDRef: { current: undefined | string };
+	writeNote: () => Promise<void>;
 }
 
 export interface INavbarActions {

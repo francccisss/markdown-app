@@ -11,7 +11,7 @@ interface IActionProps {
 }
 
 const NavbarActions = () => {
-	const { deleteNote } = useContext(NavbarActionsContext);
+	const { deleteNote, writeNote } = useContext(NavbarActionsContext);
 	const actions: IActionProps = {
 		info: {
 			title: "Note Information",
@@ -33,9 +33,7 @@ const NavbarActions = () => {
 		},
 		save: {
 			title: "Save Note",
-			onClick: (e: React.MouseEvent) => {
-				console.log("save clicked");
-			},
+			onClick: writeNote,
 		},
 		remove: {
 			title: "Remove Note",
