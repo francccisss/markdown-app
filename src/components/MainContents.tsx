@@ -1,17 +1,7 @@
-// using this component to handle the rerender and updates of state and let the parent app component
-// handle the fethcing of data and isolate its own state so that it should not have to reauthenticate user
-
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import {
-	createContext,
-	useCallback,
-	useContext,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
@@ -22,8 +12,8 @@ import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
 import { NavbarActionsContext, NoteContext } from "@/pages/App";
+import LoadingScreen from "./LoadingScreen";
 
-// auth every time rerender occurs
 interface IMainContentsProp {
 	fetchedNotes: INote[];
 }
@@ -97,15 +87,17 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		) as INote;
 		console.log(noteRef);
 		try {
-			const noteDocumentRef = doc(
-				db,
-				"users",
-				auth.currentUser.uid,
-				"notes",
-				noteRef.id
-			);
-			const filterNotes = notes.filter((note) => note.id !== noteRef.id);
-			setNotes(filterNotes);
+			if (auth.currentUser) {
+				const noteDocumentRef = doc(
+					db,
+					"users",
+					auth.currentUser.uid,
+					"notes",
+					noteRef.id
+				);
+				const filterNotes = notes.filter((note) => note.id !== noteRef.id);
+				setNotes(filterNotes);
+			}
 		} catch (err) {
 			console.log(err);
 			console.log("unable to delete note document:" + noteRef.id);

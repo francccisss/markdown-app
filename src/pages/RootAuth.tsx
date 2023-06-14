@@ -9,8 +9,6 @@ const RootAuth = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
 
-	// user timing out from firebase need to persist user login using session based authentication
-	// thats why signing out is not working
 	useEffect(() => {
 		onAuthStateChanged(auth, async (user) => {
 			if (user && (await checkIfUserExists(user))) {

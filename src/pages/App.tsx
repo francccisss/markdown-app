@@ -23,7 +23,6 @@ export const NavbarActionsContext = createContext<INavbarActions>(
 	null as unknown as INavbarActions
 );
 const App = () => {
-	const [isLoading, setIsLoading] = useState(true);
 	const [notes, setNotes] = useState<INote[]>([]);
 
 	async function getFetchedNotes(): Promise<void> {
@@ -41,17 +40,11 @@ const App = () => {
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				setIsLoading(false);
+				getFetchedNotes();
 				return;
 			}
-			setIsLoading(true);
 		});
 	}, []);
-	useEffect(() => {
-		if (!isLoading) {
-			getFetchedNotes();
-		}
-	}, [isLoading]);
 
 	return (
 		<>

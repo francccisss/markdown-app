@@ -1,7 +1,7 @@
-import { useParams, Outlet, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./note.scss";
 import { NoteContext } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
