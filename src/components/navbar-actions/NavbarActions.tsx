@@ -19,18 +19,18 @@ const NavbarActions = () => {
 				console.log("info clicked");
 			},
 		},
-		openEditor: {
-			title: "Open Editor",
-			onClick: (e: React.MouseEvent) => {
-				console.log("open editor clicked");
-			},
-		},
-		closeEditor: {
-			title: "Close Editor",
-			onClick: (e: React.MouseEvent) => {
-				console.log("close editor clicked");
-			},
-		},
+		// openEditor: {
+		// 	title: "Open Editor",
+		// 	onClick: (e: React.MouseEvent) => {
+		// 		console.log("open editor clicked");
+		// 	},
+		// },
+		// closeEditor: {
+		// 	title: "Close Editor",
+		// 	onClick: (e: React.MouseEvent) => {
+		// 		console.log("close editor clicked");
+		// 	},
+		// },
 		save: {
 			title: "Save Note",
 			onClick: writeNote,
