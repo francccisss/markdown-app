@@ -1,16 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useContext, useEffect, useState } from "react";
 import "./note.scss";
-import { NoteContext } from "@/pages/App";
+import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
 import { Vim, vim } from "@replit/codemirror-vim";
 import { closeEditorPane, writeNote } from "@/utils/vimCustomBindings";
 
 const Note = () => {
 	const { noteID } = useParams();
-	const { notes, setNotes, noteIDRef } = useContext(NoteContext);
+	const { notes, setNotes, noteIDRef } = useOutletContext() as IContextType;
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);

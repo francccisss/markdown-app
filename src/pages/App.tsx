@@ -4,17 +4,13 @@ import { fetchUserNotesLoader } from "@/loader/fetchUserNotes";
 import { auth } from "@/utils/contexts/firebaseContext";
 import { INote } from "@/utils/types/Note";
 import { onAuthStateChanged } from "firebase/auth";
-import { useScroll } from "framer-motion";
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export interface IContextType {
-	notes: Array<INote>;
+	notes: INote[];
 	setNotes: (prev: Array<INote>) => void;
 	noteIDRef: { current: undefined | string };
 }
 
-export const NoteContext = createContext<IContextType>(
-	null as unknown as IContextType
-);
 export interface INavbarActions {
 	[k: string]: (e: React.MouseEvent) => Promise<void>;
 }

@@ -10,16 +10,14 @@ import SideMenu from "@/components/SideMenu";
 import { signOut } from "firebase/auth";
 import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
 import { placeholders } from "@/utils/placeholderNotes";
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
-import { NavbarActionsContext, NoteContext } from "@/pages/App";
-import LoadingScreen from "./LoadingScreen";
+import { doc, deleteDoc } from "firebase/firestore";
+import { NavbarActionsContext } from "@/pages/App";
 
 interface IMainContentsProp {
 	fetchedNotes: INote[];
 }
 const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const navigate = useNavigate();
-	const [fetching, setFetching] = useState(false);
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
@@ -95,8 +93,11 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 					"notes",
 					noteRef.id
 				);
+				await deleteDoc(noteDocumentRef);
 				const filterNotes = notes.filter((note) => note.id !== noteRef.id);
 				setNotes(filterNotes);
+			} else {
+				console.log("Unauthorize access to user notes");
 			}
 		} catch (err) {
 			console.log(err);
@@ -157,9 +158,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						)}
 					</ul>
 				</Sidebar>
-				<NoteContext.Provider value={{ notes, setNotes, noteIDRef }}>
-					<Outlet />
-				</NoteContext.Provider>
+				<Outlet context={{ notes, setNotes, noteIDRef }} />
 			</section>
 		</main>
 	);
