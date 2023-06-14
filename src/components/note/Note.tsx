@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./note.scss";
 import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
@@ -62,16 +62,20 @@ const Note = () => {
 			}}
 		>
 			{noteModalActive && <NoteInfoModal note={currentNote} />}
-			<Editor
-				newWidth={paneWidth}
-				input={currentNote.contents}
-				onChange={handleEditorOnChange}
-			/>
-			<div
-				onMouseDownCapture={handleOnMouseDown}
-				className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
-			/>
-			<Preview markdownInput={currentNote.contents} />
+			{currentNote && (
+				<>
+					<Editor
+						newWidth={paneWidth}
+						input={currentNote.contents}
+						onChange={handleEditorOnChange}
+					/>
+					<div
+						onMouseDownCapture={handleOnMouseDown}
+						className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
+					/>
+					<Preview markdownInput={currentNote.contents} />
+				</>
+			)}
 		</section>
 	);
 };
