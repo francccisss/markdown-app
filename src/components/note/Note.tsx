@@ -10,7 +10,7 @@ import NoteInfoModal from "../NoteInfoModal";
 
 const Note = () => {
 	const { noteID } = useParams();
-	const { notes, setNotes, noteIDRef, writeNote } =
+	const { notes, setNotes, noteIDRef, writeNote, noteModalActive } =
 		useOutletContext() as IContextType;
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
@@ -61,21 +61,17 @@ const Note = () => {
 				setIsResizing(0);
 			}}
 		>
-			<NoteInfoModal note={currentNote} />
-			{currentNote && (
-				<>
-					<Editor
-						newWidth={paneWidth}
-						input={currentNote.contents}
-						onChange={handleEditorOnChange}
-					/>
-					<div
-						onMouseDownCapture={handleOnMouseDown}
-						className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
-					/>
-					<Preview markdownInput={currentNote.contents} />
-				</>
-			)}
+			{noteModalActive && <NoteInfoModal note={currentNote} />}
+			<Editor
+				newWidth={paneWidth}
+				input={currentNote.contents}
+				onChange={handleEditorOnChange}
+			/>
+			<div
+				onMouseDownCapture={handleOnMouseDown}
+				className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
+			/>
+			<Preview markdownInput={currentNote.contents} />
 		</section>
 	);
 };

@@ -26,6 +26,8 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		...fetchedNotes,
 		...placeholders,
 	]);
+	const [noteModalActive, setNoteModalActive] = useState(false);
+	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -45,6 +47,13 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		},
 		[notes]
 	);
+
+	function infoModal(e: React.MouseEvent): void {
+		e.stopPropagation();
+		console.log("clicked");
+		console.log(noteModalActive);
+		setNoteModalActive(true);
+	}
 
 	async function addNote(): Promise<void> {
 		const newID = uid(16).toString();
@@ -139,11 +148,11 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		redirectToExistingNotes();
 	}, [notes]);
 
-	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	return (
 		<main
 			onClick={(e) => {
 				setNavbarActionsActive(false);
+				setNoteModalActive(false);
 			}}
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
@@ -157,7 +166,9 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 			>
 				sign out
 			</button>
-			<NavbarActionsContext.Provider value={{ deleteNote, writeNote }}>
+			<NavbarActionsContext.Provider
+				value={{ deleteNote, writeNote, infoModal }}
+			>
 				<Navbar
 					navActionSetter={setNavbarActionsActive}
 					navActionState={navBarActionsActive}
@@ -183,7 +194,15 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						)}
 					</ul>
 				</Sidebar>
-				<Outlet context={{ notes, setNotes, noteIDRef, writeNote }} />
+				<Outlet
+					context={{
+						notes,
+						setNotes,
+						noteIDRef,
+						writeNote,
+						noteModalActive,
+					}}
+				/>
 			</section>
 		</main>
 	);

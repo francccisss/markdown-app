@@ -10,10 +10,11 @@ export interface IContextType {
 	setNotes: (prev: Array<INote>) => void;
 	noteIDRef: { current: undefined | string };
 	writeNote: () => Promise<void>;
+	noteModalActive: boolean;
 }
 
 export interface INavbarActions {
-	[k: string]: (e: React.MouseEvent) => Promise<void>;
+	[k: string]: (e: React.MouseEvent | any) => Promise<void> | void;
 }
 
 export const NavbarActionsContext = createContext<INavbarActions>(
