@@ -1,11 +1,13 @@
 import setComponentActivity from "@/utils/SetComponentActivity";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarActions from "./navbar-actions/NavbarActions";
 
-const Navbar = ({}) => {
-	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
-	useEffect(() => {}, [navBarActionsActive]);
+interface INavbarProps {
+	navActionSetter: Dispatch<SetStateAction<boolean>>;
+	navActionState: boolean;
+}
+const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 	return (
 		<nav
 			id="navbar"
@@ -17,15 +19,14 @@ const Navbar = ({}) => {
 			<div id="right" className="ml-auto flex items-center">
 				<button
 					onClick={(e) => {
-						setComponentActivity(
-							navBarActionsActive,
-							setNavbarActionsActive
-						);
+						e.stopPropagation();
+						setComponentActivity(navActionState, navActionSetter);
 					}}
-					id="note-actions"
+					id="note-actions-btn"
 					className="btn-actions w-[25px] h-[25px] inline-block"
 				>
 					<svg
+						className="btn-actions w-[25px] h-[25px] inline-block"
 						viewBox="0 0 34 34"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +46,7 @@ const Navbar = ({}) => {
 					</svg>
 				</button>
 			</div>
-			{navBarActionsActive && <NavbarActions />}
+			{navActionState && <NavbarActions />}
 		</nav>
 	);
 };

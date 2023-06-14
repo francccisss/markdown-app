@@ -3,7 +3,7 @@ import { uid } from "uid";
 
 export const placeholders: Array<INote> = [
 	{
-		id: uid(16),
+		id: "placeholder1",
 		contents: `# Header
 This is a place holder header for vimnotes note
 
@@ -34,7 +34,7 @@ X^2^
 `,
 	},
 	{
-		id: uid(16),
+		id: "placeholder2",
 		contents: `# React Routing
 
 ### Client Side Routing 
@@ -62,7 +62,7 @@ Link Having Access to a prop called Match
 Shop renders list of items that has any uniqueIDs and by clicking on any of the link will routed to a specific component that is linked with the spceific URL using the object's ID the itemDetial component with the dynamic segment that is routed to us using Link Component will have access the the Link's parameters including the url `,
 	},
 	{
-		id: uid(16),
+		id: "placeholder3",
 		contents: `# CRUD and MVC
 
 CRUD stands for, Create, Read, Update and Delete these are four basic functions for a database driven app, if building a crud interface that means users should be able to do these 4 things to items in the database 

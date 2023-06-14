@@ -1,6 +1,6 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { useState, useContext, useEffect } from "react";
-import { FirebaseContext } from "@/App";
+import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import {
 	User,
 	createUserWithEmailAndPassword,
