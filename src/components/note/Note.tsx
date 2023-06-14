@@ -6,6 +6,7 @@ import "./note.scss";
 import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
 import { Vim } from "@replit/codemirror-vim";
+import NoteInfoModal from "../NoteInfoModal";
 
 const Note = () => {
 	const { noteID } = useParams();
@@ -60,6 +61,7 @@ const Note = () => {
 				setIsResizing(0);
 			}}
 		>
+			<NoteInfoModal note={currentNote} />
 			{currentNote && (
 				<>
 					<Editor

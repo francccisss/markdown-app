@@ -26,8 +26,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		...fetchedNotes,
 		...placeholders,
 	]);
-	// created searchedNotes so that when searching for notes in search query function
-	// we don't directly set the original notes
 	const [searchedNotes, setSearchedNotes] = useState(notes);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -38,11 +36,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const searchQuery = useCallback(
 		(input: string, notesArr: Array<INote>) => {
 			if (input !== "") {
-				// on each state changes the application rerenders so that it keeps
-				// the UI in sync, notes in filter notes is referencing
-				// the previous state before the re-render or state changes happened
-				// so on each search query calls the state of notes still persist
-				// even after rerendering and filtering its state
 				const filterNotes = notesArr.filter((note) =>
 					note.contents.includes(input)
 				);

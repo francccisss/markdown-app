@@ -1,13 +1,10 @@
+import SplashScreenLayout from "./SplashScreenLayout";
+
 const LoadingScreen = () => {
 	return (
-		<div
-			id="loading-screen"
-			className="bg-vn-black text-vn-white h-screen flex"
-		>
-			<div className="flex-1 flex items-center justify-center">
-				<span id="loading-spinner" className="loading-spinner"></span>
-			</div>
-		</div>
+		<SplashScreenLayout>
+			<span id="loading-spinner" className="loading-spinner"></span>
+		</SplashScreenLayout>
 	);
 };
 export default LoadingScreen;
