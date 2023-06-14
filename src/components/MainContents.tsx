@@ -121,8 +121,12 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		redirectToExistingNotes();
 	}, [notes]);
 
+	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	return (
 		<main
+			onClick={(e) => {
+				setNavbarActionsActive(false);
+			}}
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
@@ -136,7 +140,10 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				sign out
 			</button>
 			<NavbarActionsContext.Provider value={{ deleteNote }}>
-				<Navbar />
+				<Navbar
+					navActionSetter={setNavbarActionsActive}
+					navActionState={navBarActionsActive}
+				/>
 			</NavbarActionsContext.Provider>
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu sideBarRef={sideBarRef} />
