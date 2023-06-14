@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { UserInfo } from "firebase/auth";
+import { INote } from "@/utils/types/Note";
 interface INoteItemProps {
-	note: {
-		id: string;
-		contents: string;
-	};
+	note: INote;
 }
 
 const NoteItem = ({ note }: INoteItemProps) => {

@@ -1,19 +1,17 @@
-import { useParams, Outlet, useNavigate } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./note.scss";
-import { IContextType, NoteContext } from "@/pages/App";
+import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
-interface INoteContext {
-	setNotes: (prev: Array<INote>) => any;
-	notes: Array<INote>;
-}
+import { Vim } from "@replit/codemirror-vim";
+import NoteInfoModal from "../NoteInfoModal";
 
 const Note = () => {
 	const { noteID } = useParams();
-	const navigate = useNavigate();
-	const { notes, setNotes, noteIDRef } = useContext(NoteContext);
+	const { notes, setNotes, noteIDRef, writeNote, noteModalActive } =
+		useOutletContext() as IContextType;
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
@@ -27,7 +25,6 @@ const Note = () => {
 		const filterNotes = notes.filter((note: INote) => note.id !== noteID);
 		setNotes([updateNote, ...filterNotes]);
 	}
-
 	function handleOnMouseDown(e: React.MouseEvent): void {
 		setIsResizing(e.clientX);
 	}
@@ -47,6 +44,10 @@ const Note = () => {
 		}
 	}
 
+	Vim.defineEx("write", "w", writeNote);
+
+	Vim.defineEx("quit", "q", () => setPaneWidth(0));
+
 	useEffect(() => {
 		noteIDRef.current = noteID?.toString();
 	}, [noteID]);
@@ -60,6 +61,7 @@ const Note = () => {
 				setIsResizing(0);
 			}}
 		>
+			{noteModalActive && <NoteInfoModal note={currentNote} />}
 			{currentNote && (
 				<>
 					<Editor

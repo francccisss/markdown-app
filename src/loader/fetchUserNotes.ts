@@ -1,16 +1,20 @@
-import { auth, db } from "@/App";
-import { INote } from "@/utils/types/Note";
+import { db, auth } from "@/utils/contexts/firebaseContext";
 import {
 	collection,
-	getDocs,
-	QuerySnapshot,
 	DocumentData,
+	getDocs,
 	QueryDocumentSnapshot,
 } from "firebase/firestore";
 
-export async function fetchUserNotesLoader(): Promise<
-	Array<QueryDocumentSnapshot>
-> {
+// HMR problem when reloading, maybe because app needs to reauthenticate user so loader has not chance of updating
+// cannot fetch collection on refresh because loader only waits for the loader function to finish fetching from firestore db
+// but the loader function thats fetching data from database needs a user that is authorize to fetch it, but it cannot fetch it
+// because on refresh the app needs to reauthenticate the user that is was signed in prior to refreshin
+
+// loader needs to wait for the reauthentication to finish before loader function should start fetching from db
+export async function fetchUserNotesLoader(): Promise<Array<DocumentData>> {
+	console.log("called");
+	let retries = 4;
 	try {
 		const userNoteCollectionRef = collection(
 			db,
@@ -19,7 +23,12 @@ export async function fetchUserNotesLoader(): Promise<
 			"notes"
 		);
 		const userNotes = await getDocs(userNoteCollectionRef);
-		return userNotes.docs;
+		const mapNoteDocument = userNotes.docs.map((doc) => {
+			return {
+				...doc.data(),
+			};
+		});
+		return mapNoteDocument;
 	} catch (err) {
 		console.log(err);
 		return [];

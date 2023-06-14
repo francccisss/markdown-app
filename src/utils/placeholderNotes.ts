@@ -1,9 +1,12 @@
 import { INote } from "./types/Note";
 import { uid } from "uid";
+import format from "date-fns/format";
 
 export const placeholders: Array<INote> = [
 	{
-		id: uid(16),
+		id: "placeholder1",
+		lastUpdated: format(new Date(), "PPP"),
+		dateAdded: format(new Date(), "PPP"),
 		contents: `# Header
 This is a place holder header for vimnotes note
 
@@ -34,12 +37,13 @@ X^2^
 `,
 	},
 	{
-		id: uid(16),
+		id: "placeholder2",
+		lastUpdated: format(new Date(), "PPP"),
+		dateAdded: format(new Date(), "PPP"),
 		contents: `# React Routing
 
 ### Client Side Routing 
 > Internal handling of routes inside the JS file that is rendered to the client. client side routing helps build single page applications without having to refresh the page when user navigates between pages within the application
-
 
 ### React router uses dynamic routing
 Meaning it takes place as the app is rendering instead of relying on a third party or server to render the page and fetch it from there
@@ -62,7 +66,9 @@ Link Having Access to a prop called Match
 Shop renders list of items that has any uniqueIDs and by clicking on any of the link will routed to a specific component that is linked with the spceific URL using the object's ID the itemDetial component with the dynamic segment that is routed to us using Link Component will have access the the Link's parameters including the url `,
 	},
 	{
-		id: uid(16),
+		id: "placeholder3",
+		lastUpdated: format(new Date(), "PPP"),
+		dateAdded: format(new Date(), "PPP"),
 		contents: `# CRUD and MVC
 
 CRUD stands for, Create, Read, Update and Delete these are four basic functions for a database driven app, if building a crud interface that means users should be able to do these 4 things to items in the database 
