@@ -3,8 +3,8 @@
 // const shell = typeof window === "object" ? require("electron").shell : null;
 
 const VimnoteCheatSheet = () => {
-	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg shrink-0`;
-	const sectionTitles = `text-4xl font-semibold mb-2`;
+	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg `;
+	const sectionTitles = `text-[2rem] font-semibold mb-2`;
 	const shortcuts = {
 		global: {
 			help: `:h - open vim Cheatsheeet`,
@@ -127,7 +127,7 @@ const VimnoteCheatSheet = () => {
 				</p>
 				{/* </p> */}
 			</section>
-			<section className="grid grid-cols-[repeat(3,minmax(350px,1fr))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 ">
+			<section className="grid grid-cols-[repeat(3,minmax(150px,500px))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 ">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}
