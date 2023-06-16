@@ -15,9 +15,13 @@ const NoteInfoModal = ({ note }: { note: INote }) => {
 				<div className="grid grid-col-2 gap-x-10 gap-y-2 py-4 border-t-2 border-vn-outline-black">
 					<p>Note ID: </p> <span className={infoClass}>{note.id}</span>
 					<p>Date Added: </p>{" "}
-					<span className={infoClass}>{note.dateAdded}</span>
+					<span className={infoClass}>
+						{format(note.dateAdded as Date, "PP")}
+					</span>
 					<p>Last Updated: </p>{" "}
-					<span className={infoClass}>{note.lastUpdated}</span>
+					<span className={infoClass}>
+						{format(note.lastUpdated as Date, "PP")}
+					</span>
 					<p>Note Author: </p>
 					<span className={infoClass}>{auth.currentUser?.email}</span>
 				</div>

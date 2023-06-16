@@ -57,8 +57,8 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		const newNote: INote = {
 			id: newID,
 			authorID: auth.currentUser?.uid,
-			dateAdded: format(new Date(), "PPP"),
-			lastUpdated: format(new Date(), "PPP"),
+			dateAdded: new Date(),
+			lastUpdated: new Date(),
 			contents: "",
 		};
 		try {
@@ -120,7 +120,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				);
 				const updateNote = await updateDoc(noteDocRef, {
 					contents: noteRef.contents,
-					lastUpdated: format(new Date(), "PPP"),
+					lastUpdated: new Date(),
 				});
 				console.log(`current note is saved: ${noteRef.id}`);
 			}

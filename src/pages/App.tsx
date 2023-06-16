@@ -46,7 +46,7 @@ const App = () => {
 
 	return (
 		<>
-			{notes.length !== 0 ? (
+			{auth.currentUser ? (
 				<MainContents fetchedNotes={notes} />
 			) : (
 				<LoadingScreen />
