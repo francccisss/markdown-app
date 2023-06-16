@@ -26,7 +26,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
-	const [sortItems, setSortItems] = useState(false);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -131,33 +130,12 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		}
 	}
 
-	function sortNoteItems(): void {
-		if (sortItems) {
-			const sortByLastUpdated = searchedNotes.sort(
-				(a, b) =>
-					getTime(b.lastUpdated as Date) - getTime(a.lastUpdated as Date)
-			);
-			setSearchedNotes(sortByLastUpdated);
-		} else {
-			const sortByDateAdded = searchedNotes.sort(
-				(a, b) =>
-					getTime(b.dateAdded as Date) - getTime(a.dateAdded as Date)
-			);
-			setSearchedNotes(sortByDateAdded);
-		}
-	}
-
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
 		}
 		return navigate("/app/empty-notes");
 	}
-
-	useEffect(() => {
-		sortNoteItems();
-	}, [sortItems]);
-
 	useEffect(() => {
 		searchQuery(searchInput, notes);
 	}, [searchInput]);
@@ -200,8 +178,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
 						addNote={addNote}
-						setSortItems={setSortItems}
-						sortNotes={sortItems}
 					/>
 					<ul id="notes-list" className="h-full w-[384px] ">
 						{notes.length !== 0 ? (

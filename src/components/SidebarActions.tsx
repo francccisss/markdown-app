@@ -1,20 +1,13 @@
-import setComponentActivity from "@/utils/SetComponentActivity";
-import { Dispatch, SetStateAction } from "react";
-
 interface ISearchBarProps {
 	handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	searchInput: string;
 	addNote: () => void;
-	setSortItems: Dispatch<SetStateAction<boolean>>;
-	sortNotes: boolean;
 }
 
 const SidebarActions = ({
 	handleInput,
 	searchInput,
 	addNote,
-	setSortItems,
-	sortNotes,
 }: ISearchBarProps) => {
 	return (
 		<div
@@ -45,9 +38,6 @@ const SidebarActions = ({
 				</svg>
 			</button>
 			<button
-				onClick={() => {
-					setComponentActivity(sortNotes, setSortItems);
-				}}
 				id="sort-note"
 				className="btn-actions ml-auto w-[25px] h-[25px] flex justify-center items-center"
 			>
