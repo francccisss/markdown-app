@@ -131,20 +131,19 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		}
 	}
 
-	function sortNoteItems(sort: boolean): Array<INote> {
-		console.log(searchedNotes);
-		if (sort) {
+	function sortNoteItems(): void {
+		if (sortItems) {
 			const sortByLastUpdated = searchedNotes.sort(
 				(a, b) =>
 					getTime(b.lastUpdated as Date) - getTime(a.lastUpdated as Date)
 			);
-			return sortByLastUpdated;
+			setSearchedNotes(sortByLastUpdated);
 		} else {
 			const sortByDateAdded = searchedNotes.sort(
 				(a, b) =>
 					getTime(b.dateAdded as Date) - getTime(a.dateAdded as Date)
 			);
-			return sortByDateAdded;
+			setSearchedNotes(sortByDateAdded);
 		}
 	}
 
@@ -154,6 +153,10 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		}
 		return navigate("/app/empty-notes");
 	}
+
+	useEffect(() => {
+		sortNoteItems();
+	}, [sortItems]);
 
 	useEffect(() => {
 		searchQuery(searchInput, notes);
@@ -197,12 +200,12 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
 						addNote={addNote}
+						setSortItems={setSortItems}
 						sortNotes={sortItems}
-						setSortNotes={setSortItems}
 					/>
 					<ul id="notes-list" className="h-full w-[384px] ">
 						{notes.length !== 0 ? (
-							sortNoteItems(sortItems).map((note) => {
+							searchedNotes.map((note) => {
 								return <NoteItem key={note.id} note={note} />;
 							})
 						) : (
