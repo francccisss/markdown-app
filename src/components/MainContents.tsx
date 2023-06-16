@@ -11,7 +11,7 @@ import { signOut } from "firebase/auth";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { doc, deleteDoc, updateDoc, addDoc, setDoc } from "firebase/firestore";
 import { NavbarActionsContext } from "@/pages/App";
-import { format } from "date-fns";
+import { format, getTime } from "date-fns";
 
 interface IMainContentsProp {
 	fetchedNotes: INote[];
@@ -26,6 +26,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
+	const [sortItems, setSortItems] = useState(false);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -130,6 +131,23 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		}
 	}
 
+	function sortNoteItems(sort: boolean): Array<INote> {
+		console.log(searchedNotes);
+		if (sort) {
+			const sortByLastUpdated = searchedNotes.sort(
+				(a, b) =>
+					getTime(b.lastUpdated as Date) - getTime(a.lastUpdated as Date)
+			);
+			return sortByLastUpdated;
+		} else {
+			const sortByDateAdded = searchedNotes.sort(
+				(a, b) =>
+					getTime(b.dateAdded as Date) - getTime(a.dateAdded as Date)
+			);
+			return sortByDateAdded;
+		}
+	}
+
 	async function redirectToExistingNotes(): Promise<void> {
 		if (notes.length !== 0) {
 			return navigate(`/app/${notes[0].id}`);
@@ -179,10 +197,12 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
 						addNote={addNote}
+						sortNotes={sortItems}
+						setSortNotes={setSortItems}
 					/>
 					<ul id="notes-list" className="h-full w-[384px] ">
 						{notes.length !== 0 ? (
-							searchedNotes.map((note) => {
+							sortNoteItems(sortItems).map((note) => {
 								return <NoteItem key={note.id} note={note} />;
 							})
 						) : (
