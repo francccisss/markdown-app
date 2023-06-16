@@ -30,7 +30,8 @@ const Note = () => {
 	}
 
 	function resizePane(e: React.MouseEvent): void {
-		const mouseX = e.clientX;
+		// need to take into account the side menu and sidebar width plus box layouts
+		const mouseX = e.clientX - 40;
 		let sideBar = document.getElementById("sidebar");
 		const maxWidth = Math.floor(0.65 * window.innerWidth);
 		if (isResizing !== 0 && mouseX < maxWidth) {
@@ -45,8 +46,8 @@ const Note = () => {
 	}
 
 	Vim.defineEx("write", "w", writeNote);
-
 	Vim.defineEx("quit", "q", () => setPaneWidth(0));
+	Vim.defineEx("open", "o", () => setPaneWidth(500));
 
 	useEffect(() => {
 		noteIDRef.current = noteID?.toString();

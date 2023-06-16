@@ -13,7 +13,7 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
 		<section
 			id="markdown-preview"
-			className={`overflow-auto h-full lg:px-20 2xl:px-36 py-5 z-10 markdown-body flex-1 w-0 `}
+			className={`overflow-auto h-full px-16 2xl:px-36 py-5 z-10 markdown-body flex-1 w-0 `}
 		>
 			<ReactMarkdown
 				children={markdownInput}
