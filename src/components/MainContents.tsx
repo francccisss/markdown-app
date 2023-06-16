@@ -8,8 +8,7 @@ import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
 import { signOut } from "firebase/auth";
-import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
-import { placeholders } from "@/utils/placeholderNotes";
+import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { doc, deleteDoc, updateDoc, addDoc, setDoc } from "firebase/firestore";
 import { NavbarActionsContext } from "@/pages/App";
 import { format } from "date-fns";
@@ -23,10 +22,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
 	const sideBarRef = useRef<HTMLDivElement>();
-	const [notes, setNotes] = useState<INote[]>([
-		...fetchedNotes,
-		...placeholders,
-	]);
+	const [notes, setNotes] = useState<INote[]>(fetchedNotes);
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
