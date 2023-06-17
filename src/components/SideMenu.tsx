@@ -16,6 +16,35 @@ const SideMenu = ({ sideBarRef }: any) => {
 	return (
 		<div className="side-menu h-full py-3  flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[4px] border-t-[3px] border-vn-dshade-white2 ">
 			<div id="upper-side-menu-actions" className="flex flex-col gap-2">
+				<button onClick={sideBarActivitiy} className={actionsStyle}>
+					<svg
+						viewBox="0 0 34 34"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M5.61484 8.44H28.2161"
+							stroke="#878A8C"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+						<path
+							d="M5.61484 16.9155H28.2161"
+							stroke="#878A8C"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+						<path
+							d="M5.61484 25.3909H28.2161"
+							stroke="#878A8C"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+				</button>
 				<NavLink
 					id="empty-notes-link"
 					to={"/app/empty-notes"}
@@ -60,35 +89,7 @@ const SideMenu = ({ sideBarRef }: any) => {
 						/>
 					</svg>
 				</NavLink>
-				<button onClick={sideBarActivitiy} className={actionsStyle}>
-					<svg
-						viewBox="0 0 34 34"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M5.61484 8.44H28.2161"
-							stroke="#878A8C"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-						<path
-							d="M5.61484 16.9155H28.2161"
-							stroke="#878A8C"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-						<path
-							d="M5.61484 25.3909H28.2161"
-							stroke="#878A8C"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-					</svg>
-				</button>
+
 				<NavLink
 					id="vim-cheatsheet"
 					to={"/app/vim-cheatsheet"}
