@@ -37,45 +37,6 @@ const SidebarActions = ({
 					/>
 				</svg>
 			</button>
-			<button
-				id="sort-note"
-				className="btn-actions ml-auto w-[25px] h-[25px] flex justify-center items-center"
-			>
-				<svg
-					viewBox="0 0 17 17"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M2.125 4.07294H10.2708"
-						stroke="#878A8C"
-						strokeWidth="0.882289"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-					<path
-						d="M2.125 8.67709H10.2708"
-						stroke="#878A8C"
-						strokeWidth="0.882289"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-					<path
-						d="M12.75 4.07294V13.2813L14.875 10.8021"
-						stroke="#878A8C"
-						strokeWidth="0.882289"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-					<path
-						d="M2.125 13.2812H10.2708"
-						stroke="#878A8C"
-						strokeWidth="0.882289"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-				</svg>
-			</button>
 		</div>
 	);
 };

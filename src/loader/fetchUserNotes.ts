@@ -3,7 +3,8 @@ import {
 	collection,
 	DocumentData,
 	getDocs,
-	QueryDocumentSnapshot,
+	orderBy,
+	query,
 	Timestamp,
 } from "firebase/firestore";
 
@@ -32,7 +33,11 @@ export async function fetchUserNotesLoader(): Promise<Array<DocumentData>> {
 			auth.currentUser?.uid as string,
 			"notes"
 		);
-		const userNotes = await getDocs(userNoteCollectionRef);
+		const queryCollection = query(
+			userNoteCollectionRef,
+			orderBy("lastUpdated", "desc")
+		);
+		const userNotes = await getDocs(queryCollection);
 		const mapNoteDocument = userNotes.docs.map((doc) => {
 			const dateAdded = doc.data().dateAdded;
 			// console.log(timeStamp.toDate());
