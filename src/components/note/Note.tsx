@@ -1,4 +1,4 @@
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import NoteInfoModal from "../NoteInfoModal";
 
 const Note = () => {
 	const { noteID } = useParams();
+	const navigate = useNavigate();
 	const { notes, setNotes, noteIDRef, writeNote, noteModalActive } =
 		useOutletContext() as IContextType;
 	const [paneWidth, setPaneWidth] = useState<number>(500);
@@ -48,6 +49,7 @@ const Note = () => {
 	Vim.defineEx("write", "w", writeNote);
 	Vim.defineEx("quit", "q", () => setPaneWidth(0));
 	Vim.defineEx("open", "o", () => setPaneWidth(500));
+	Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
 
 	useEffect(() => {
 		noteIDRef.current = noteID?.toString();
