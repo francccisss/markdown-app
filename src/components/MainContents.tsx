@@ -179,7 +179,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						handleInput={handleSearchInput}
 						addNote={addNote}
 					/>
-					<ul id="notes-list" className="h-full w-[384px] ">
+					<ul id="notes-list" className="h-full w-full ">
 						{notes.length !== 0 ? (
 							searchedNotes.map((note) => {
 								return <NoteItem key={note.id} note={note} />;
