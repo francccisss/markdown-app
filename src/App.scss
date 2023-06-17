@@ -78,11 +78,21 @@ input[type="search"]::-webkit-search-cancel-button {
 	border: none;
 }
 
-a.active {
-	transition: all 100ms ease-in-out;
-	background-color: #878a8c20;
-	border-left-color: #6b7ff2;
-	border-left-width: 4px;
+#notes-list {
+	a.active {
+		transition: all 100ms ease-in-out;
+		background-color: #878a8c20;
+		border-left-color: #6b7ff2;
+		border-left-width: 4px;
+	}
+}
+.side-menu {
+	& > *a.active {
+		transition: all 100ms ease-in-out;
+		background-color: #878a8c20;
+		border-left-color: #6b7ff2;
+		// border-left-width: 0px;
+	}
 }
 
 .btn-actions {

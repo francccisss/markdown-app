@@ -16,7 +16,7 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 			<div id="left" className="text-vn-blue font-semibold text-sm">
 				Vimnotes
 			</div>
-			{window.location.pathname !== "/app/vim-cheatsheet" && (
+			{/* {window.location.pathname !== "/app/vim-cheatsheet" && (
 				<div id="right" className="ml-auto flex items-center">
 					<button
 						onClick={(e) => {
@@ -47,7 +47,7 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 						</svg>
 					</button>
 				</div>
-			)}
+			)} */}
 			{navActionState && <NavbarActions />}
 		</nav>
 	);
