@@ -19,7 +19,7 @@ const SideMenu = ({ sideBarRef }: any) => {
 	}
 
 	return (
-		<div className="side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[4px] border-t-[3px] border-vn-dshade-white2 ">
+		<div className="side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[3px] border-t-[3px] border-vn-dshade-white2 ">
 			<div id="upper-side-menu-actions" className="flex flex-col gap-2">
 				<button onClick={sideBarActivitiy} className={actionsStyle}>
 					<svg

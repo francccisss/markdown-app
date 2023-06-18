@@ -13,3 +13,9 @@
 .cm-gutters {
 	display: inline;
 }
+
+.markdown-editor {
+	@media (max-width: 1280px) {
+		max-width: 50%;
+	}
+}

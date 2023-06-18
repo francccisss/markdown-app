@@ -1,5 +1,6 @@
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { editorAppTheme } from "@/assets/themes/editorThemecopy";
+// import { editorAppTheme } from "@/assets/themes/editorTheme";
 import { vim } from "@replit/codemirror-vim";
 import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
@@ -27,7 +28,7 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 			value={input}
 			onChange={onChange}
 			width={`${newWidth}px`}
-			className="focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none"
+			className="markdown-editor focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none"
 			height="100%"
 			extensions={[
 				theme,
