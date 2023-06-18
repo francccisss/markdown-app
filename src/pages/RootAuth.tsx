@@ -1,4 +1,5 @@
 import AuthContents from "@/components/AuthContents";
+import LoadingScreen from "@/components/LoadingScreen";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { doc, collection, getDoc } from "firebase/firestore";
@@ -43,7 +44,11 @@ const RootAuth = () => {
 				id="auth-form"
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
-				<Outlet />
+				{!auth.currentUser ? (
+					<Outlet />
+				) : (
+					<span id="loading-spinner" className="loading-spinner" />
+				)}
 			</section>
 		</main>
 	);
