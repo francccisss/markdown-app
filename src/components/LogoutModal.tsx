@@ -12,7 +12,7 @@ const LogoutModal = ({
 	return (
 		<div
 			id="logout-modal-container"
-			className=" flex flex-col bg-vn-black p-6 border-vn-dshade-white rounded-sm border gap-5 justify-between absolute left-16 bottom-7 text-vn-white w-[250px]"
+			className=" flex flex-col bg-vn-black p-6 border-[#ffffff30] rounded border-2 gap-5 justify-between absolute left-12 bottom-5 text-vn-white w-[250px]"
 		>
 			<div className="flex justify-center items-center">
 				<p className="font-semibold">Logout from this session?</p>
