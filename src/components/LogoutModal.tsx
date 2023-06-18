@@ -1,39 +1,29 @@
 import { auth } from "@/utils/contexts/firebaseContext";
 import { signOut } from "firebase/auth";
-import { SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutModal = ({
-	setActiveModal,
-}: {
-	setActiveModal: React.Dispatch<SetStateAction<boolean>>;
-}) => {
+const LogoutModal = ({}) => {
 	const navigate = useNavigate();
 	return (
 		<div
 			id="logout-modal-container"
-			className=" flex flex-col bg-vn-black p-6 border-[#ffffff30] rounded border-2 gap-5 justify-between absolute left-12 bottom-5 text-vn-white w-[250px]"
+			className=" flex flex-col bg-vn-black  border-[#ffffff30] rounded border-2 justify-between absolute left-12 bottom-5 text-vn-white w-[270px]"
 		>
-			<div className="flex justify-center items-center">
-				<p className="font-semibold">Logout from this session?</p>
-			</div>
+			<p className="font-semibold px-3 py-2">{auth.currentUser?.email}</p>
 
-			<div className="flex justify-evenly text-sm">
+			<div className="flex flex-col text-[.8rem] border-t border-t-vn-outline-black">
 				<button
 					onClick={() => {
 						signOut(auth).then(() => {
 							navigate("/sign-in");
 						});
 					}}
-					className="bg-vn-dshade-white3 hover:bg-vn-outline-black transition-all duration-100 ease-in-out px-3 py-1 w-20"
+					className="flex-1 text-start  hover:bg-vn-dshade-white3 transition-all duration-100 ease-in-out px-3 py-2 "
 				>
-					Yes
+					Logout
 				</button>
-				<button
-					onClick={() => setActiveModal(false)}
-					className="hover:underline px-3 py-1 w-20"
-				>
-					Cancel
+				<button className="flex-1 text-start  hover:bg-vn-dshade-white3 px-3 py-1 text-vn-red">
+					Delete Account
 				</button>
 			</div>
 		</div>

@@ -26,6 +26,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
+	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -150,6 +151,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 			onClick={(e) => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
+				setActiveLogoutModal(false);
 			}}
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
@@ -163,7 +165,11 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				/>
 			</NavbarActionsContext.Provider>
 			<section id="content-section" className="flex-1 flex h-[0%]">
-				<SideMenu sideBarRef={sideBarRef} />
+				<SideMenu
+					sideBarRef={sideBarRef}
+					activeModal={activeLogoutModal}
+					setActiveModal={setActiveLogoutModal}
+				/>
 				<Sidebar sideBarRef={sideBarRef}>
 					<SidebarActions
 						searchInput={searchInput}
