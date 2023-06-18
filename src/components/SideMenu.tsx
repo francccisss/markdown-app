@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import LogoutModal from "./LogoutModal";
+import { useState } from "react";
+import setComponentActivity from "@/utils/SetComponentActivity";
 
 const SideMenu = ({ sideBarRef }: any) => {
+	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
+
 	const actionsStyle = `side-menu-actions border-l-[3px] border-l-[#00000000] w-10 p-2 h-fit block box-border bg-center transition-all duration-150 ease-in-out
      hover:bg-vn-dshade-white3 `;
 
@@ -124,7 +128,13 @@ const SideMenu = ({ sideBarRef }: any) => {
 					</svg>
 				</NavLink>
 			</div>
-			<button id="logout" className={actionsStyle}>
+			<button
+				onClick={() =>
+					setComponentActivity(activeLogoutModal, setActiveLogoutModal)
+				}
+				id="logout"
+				className={actionsStyle}
+			>
 				<svg
 					viewBox="0 0 23 23"
 					fill="none"
@@ -144,7 +154,9 @@ const SideMenu = ({ sideBarRef }: any) => {
 					/>
 				</svg>
 			</button>
-			<LogoutModal />
+			{activeLogoutModal && (
+				<LogoutModal setActiveModal={setActiveLogoutModal} />
+			)}
 		</div>
 	);
 };

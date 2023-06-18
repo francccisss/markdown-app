@@ -1,8 +1,13 @@
 import { auth } from "@/utils/contexts/firebaseContext";
 import { signOut } from "firebase/auth";
+import { SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutModal = () => {
+const LogoutModal = ({
+	setActiveModal,
+}: {
+	setActiveModal: React.Dispatch<SetStateAction<boolean>>;
+}) => {
 	const navigate = useNavigate();
 	return (
 		<div
@@ -17,14 +22,19 @@ const LogoutModal = () => {
 				<button
 					onClick={() => {
 						signOut(auth).then(() => {
-							navigate("/");
+							navigate("/sign-in");
 						});
 					}}
 					className="bg-vn-dshade-white3 hover:bg-vn-outline-black transition-all duration-100 ease-in-out px-3 py-1 w-20"
 				>
 					Yes
 				</button>
-				<button className="hover:underline px-3 py-1 w-20">Cancel</button>
+				<button
+					onClick={() => setActiveModal(false)}
+					className="hover:underline px-3 py-1 w-20"
+				>
+					Cancel
+				</button>
 			</div>
 		</div>
 	);
