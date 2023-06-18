@@ -1,0 +1,33 @@
+import { auth } from "@/utils/contexts/firebaseContext";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+const LogoutModal = () => {
+	const navigate = useNavigate();
+	return (
+		<div
+			id="logout-modal-container"
+			className=" flex flex-col bg-vn-black p-6 border-vn-dshade-white rounded-sm border gap-5 justify-between absolute left-16 bottom-7 text-vn-white w-[250px]"
+		>
+			<div className="flex justify-center items-center">
+				<p className="font-semibold">Logout from this session?</p>
+			</div>
+
+			<div className="flex justify-evenly text-sm">
+				<button
+					onClick={() => {
+						signOut(auth).then(() => {
+							navigate("/");
+						});
+					}}
+					className="bg-vn-dshade-white3 hover:bg-vn-outline-black transition-all duration-100 ease-in-out px-3 py-1 w-20"
+				>
+					Yes
+				</button>
+				<button className="hover:underline px-3 py-1 w-20">Cancel</button>
+			</div>
+		</div>
+	);
+};
+
+export default LogoutModal;

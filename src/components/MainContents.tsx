@@ -154,15 +154,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
-			<button
-				className="absolute z-40"
-				onClick={() => {
-					signOut(auth);
-					navigate("/");
-				}}
-			>
-				sign out
-			</button>
 			<NavbarActionsContext.Provider
 				value={{ deleteNote, writeNote, infoModal }}
 			>

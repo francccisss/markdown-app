@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import LogoutModal from "./LogoutModal";
 
 const SideMenu = ({ sideBarRef }: any) => {
 	const actionsStyle = `side-menu-actions border-l-[3px] border-l-[#00000000] w-10 p-2 h-fit block box-border bg-center transition-all duration-150 ease-in-out
@@ -14,7 +15,7 @@ const SideMenu = ({ sideBarRef }: any) => {
 	}
 
 	return (
-		<div className="side-menu h-full py-3  flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[4px] border-t-[3px] border-vn-dshade-white2 ">
+		<div className="side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[4px] border-t-[3px] border-vn-dshade-white2 ">
 			<div id="upper-side-menu-actions" className="flex flex-col gap-2">
 				<button onClick={sideBarActivitiy} className={actionsStyle}>
 					<svg
@@ -143,6 +144,7 @@ const SideMenu = ({ sideBarRef }: any) => {
 					/>
 				</svg>
 			</button>
+			<LogoutModal />
 		</div>
 	);
 };
