@@ -14,7 +14,7 @@ const RootTextLayout = ({
 	return (
 		<div
 			id="root-texts"
-			className={`mr-10 p-12 bg-vn-black z-10 auth-text-container text-vn-white w-fit rounded-lg inline-block absolute`}
+			className="drop-shadow-xl mr-10 p-12 bg-vn-black z-10 auth-text-container text-vn-white w-fit rounded-lg inline-block "
 			style={{
 				top,
 				left,

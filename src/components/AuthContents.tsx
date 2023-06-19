@@ -6,10 +6,15 @@ const AuthContents = () => {
 	return (
 		<div
 			id="auth-contents"
-			className="relative w-full bg-[#ffffff] rounded-2xl overflow-hidden"
+			className="relative w-full bg-[#ffffff] flex rounded-2xl overflow-hidden"
 		>
-			<WelcomeText />
-			<GithubLink />
+			<section
+				id="text-section"
+				className="flex flex-col flex-1 z-30 px-10 justify-center items-start gap-6"
+			>
+				<WelcomeText />
+				<GithubLink />
+			</section>
 			<Wave />
 		</div>
 	);

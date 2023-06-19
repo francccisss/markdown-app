@@ -1,6 +1,7 @@
 export const Wave = () => {
 	return (
 		<svg
+			className="z-0 absolute"
 			id="patternId"
 			width="100%"
 			height="100%"
