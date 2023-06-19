@@ -57,7 +57,7 @@ const AuthForm = ({
 	};
 
 	return (
-		<div id="auth-form" className="flex w-2/3 flex-col z-10 text-[#ffffff]">
+		<div id="auth-form" className="flex w-2/3 flex-col z-40 text-[#ffffff]">
 			<div id="instruct-user-txt">
 				<h1 className="font-semibold mb-[8px] sm:text-2xl lg:text-3xl xl:text-4xl">
 					{action === "/sign-in"
