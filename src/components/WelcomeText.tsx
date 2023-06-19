@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import RootTextLayout from "./RootTextLayout";
 const WelcomeText = () => {
 	return (
-		<RootTextLayout top="30%">
+		<RootTextLayout>
 			<h1 className="text-6xl font-bold border-b-2 border-black border-solid inline-block mb-[19px]">
 				# Hi There!
 			</h1>

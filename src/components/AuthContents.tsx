@@ -1,4 +1,4 @@
-import GithubLink from "./GithubLink";
+import RootText from "./RootText";
 import WelcomeText from "./WelcomeText";
 import { Wave } from "./decorator-components/Wave";
 
@@ -10,10 +10,28 @@ const AuthContents = () => {
 		>
 			<section
 				id="text-section"
-				className="flex flex-col flex-1 z-30 px-10 justify-center items-start gap-6"
+				className="flex flex-col flex-1 z-30 p-10 justify-center items-start gap-6 overflow-auto max-xl:justify-start"
 			>
 				<WelcomeText />
-				<GithubLink />
+				<RootText
+					title="Free Note Taking App"
+					para="
+				Mainly targeted for vim users or people who wants to use vim when
+				using a note taking app(cause I know I do)"
+				/>
+				<RootText
+					title="Free Note Taking App"
+					para="
+				Mainly targeted for vim users or people who wants to use vim when
+				using a note taking app(cause I know I do)"
+				/>
+
+				<RootText
+					title="Free Note Taking App"
+					para="
+				Mainly targeted for vim users or people who wants to use vim when
+				using a note taking app(cause I know I do)"
+				/>
 			</section>
 			<Wave />
 		</div>
