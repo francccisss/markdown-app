@@ -10,28 +10,26 @@ const AuthContents = () => {
 		>
 			<section
 				id="text-section"
-				className="flex flex-col flex-1 z-30 p-10 justify-center items-start gap-6 overflow-auto max-xl:justify-start"
+				className="flex flex-col flex-1 z-30 p-20 xl:py-20 max-xl:px-10 justify-between items-start overflow-auto gap-3 max-xl:justify-start"
 			>
 				<WelcomeText />
 				<RootText
 					title="Free Note Taking App"
 					para="
-				Mainly targeted for vim users or people who wants to use vim when
-				using a note taking app(cause I know I do)"
+				Mainly targeted for vim users or people who are too used to vim keymaps when
+				using a note taking app (cause I know I do)."
 				/>
-				<RootText
-					title="Free Note Taking App"
-					para="
-				Mainly targeted for vim users or people who wants to use vim when
-				using a note taking app(cause I know I do)"
-				/>
-
-				<RootText
-					title="Free Note Taking App"
-					para="
-				Mainly targeted for vim users or people who wants to use vim when
-				using a note taking app(cause I know I do)"
-				/>
+				<section className="flex gap-3 ">
+					<RootText title="Simple to use" para="An intuitive UI design." />
+					<RootText title="Syntax Highlighting" para="Yes." />
+				</section>
+				<section className="flex gap-3 ">
+					<RootText
+						title="Split Pane"
+						para="To easily preview the changes written down and can also be expanded."
+					/>
+					<RootText title="Github" para="" />
+				</section>
 			</section>
 			<Wave />
 		</div>
