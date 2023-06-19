@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Wave } from "./decorator-components/Wave";
-import { AppImage } from "./decorator-components/AppImage";
 
 const AuthContents = () => {
 	return (
@@ -30,7 +29,6 @@ const AuthContents = () => {
 						: "Do Something"}
 				</Link>
 			</div>
-			<AppImage />
 			<Wave />
 		</div>
 	);
