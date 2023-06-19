@@ -18,6 +18,7 @@ interface IMainContentsProp {
 }
 const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const navigate = useNavigate();
+	const previousNoteContents = useRef<undefined | string>();
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
@@ -70,8 +71,8 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				"notes",
 				newID
 			);
-			await setDoc(newNoteDocRef, newNote);
 			setNotes((prev) => [newNote, ...prev]);
+			await setDoc(newNoteDocRef, newNote);
 			console.log(newNote);
 		} catch (err) {
 			console.log("unable to add note ");
@@ -93,9 +94,9 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 					"notes",
 					noteRef.id
 				);
-				await deleteDoc(noteDocumentRef);
 				const filterNotes = notes.filter((note) => note.id !== noteRef.id);
 				setNotes(filterNotes);
+				await deleteDoc(noteDocumentRef);
 			} else {
 				console.log("Unauthorize access to user notes");
 			}
@@ -109,26 +110,33 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
-		console.log(noteRef);
-		try {
-			if (auth.currentUser) {
-				const noteDocRef = doc(
-					db,
-					"users",
-					auth.currentUser?.uid,
-					"notes",
-					noteRef.id
-				);
-				const updateNote = await updateDoc(noteDocRef, {
-					contents: noteRef.contents,
-					lastUpdated: new Date(),
-				});
-				console.log(`current note is saved: ${noteRef.id}`);
+		// saving the previous contents from last save, and checking the current contents of a note
+		// if they are the same with the old contents so that we users dont push the same contents
+		// to save write cost on database
+		if (previousNoteContents.current !== noteRef.contents) {
+			previousNoteContents.current = noteRef.contents;
+			try {
+				if (auth.currentUser) {
+					const noteDocRef = doc(
+						db,
+						"users",
+						auth.currentUser?.uid,
+						"notes",
+						noteRef.id
+					);
+					const updateNote = await updateDoc(noteDocRef, {
+						contents: noteRef.contents,
+						lastUpdated: new Date(),
+					});
+					console.log(`current note is saved: ${noteRef.id}`);
+					return;
+				}
+			} catch (err) {
+				console.log(err);
+				throw err;
 			}
-		} catch (err) {
-			console.log(err);
-			throw err;
 		}
+		console.log("the same");
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
