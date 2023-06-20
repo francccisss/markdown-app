@@ -57,7 +57,7 @@ const AuthForm = ({
 	return (
 		<div
 			id="auth-form"
-			className="flex w-2/3 flex-col z-40 text-[#ffffff] bg-vn-dshade-black box-content px-16 py-28 rounded-md"
+			className="flex w-2/3 flex-col z-40 text-[#ffffff]  rounded-md"
 		>
 			<div id="instruct-user-txt">
 				<h1 className="font-semibold mb-[8px] sm:text-2xl lg:text-3xl xl:text-4xl">

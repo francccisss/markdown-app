@@ -6,7 +6,7 @@ const AuthContents = () => {
 	return (
 		<div
 			id="auth-contents"
-			className="relative w-full bg-[#ffffff] flex rounded-2xl box-border justify-center items-center"
+			className="relative w-full bg-[#ffffff] flex rounded-2xl overflow-clip box-border justify-center items-center"
 		>
 			<section
 				id="text-section"
