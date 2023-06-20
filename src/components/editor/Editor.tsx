@@ -7,7 +7,7 @@ import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 import createTheme from "@uiw/codemirror-themes";
 
-export interface IEdtiorProps {
+export interface IEditorProps {
 	onChange: (value: string) => void;
 	input: string;
 	newWidth?: number;
@@ -21,13 +21,13 @@ const theme = createTheme({
 	},
 });
 
-const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
+const Editor = ({ onChange, input, newWidth }: IEditorProps) => {
 	return (
 		<ReactCodeMirror
 			theme={editorAppTheme}
 			value={input}
 			onChange={onChange}
-			width={`${newWidth}px`}
+			style={{ width: `${newWidth}px` }}
 			className="markdown-editor focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none"
 			height="100%"
 			extensions={[
@@ -39,9 +39,14 @@ const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
 					addKeymap: true,
 				}),
 			]}
+			editable={false}
 			basicSetup={{
 				foldGutter: false,
 				highlightActiveLine: false,
+			}}
+			onUpdate={(viewUpdate) => {
+				// returning true and false whenever width is being moved
+				console.log(viewUpdate.geometryChanged);
 			}}
 		/>
 	);

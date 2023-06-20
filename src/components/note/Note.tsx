@@ -33,11 +33,10 @@ const Note = () => {
 	const resizePane = useCallback(
 		function (e: React.MouseEvent): void {
 			// need to take into account the side menu and sidebar width plus box layouts
-			console.log("moving");
 			const mouseX = e.clientX - 40;
 			let sideBar = document.getElementById("sidebar");
 			const maxWidth = Math.floor(0.65 * window.innerWidth);
-			if (isResizing !== 0 && mouseX < maxWidth) {
+			if (mouseX < maxWidth) {
 				if (sideBar?.className.includes("sidebar-inactive")) {
 					setPaneWidth(mouseX);
 					if (mouseX < 80) setPaneWidth(0);
@@ -59,11 +58,21 @@ const Note = () => {
 		noteIDRef.current = noteID?.toString();
 	}, [noteID]);
 
+	window.onresize = () => {
+		if (paneWidth !== 0) {
+			setPaneWidth(600);
+		}
+	};
+
 	return (
 		<section
 			id="note"
 			className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
-			onMouseMove={resizePane}
+			onMouseMove={(e) => {
+				if (isResizing !== 0) {
+					resizePane(e);
+				}
+			}}
 			onMouseUpCapture={() => {
 				setIsResizing(0);
 			}}
@@ -78,7 +87,7 @@ const Note = () => {
 					/>
 					<div
 						onMouseDownCapture={handleOnMouseDown}
-						className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
+						className=" h-full z-10 hover:bg-vn-outline-black active:bg-vn-dshade-white select-none cursor-ew-resize active:w-[6px] w-[4px] bg-vn-black box-content"
 					/>
 					<Preview markdownInput={currentNote.contents} />
 				</>
