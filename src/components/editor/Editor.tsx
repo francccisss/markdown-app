@@ -27,9 +27,9 @@ const Editor = ({ onChange, input, newWidth }: IEditorProps) => {
 			theme={editorAppTheme}
 			value={input}
 			onChange={onChange}
-			style={{ width: `${newWidth}px` }}
 			className="markdown-editor focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none"
 			height="100%"
+			width={`${newWidth}px`}
 			extensions={[
 				theme,
 				vim(),
@@ -39,7 +39,6 @@ const Editor = ({ onChange, input, newWidth }: IEditorProps) => {
 					addKeymap: true,
 				}),
 			]}
-			editable={false}
 			basicSetup={{
 				foldGutter: false,
 				highlightActiveLine: false,

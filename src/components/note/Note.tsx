@@ -51,7 +51,7 @@ const Note = () => {
 
 	Vim.defineEx("write", "w", writeNote);
 	Vim.defineEx("quit", "q", () => setPaneWidth(0));
-	Vim.defineEx("open", "o", () => setPaneWidth(500));
+	Vim.defineEx("open", "o", () => setPaneWidth(0.6 * window.innerWidth));
 	Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
 
 	useEffect(() => {
