@@ -10,7 +10,7 @@ const AuthContents = () => {
 		>
 			<section
 				id="text-section"
-				className="overflow-auto max-h-screen py-20 flex flex-col flex-1 z-30 px-16 max-xl:py-20 max-xl:px-10 justify-center items-start gap-6 max-xl:justify-start"
+				className="overflow-auto max-h-screen py-20 flex flex-col flex-1 z-30 px-16 max-xl:py-20 max-xl:px-10 justify-center items-start gap-6 max-xl:justify-start "
 			>
 				<section id="main-auth-text" className="flex flex-col gap-6">
 					<WelcomeText />
