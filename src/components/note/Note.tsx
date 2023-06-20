@@ -92,7 +92,12 @@ const Note = () => {
 					<Preview markdownInput={currentNote.contents} />
 				</>
 			)}
-			<p>{isSaving}</p>
+			{isSaving ? (
+				<span
+					id="loading-spinner"
+					className="loading-spinner  w-[30px] h-[30px] absolute right-0 m-8 z-50 border-vn-black border-[6px] border-b-vn-blue"
+				/>
+			) : null}
 		</section>
 	);
 };
