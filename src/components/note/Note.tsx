@@ -1,7 +1,7 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./note.scss";
 import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
@@ -30,21 +30,25 @@ const Note = () => {
 		setIsResizing(e.clientX);
 	}
 
-	function resizePane(e: React.MouseEvent): void {
-		// need to take into account the side menu and sidebar width plus box layouts
-		const mouseX = e.clientX - 40;
-		let sideBar = document.getElementById("sidebar");
-		const maxWidth = Math.floor(0.65 * window.innerWidth);
-		if (isResizing !== 0 && mouseX < maxWidth) {
-			if (sideBar?.className.includes("sidebar-inactive")) {
-				setPaneWidth(mouseX);
-				if (mouseX < 80) setPaneWidth(0);
-			} else if (sideBar?.className.includes("sidebar-active")) {
-				setPaneWidth(mouseX - 384);
-				if (mouseX - 384 < 80) setPaneWidth(0);
+	const resizePane = useCallback(
+		function (e: React.MouseEvent): void {
+			// need to take into account the side menu and sidebar width plus box layouts
+			console.log("moving");
+			const mouseX = e.clientX - 40;
+			let sideBar = document.getElementById("sidebar");
+			const maxWidth = Math.floor(0.65 * window.innerWidth);
+			if (isResizing !== 0 && mouseX < maxWidth) {
+				if (sideBar?.className.includes("sidebar-inactive")) {
+					setPaneWidth(mouseX);
+					if (mouseX < 80) setPaneWidth(0);
+				} else if (sideBar?.className.includes("sidebar-active")) {
+					setPaneWidth(mouseX - 384);
+					if (mouseX - 384 < 80) setPaneWidth(0);
+				}
 			}
-		}
-	}
+		},
+		[isResizing]
+	);
 
 	Vim.defineEx("write", "w", writeNote);
 	Vim.defineEx("quit", "q", () => setPaneWidth(0));
