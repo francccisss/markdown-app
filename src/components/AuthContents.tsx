@@ -15,8 +15,10 @@ const AuthContents = () => {
 				<section id="main-auth-text" className="flex flex-col gap-6">
 					<WelcomeText />
 					<RootText
-						title="Get Started"
-						para="By signing up or creating an account"
+						title="Free Note Taking App"
+						para="
+				Mainly targeted for vim users or people who are too used to vim keymaps when
+				using a note taking app (cause I know I do)."
 					/>
 				</section>
 
@@ -26,10 +28,8 @@ const AuthContents = () => {
 						para="To easily preview the changes written down and can also be expanded."
 					/>
 					<RootText
-						title="Free Note Taking App"
-						para="
-				Mainly targeted for vim users or people who are too used to vim keymaps when
-				using a note taking app (cause I know I do)."
+						title="Get Started"
+						para="By signing up or creating an account"
 					/>
 				</section>
 			</section>
