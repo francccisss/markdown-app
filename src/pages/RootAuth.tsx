@@ -9,14 +9,18 @@ import { Outlet, useNavigate } from "react-router-dom";
 const RootAuth = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
+	const [isSignedIn, setIsSignedIn] = useState(false);
 
 	useEffect(() => {
+		setIsSignedIn(true);
 		onAuthStateChanged(auth, async (user) => {
 			if (user && (await checkIfUserExists(user))) {
 				navigate("/app");
+				setIsSignedIn(false);
 			} else if (user === null) {
 				navigate("/sign-in");
 				auth.currentUser ? deleteUser(auth.currentUser) : 0;
+				setIsSignedIn(false);
 			}
 		});
 	}, []);
@@ -44,7 +48,7 @@ const RootAuth = () => {
 				id="auth-form"
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
-				{!auth.currentUser ? (
+				{!isSignedIn ? (
 					<Outlet />
 				) : (
 					<span id="loading-spinner" className="loading-spinner" />

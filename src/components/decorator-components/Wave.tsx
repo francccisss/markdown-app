@@ -2,39 +2,55 @@ export const Wave = () => {
 	return (
 		<svg
 			id="patternId"
-			className="z-0 absolute"
 			width="100%"
 			height="100%"
 			xmlns="http://www.w3.org/2000/svg"
+			className="z-0 absolute rounded-lg"
 		>
 			<defs>
 				<pattern
 					id="a"
 					patternUnits="userSpaceOnUse"
-					width="21"
-					height="21"
-					patternTransform="scale(3) rotate(45)"
+					width="40"
+					height="80"
+					patternTransform="scale(3) rotate(135)"
 				>
 					<rect
 						x="0"
 						y="0"
 						width="100%"
 						height="100%"
-						fill="hsla(231, 28%, 27%, 1)"
+						fill="hsla(231, 19%, 21%, 1)"
 					/>
 					<path
-						d="M3.25 10h13.5M10 3.25v13.5"
-						transform="translate(0.5,0)"
-						strokeLinecap="square"
-						strokeWidth="5"
+						d="M-4.798 13.573C-3.149 12.533-1.446 11.306 0 10c2.812-2.758 6.18-4.974 10-5 4.183.336 7.193 2.456 10 5 2.86 2.687 6.216 4.952 10 5 4.185-.315 7.35-2.48 10-5 1.452-1.386 3.107-3.085 4.793-4.176"
+						stroke-width="5"
+						stroke="hsla(231, 40%, 51%, 1)"
+						fill="none"
+					/>
+					<path
+						d="M-4.798 33.573C-3.149 32.533-1.446 31.306 0 30c2.812-2.758 6.18-4.974 10-5 4.183.336 7.193 2.456 10 5 2.86 2.687 6.216 4.952 10 5 4.185-.315 7.35-2.48 10-5 1.452-1.386 3.107-3.085 4.793-4.176"
+						stroke-width="5"
+						stroke="hsla(231, 28%, 27%, 1)"
+						fill="none"
+					/>
+					<path
+						d="M-4.798 53.573C-3.149 52.533-1.446 51.306 0 50c2.812-2.758 6.18-4.974 10-5 4.183.336 7.193 2.456 10 5 2.86 2.687 6.216 4.952 10 5 4.185-.315 7.35-2.48 10-5 1.452-1.386 3.107-3.085 4.793-4.176"
+						stroke-width="5"
+						stroke="hsla(231, 40%, 51%, 1)"
+						fill="none"
+					/>
+					<path
+						d="M-4.798 73.573C-3.149 72.533-1.446 71.306 0 70c2.812-2.758 6.18-4.974 10-5 4.183.336 7.193 2.456 10 5 2.86 2.687 6.216 4.952 10 5 4.185-.315 7.35-2.48 10-5 1.452-1.386 3.107-3.085 4.793-4.176"
+						stroke-width="5"
 						stroke="hsla(231, 84%, 68%, 1)"
 						fill="none"
 					/>
 				</pattern>
 			</defs>
 			<rect
-				width="800%"
-				height="800%"
+				width="100%"
+				height="100%"
 				transform="translate(0,0)"
 				fill="url(#a)"
 			/>
