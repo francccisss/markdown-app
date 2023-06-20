@@ -3,16 +3,16 @@ import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
 import { useCallback, useEffect, useState } from "react";
 import "./note.scss";
-import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
 import { Vim } from "@replit/codemirror-vim";
 import NoteInfoModal from "../NoteInfoModal";
+import { IMainContentsContextType } from "@/utils/types/MainContentsContextProp";
 
 const Note = () => {
 	const { noteID } = useParams();
 	const navigate = useNavigate();
-	const { notes, setNotes, noteIDRef, writeNote, noteModalActive } =
-		useOutletContext() as IContextType;
+	const { isSaving, notes, setNotes, noteIDRef, writeNote, noteModalActive } =
+		useOutletContext() as IMainContentsContextType;
 	const [paneWidth, setPaneWidth] = useState<number>(500);
 	const [isResizing, setIsResizing] = useState<number>(0);
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
@@ -92,6 +92,7 @@ const Note = () => {
 					<Preview markdownInput={currentNote.contents} />
 				</>
 			)}
+			<p>{isSaving}</p>
 		</section>
 	);
 };

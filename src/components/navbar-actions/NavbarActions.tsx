@@ -1,5 +1,5 @@
-import { NavbarActionsContext } from "@/pages/App";
-import React, { useContext } from "react";
+import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
+import React, { useContext, createContext } from "react";
 
 interface IActionProps {
 	[key: string]: {

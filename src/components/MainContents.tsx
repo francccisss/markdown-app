@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import SidebarActions from "@/components/SidebarActions";
@@ -7,16 +7,11 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
-import { signOut } from "firebase/auth";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
-import { doc, deleteDoc, updateDoc, addDoc, setDoc } from "firebase/firestore";
-import { NavbarActionsContext } from "@/pages/App";
-import { format, getTime } from "date-fns";
+import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
+import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
-interface IMainContentsProp {
-	fetchedNotes: INote[];
-}
-const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
+const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const navigate = useNavigate();
 	const previousNoteContents = useRef<undefined | string>();
 	const { auth, db } = useContext(FirebaseContext);
@@ -28,6 +23,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
 	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -113,6 +109,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		// saving the previous contents from last save, and checking the current contents of a note
 		// if they are the same with the old contents so that we users dont push the same contents
 		// to save write cost on database
+		setIsSaving(true);
 		if (previousNoteContents.current !== noteRef.contents) {
 			previousNoteContents.current = noteRef.contents;
 			try {
@@ -129,6 +126,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 						lastUpdated: new Date(),
 					});
 					console.log(`current note is saved: ${noteRef.id}`);
+					setIsSaving(false);
 					return;
 				}
 			} catch (err) {
@@ -198,6 +196,7 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				</Sidebar>
 				<Outlet
 					context={{
+						isSaving,
 						notes,
 						setNotes,
 						noteIDRef,

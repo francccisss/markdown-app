@@ -1,13 +1,12 @@
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { editorAppTheme } from "@/assets/themes/editorThemecopy";
-// import { editorAppTheme } from "@/assets/themes/editorTheme";
 import { vim } from "@replit/codemirror-vim";
 import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 import createTheme from "@uiw/codemirror-themes";
 
-export interface IEditorProps {
+interface IEditorProps {
 	onChange: (value: string) => void;
 	input: string;
 	newWidth?: number;
@@ -42,10 +41,6 @@ const Editor = ({ onChange, input, newWidth }: IEditorProps) => {
 			basicSetup={{
 				foldGutter: false,
 				highlightActiveLine: false,
-			}}
-			onUpdate={(viewUpdate) => {
-				// returning true and false whenever width is being moved
-				console.log(viewUpdate.geometryChanged);
 			}}
 		/>
 	);
