@@ -38,10 +38,10 @@ const Note = () => {
 		if (isResizing !== 0 && mouseX < maxWidth) {
 			if (sideBar?.className.includes("sidebar-inactive")) {
 				setPaneWidth(mouseX);
-				if (mouseX < 50) setPaneWidth(0);
+				if (mouseX < 80) setPaneWidth(0);
 			} else if (sideBar?.className.includes("sidebar-active")) {
 				setPaneWidth(mouseX - 384);
-				if (mouseX - 384 < 50) setPaneWidth(0);
+				if (mouseX - 384 < 80) setPaneWidth(0);
 			}
 		}
 	}
