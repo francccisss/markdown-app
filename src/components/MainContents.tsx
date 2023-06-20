@@ -60,6 +60,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			contents: "",
 		};
 		try {
+			setIsSaving(true);
 			const newNoteDocRef = doc(
 				db,
 				"users",
@@ -69,6 +70,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			);
 			setNotes((prev) => [newNote, ...prev]);
 			await setDoc(newNoteDocRef, newNote);
+			setIsSaving(false);
 			console.log(newNote);
 		} catch (err) {
 			console.log("unable to add note ");
