@@ -17,7 +17,7 @@ const AuthContents = () => {
 					<RootText
 						title="Free Note Taking App"
 						para="
-				Mainly targeted for vim users or people who are too used to vim keymaps when
+				Mainly targeted for vim users who are too used to vim keymaps when
 				using a note taking app (cause I know I do)."
 					/>
 				</section>
@@ -25,7 +25,7 @@ const AuthContents = () => {
 				<section className="split-started flex gap-6">
 					<RootText
 						title="Split Pane"
-						para="To easily preview the changes written down and can also be expanded."
+						para="To easily preview the changes written down and can also be expanded and collapsed."
 					/>
 					<RootText
 						title="Get Started"
