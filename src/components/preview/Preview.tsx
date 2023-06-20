@@ -13,12 +13,12 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 	return (
 		<section
 			id="markdown-preview"
-			className={`overflow-auto h-full px-16 min-[1650px]:px-36 py-5 z-10 markdown-body flex-1 w-0 `}
+			className={`@container overflow-auto h-full px-16 py-5 z-10 markdown-body flex-1 w-0 `}
 		>
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}
-				className="z-10 max-w-[100%] react-markdown"
+				className="z-10 max-w-[100%] react-markdown @3xl:px-28 @[1400px]:px-72"
 				components={{
 					code({ node, inline, className, children, ...props }) {
 						const match = /language-(\w+)/.exec(className || "");
