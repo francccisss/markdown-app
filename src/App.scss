@@ -102,3 +102,23 @@ input[type="search"]::-webkit-search-cancel-button {
 			brightness(102%) contrast(90%);
 	}
 }
+
+@media screen and (min-height: 1000px) {
+	.split-started {
+		flex-direction: column;
+		gap: 6;
+	}
+	#welcome-text {
+		h1 {
+			font-size: 3rem;
+		}
+		#greet {
+			:first-child {
+				font-size: 2rem;
+			}
+			& > :not(:first-child) {
+				font-size: 1.5rem;
+			}
+		}
+	}
+}

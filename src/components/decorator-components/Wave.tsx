@@ -22,7 +22,7 @@ export const Wave = () => {
 						strokeLinejoin="round"
 						strokeLinecap="round"
 						strokeWidth="2"
-						stroke="hsla(225, 6%, 14%, 1)"
+						stroke="#6b7ff2"
 						fill="none"
 					/>
 					<path
@@ -42,5 +42,37 @@ export const Wave = () => {
 				fill="url(#a)"
 			/>
 		</svg>
+
+		// <svg
+		// 	id="visual"
+		// 	className="z-0 absolute -bottom-0"
+		// 	viewBox="0 0 960 540"
+		// 	width="100%"
+		// 	shapeRendering="geometricPrecision"
+		// 	xmlns="http://www.w3.org/2000/svg"
+		// 	xmlnsXlink="http://www.w3.org/1999/xlink"
+		// 	version="1.1"
+		// >
+		// 	<path
+		// 		d="M0 343L137 316L274 337L411 394L549 382L686 365L823 353L960 393L960 541L823 541L686 541L549 541L411 541L274 541L137 541L0 541Z"
+		// 		fill="#6b7ff2"
+		// 	></path>
+		// 	<path
+		// 		d="M0 378L137 413L274 372L411 354L549 412L686 423L823 364L960 376L960 541L823 541L686 541L549 541L411 541L274 541L137 541L0 541Z"
+		// 		fill="#5b6dca"
+		// 	></path>
+		// 	<path
+		// 		d="M0 413L137 453L274 444L411 452L549 430L686 395L823 430L960 438L960 541L823 541L686 541L549 541L411 541L274 541L137 541L0 541Z"
+		// 		fill="#4c5ba3"
+		// 	></path>
+		// 	<path
+		// 		d="M0 451L137 475L274 487L411 476L549 446L686 481L823 485L960 455L960 541L823 541L686 541L549 541L411 541L274 541L137 541L0 541Z"
+		// 		fill="#3f497d"
+		// 	></path>
+		// 	<path
+		// 		d="M0 482L137 485L274 511L411 493L549 510L686 493L823 495L960 481L960 541L823 541L686 541L549 541L411 541L274 541L137 541L0 541Z"
+		// 		fill="#323859"
+		// 	></path>
+		// </svg>
 	);
 };
