@@ -28,7 +28,8 @@ const Editor = ({ onChange, input, newWidth }: IEditorProps) => {
 			onChange={onChange}
 			className="markdown-editor focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none"
 			height="100%"
-			width={`${newWidth}px`}
+			// width={`${newWidth}px`}
+			width={`500px`}
 			extensions={[
 				theme,
 				vim(),

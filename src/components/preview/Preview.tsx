@@ -7,13 +7,14 @@ import { oneDark as previewStyle } from "react-syntax-highlighter/dist/esm/style
 
 interface IPreviewProps {
 	markdownInput: string;
+	newPos: number;
 }
 
-const Preview = ({ markdownInput }: IPreviewProps) => {
+const Preview = ({ markdownInput, newPos }: IPreviewProps) => {
 	return (
 		<section
 			id="markdown-preview"
-			className={`@container overflow-auto  px-16  py-10 z-10 markdown-body box-border flex-1 w-0 flex justify-center `}
+			className={`translate-x-[${newPos}px]  @container overflow-auto px-16 py-10 z-10 markdown-body box-border flex-1 w-0 flex justify-center `}
 		>
 			<ReactMarkdown
 				children={markdownInput}

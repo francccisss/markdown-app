@@ -89,7 +89,10 @@ const Note = () => {
 						onMouseDownCapture={handleOnMouseDown}
 						className=" h-full z-10 hover:bg-vn-outline-black active:bg-vn-dshade-white select-none cursor-ew-resize active:w-[6px] w-[4px] bg-vn-black box-content"
 					/>
-					<Preview markdownInput={currentNote.contents} />
+					<Preview
+						newPos={paneWidth}
+						markdownInput={currentNote.contents}
+					/>
 				</>
 			)}
 			{isSaving ? (
