@@ -188,6 +188,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 					setEditorActive((prev) => (prev ? false : true));
 				}
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
+					mainRef.current.focus();
 					e.preventDefault();
 					sideBarActivitiy();
 				}
