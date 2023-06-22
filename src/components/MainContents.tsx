@@ -171,20 +171,24 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			sideBar.classList.replace("sidebar-inactive", "sidebar-active");
 		}
 	}
+
+	useEffect(() => {
+		mainRef.current.focus();
+	}, [editorActive]);
+
 	return (
 		<main
 			ref={mainRef}
 			tabIndex={0}
 			autoFocus
 			onKeyDown={(e) => {
-				mainRef.current.focus();
-				e.stopPropagation();
-				e.preventDefault();
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
+					e.preventDefault();
 					console.log("open preview");
 					setEditorActive((prev) => (prev ? false : true));
 				}
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
+					e.preventDefault();
 					sideBarActivitiy();
 				}
 			}}

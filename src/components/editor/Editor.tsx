@@ -23,6 +23,7 @@ const theme = createTheme({
 const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
 		<ReactCodeMirror
+			autoFocus
 			theme={editorAppTheme}
 			value={input}
 			onChange={onChange}
