@@ -4,14 +4,12 @@ import React, { SetStateAction, useState } from "react";
 import setComponentActivity from "@/utils/SetComponentActivity";
 
 interface ISideMenuProps {
-	sideBarRef: any;
 	activeModal: boolean;
 	setActiveModal: React.Dispatch<SetStateAction<boolean>>;
 	sideBarActivity: () => void;
 }
 
 const SideMenu = ({
-	sideBarRef,
 	activeModal,
 	setActiveModal,
 	sideBarActivity,

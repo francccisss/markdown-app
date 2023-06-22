@@ -19,7 +19,7 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 			<ReactMarkdown
 				children={markdownInput}
 				remarkPlugins={[remarkGfm]}
-				className="z-10 react-markdown h-fit my-5 @[200px]:min-w-[200px] @[700px]:w-[800px] @[1000px]:w-[1000px] "
+				className="z-10 react-markdown h-fit my-5 @[200px]:min-w-[200px] @[700px]:w-[800px] @[1000px]:w-[900px] "
 				components={{
 					code({ node, inline, className, children, ...props }) {
 						const match = /language-(\w+)/.exec(className || "");

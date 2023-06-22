@@ -211,7 +211,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu
 					sideBarActivity={sideBarActivitiy}
-					sideBarRef={sideBarRef}
 					activeModal={activeLogoutModal}
 					setActiveModal={setActiveLogoutModal}
 				/>

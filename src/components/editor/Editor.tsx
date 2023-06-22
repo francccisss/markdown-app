@@ -22,28 +22,29 @@ const theme = createTheme({
 
 const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
-		<ReactCodeMirror
-			autoFocus
-			theme={editorAppTheme}
-			value={input}
-			onChange={onChange}
-			className="markdown-editor font-medium focus-within:border-t-[3px] text-[.8rem] focus-within:border-vn-blue border-solid outline-none flex-1 flex justify-center "
-			height="100%"
-			width="100%"
-			extensions={[
-				theme,
-				vim(),
-				markdown({
-					base: markdownLanguage,
-					codeLanguages: languages,
-					addKeymap: true,
-				}),
-			]}
-			basicSetup={{
-				foldGutter: false,
-				highlightActiveLine: false,
-			}}
-		/>
+		<section className=" @container flex w-full h-full">
+			<ReactCodeMirror
+				autoFocus
+				theme={editorAppTheme}
+				value={input}
+				onChange={onChange}
+				className="markdown-editor flex-1 font-medium focus-within:border-t-[3px] text-[.8rem] focus-within:border-vn-blue border-solid outline-none "
+				height="100%"
+				extensions={[
+					theme,
+					vim(),
+					markdown({
+						base: markdownLanguage,
+						codeLanguages: languages,
+						addKeymap: true,
+					}),
+				]}
+				basicSetup={{
+					foldGutter: false,
+					highlightActiveLine: false,
+				}}
+			/>
+		</section>
 	);
 };
 

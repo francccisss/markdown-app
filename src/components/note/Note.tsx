@@ -55,7 +55,6 @@ const Note = () => {
 					onChange={handleEditorOnChange}
 				/>
 			) : (
-				// <input autoFocus={true} />
 				<Preview markdownInput={currentNote.contents} />
 			)}
 			{isSaving ? (
