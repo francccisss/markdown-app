@@ -27,7 +27,7 @@ const Editor = ({ onChange, input }: IEditorProps) => {
 			theme={editorAppTheme}
 			value={input}
 			onChange={onChange}
-			className="markdown-editor font-semibold focus-within:border-t-[3px] text-sm focus-within:border-vn-blue border-solid outline-none flex-1 flex justify-center "
+			className="markdown-editor font-medium focus-within:border-t-[3px] text-[.8rem] focus-within:border-vn-blue border-solid outline-none flex-1 flex justify-center "
 			height="100%"
 			width="100%"
 			extensions={[
