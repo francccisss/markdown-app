@@ -31,6 +31,8 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const [searchedNotes, setSearchedNotes] = useState(notes);
 	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
+	const [editorActive, setEditorActive] = useState(true);
+	const mainRef = useRef<HTMLDivElement>(null) as any;
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -161,14 +163,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		redirectToExistingNotes();
 	}, [notes]);
 
-	const [editorActive, setEditorActive] = useState(true);
-
-	const mainRef = useRef<HTMLDivElement>(null) as any;
-
-	useEffect(() => {
-		mainRef.current.focus();
-	}, [editorActive]);
-
 	function sideBarActivitiy(): void {
 		const sideBar = sideBarRef.current;
 		if (sideBar.classList.contains("sidebar-active")) {
@@ -183,6 +177,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			tabIndex={0}
 			autoFocus
 			onKeyDown={(e) => {
+				mainRef.current.focus();
 				e.stopPropagation();
 				e.preventDefault();
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
