@@ -18,7 +18,7 @@ const SideMenu = ({
      hover:bg-vn-dshade-white3 `;
 
 	return (
-		<div className="side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[3px] border-t-[3px] border-vn-dshade-white2 ">
+		<div className="  side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-50  bg-vn-black border-r-[3px] border-separator-grey-line ">
 			<div id="upper-side-menu-actions" className="flex flex-col gap-2">
 				<button onClick={sideBarActivity} className={actionsStyle}>
 					<svg

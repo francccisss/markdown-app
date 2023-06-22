@@ -1,6 +1,5 @@
 import setComponentActivity from "@/utils/SetComponentActivity";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import NavbarActions from "./navbar-actions/NavbarActions";
 
 interface INavbarProps {
@@ -11,7 +10,7 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 	return (
 		<nav
 			id="navbar"
-			className="h-[40px] bg-no-repeat flex relative bg-vn-black px-2 py-2 items-center border-separator-grey-line z-20"
+			className="h-[40px] bg-no-repeat flex relative bg-vn-black px-2 py-2 items-center border-separator-grey-line border-b-[3px] z-10 shadow "
 		>
 			<div id="left" className="text-vn-blue font-semibold text-sm">
 				Vimnotes
