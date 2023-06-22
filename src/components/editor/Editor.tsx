@@ -23,13 +23,13 @@ const theme = createTheme({
 
 const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
-		<section className="@container bg-vn-dshade-black flex w-full h-full justify-center overflow-auto">
+		<section className="@container bg-vn-dshade-black py-10 px-16 flex w-full h-full justify-center overflow-auto">
 			<ReactCodeMirror
 				autoFocus
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
-				className="markdown-editor @[200px]:min-w-[200px] @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
+				className="markdown-editor @[500px]:min-w-[500px] @[700px]:text-sm @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
 				minHeight="100%"
 				extensions={[
 					EditorView.lineWrapping,
