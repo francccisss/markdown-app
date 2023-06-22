@@ -1,7 +1,14 @@
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+	LegacyRef,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
@@ -156,13 +163,19 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 
 	const [editorActive, setEditorActive] = useState(true);
 
+	const mainRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		mainRef.current.focus();
+	}, [editorActive]);
+
 	return (
 		<main
+			ref={mainRef}
+			tabIndex={0}
 			autoFocus
 			onKeyDown={(e) => {
 				e.stopPropagation();
-				console.log(e.code);
-				console.log(e.key);
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
 					console.log("open preview");
 					setEditorActive((prev) => (prev ? false : true));
