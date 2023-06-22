@@ -154,8 +154,20 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		redirectToExistingNotes();
 	}, [notes]);
 
+	const [editorActive, setEditorActive] = useState(true);
+
 	return (
 		<main
+			autoFocus
+			onKeyDown={(e) => {
+				e.stopPropagation();
+				console.log(e.code);
+				console.log(e.key);
+				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
+					console.log("open preview");
+					setEditorActive((prev) => (prev ? false : true));
+				}
+			}}
 			onClick={(e) => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
@@ -204,6 +216,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 						noteIDRef,
 						writeNote,
 						noteModalActive,
+						editorActive,
 					}}
 				/>
 			</section>

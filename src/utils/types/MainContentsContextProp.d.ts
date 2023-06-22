@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 export interface IMainContentsContextType {
 	notes: INote[];
 	setNotes: (prev: Array<INote>) => void;
@@ -5,4 +7,6 @@ export interface IMainContentsContextType {
 	writeNote: () => Promise<void>;
 	noteModalActive: boolean;
 	isSaving: boolean;
+	setEditorActive: Dispatch<SetStateAction<boolean>>;
+	editorActive: boolean;
 }
