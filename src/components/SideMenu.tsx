@@ -1,35 +1,28 @@
 import { NavLink } from "react-router-dom";
 import LogoutModal from "./LogoutModal";
-import { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import setComponentActivity from "@/utils/SetComponentActivity";
 
 interface ISideMenuProps {
 	sideBarRef: any;
 	activeModal: boolean;
 	setActiveModal: React.Dispatch<SetStateAction<boolean>>;
+	sideBarActivity: () => void;
 }
 
 const SideMenu = ({
 	sideBarRef,
 	activeModal,
 	setActiveModal,
+	sideBarActivity,
 }: ISideMenuProps) => {
 	const actionsStyle = `side-menu-actions border-l-[3px] border-l-[#00000000] w-10 p-2 h-fit block box-border bg-center transition-all duration-150 ease-in-out
      hover:bg-vn-dshade-white3 `;
 
-	function sideBarActivitiy(e: React.MouseEvent): void {
-		const sideBar = sideBarRef.current;
-		if (sideBar.classList.contains("sidebar-active")) {
-			sideBar.classList.replace("sidebar-active", "sidebar-inactive");
-		} else {
-			sideBar.classList.replace("sidebar-inactive", "sidebar-active");
-		}
-	}
-
 	return (
 		<div className="side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-20 bg-vn-black border-r-[3px] border-t-[3px] border-vn-dshade-white2 ">
 			<div id="upper-side-menu-actions" className="flex flex-col gap-2">
-				<button onClick={sideBarActivitiy} className={actionsStyle}>
+				<button onClick={sideBarActivity} className={actionsStyle}>
 					<svg
 						viewBox="0 0 34 34"
 						fill="none"

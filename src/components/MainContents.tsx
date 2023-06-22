@@ -24,7 +24,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
-	const sideBarRef = useRef<HTMLDivElement>();
+	const sideBarRef = useRef<HTMLDivElement>() as any;
 	const [notes, setNotes] = useState<INote[]>(fetchedNotes);
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
@@ -163,12 +163,20 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 
 	const [editorActive, setEditorActive] = useState(true);
 
-	const mainRef = useRef<HTMLDivElement>(null);
+	const mainRef = useRef<HTMLDivElement>(null) as any;
 
 	useEffect(() => {
 		mainRef.current.focus();
 	}, [editorActive]);
 
+	function sideBarActivitiy(): void {
+		const sideBar = sideBarRef.current;
+		if (sideBar.classList.contains("sidebar-active")) {
+			sideBar.classList.replace("sidebar-active", "sidebar-inactive");
+		} else {
+			sideBar.classList.replace("sidebar-inactive", "sidebar-active");
+		}
+	}
 	return (
 		<main
 			ref={mainRef}
@@ -176,9 +184,13 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			autoFocus
 			onKeyDown={(e) => {
 				e.stopPropagation();
+				e.preventDefault();
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
 					console.log("open preview");
 					setEditorActive((prev) => (prev ? false : true));
+				}
+				if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
+					sideBarActivitiy();
 				}
 			}}
 			onClick={(e) => {
@@ -199,6 +211,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			</NavbarActionsContext.Provider>
 			<section id="content-section" className="flex-1 flex h-[0%]">
 				<SideMenu
+					sideBarActivity={sideBarActivitiy}
 					sideBarRef={sideBarRef}
 					activeModal={activeLogoutModal}
 					setActiveModal={setActiveLogoutModal}
