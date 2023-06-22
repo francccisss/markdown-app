@@ -46,7 +46,7 @@ const Note = () => {
 	return (
 		<section
 			id="note"
-			className="flex flex-1  @container bg-vn-dshade-black relative text-vn-white w-full "
+			className="flex flex-1  bg-vn-dshade-black relative text-vn-white w-full "
 		>
 			{noteModalActive && <NoteInfoModal note={currentNote} />}
 			{!editorActive ? (
