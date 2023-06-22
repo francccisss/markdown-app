@@ -5,6 +5,7 @@ import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 import createTheme from "@uiw/codemirror-themes";
+import { EditorView } from "@codemirror/view";
 
 interface IEditorProps {
 	onChange: (value: string) => void;
@@ -22,15 +23,16 @@ const theme = createTheme({
 
 const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
-		<section className=" @container flex w-full h-full">
+		<section className="@container bg-vn-dshade-black flex w-full h-full justify-center overflow-auto">
 			<ReactCodeMirror
 				autoFocus
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
-				className="markdown-editor flex-1 font-medium focus-within:border-t-[3px] text-[.8rem] focus-within:border-vn-blue border-solid outline-none "
-				height="100%"
+				className="markdown-editor @[200px]:min-w-[200px] @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
+				minHeight="100%"
 				extensions={[
+					EditorView.lineWrapping,
 					theme,
 					vim(),
 					markdown({
@@ -42,6 +44,11 @@ const Editor = ({ onChange, input }: IEditorProps) => {
 				basicSetup={{
 					foldGutter: false,
 					highlightActiveLine: false,
+					lineNumbers: false,
+				}}
+				onCreateEditor={(view, state) => {
+					console.log(view);
+					console.log(state);
 				}}
 			/>
 		</section>
