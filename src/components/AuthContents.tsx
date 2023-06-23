@@ -6,11 +6,11 @@ const AuthContents = () => {
 	return (
 		<div
 			id="auth-contents"
-			className="relative w-full bg-[#ffffff] flex rounded-2xl box-border justify-center items-center"
+			className="relative w-full bg-[#ffffff] flex rounded-2xl  box-border justify-center items-center"
 		>
 			<section
 				id="text-section"
-				className="overflow-auto w-full max-h-screen py-20 flex flex-col flex-1 z-30 px-16 max-xl:py-20 max-xl:px-10 justify-center items-start gap-6 max-xl:justify-start "
+				className=" w-full overflow-hidden py-20 flex flex-col flex-1 z-30 px-16 max-xl:py-20 max-xl:px-10 justify-center items-start gap-6 max-xl:justify-start "
 			>
 				<section id="main-auth-text" className="flex flex-col gap-6">
 					<WelcomeText />
