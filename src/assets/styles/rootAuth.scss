@@ -75,17 +75,20 @@
 	#welcome-text {
 		h1 {
 			font-size: 1.6rem;
+			margin-bottom: 10px;
 		}
 		#greet {
 			:first-child {
 				font-size: 1.3rem;
+				margin-bottom: 0px;
 			}
 			& > :not(:first-child) {
-				font-size: 1.2rem;
+				font-size: 1rem;
+				line-height: normal;
 			}
 		}
 		a {
-			padding: 10px 12px;
+			// padding: 10px 12px;
 			font-size: 0.8rem;
 		}
 	}
@@ -95,7 +98,7 @@
 			margin-bottom: 0.4em;
 		}
 		p {
-			font-size: 0.8rem;
+			font-size: 0.9rem;
 		}
 	}
 }
