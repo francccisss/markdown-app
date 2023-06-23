@@ -6,15 +6,16 @@ import { useEffect, useRef } from "react";
 
 const VimnoteCheatSheet = () => {
 	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg `;
-	const sectionTitles = `text-[2rem] font-semibold mb-2`;
+	const sectionTitles = `text-[2rem] font-semibold mb-2 max-[1024px]:text-[1.5rem]`;
 	const shortcuts = {
 		global: {
 			help: `:h - open vim Cheatsheeet`,
 			save: `:w - save file as `,
 			close: `:q - close editor`,
-			openPreview: `ctrl+shift+p to toggle between preview and editor`,
-			openSidebar: `ctrl+shift+e to toggle sidebar`,
-			cheatsheetToPreviousPage: `ctrl+shift+h to toggle help and previous note`,
+			openPreview: `ctrl+shift+p - toggle between preview and editor`,
+			openSidebar: `ctrl+shift+e - toggle sidebar`,
+			cheatsheetToPreviousPage: `ctrl+shift+h - toggle help and previous note`,
+			focusSearchBar: `ctrl+shift+f - focus on search bar`,
 		},
 		cursorMovement: {
 			h: `h - move cursor left`,
@@ -92,7 +93,7 @@ const VimnoteCheatSheet = () => {
 		const extractJSXContents = tmpArray.map((content, i) => {
 			const firstChar = content.slice(0, 1);
 			return (
-				<li key={i} className="text-base">
+				<li key={i} className="text-base  max-[1024px]:text-[.9rem]">
 					<span className="text-vn-blue text-lg font-bold">
 						{firstChar}
 					</span>
@@ -167,7 +168,7 @@ const VimnoteCheatSheet = () => {
 					</a>
 				</p>
 			</section>
-			<section className="grid grid-cols-[repeat(3,minmax(150px,500px))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 max-[800px]:flex max-[800px]:flex-col ">
+			<section className="grid grid-cols-[repeat(3,minmax(150px,500px))] flex-1 grid-rows-[repeat(2,1fr)] gap-5  max-[800px]:flex max-[800px]:flex-col ">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}

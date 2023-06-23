@@ -80,8 +80,8 @@ async function createWindow() {
 		return { action: "deny" };
 	});
 
-	win.setSize(1280, 720);
-	win.setMinimumSize(1024, 720);
+	win.setSize(1024, 800);
+	win.setMinimumSize(500, 600);
 
 	// Apply electron-updater
 	update(win);
