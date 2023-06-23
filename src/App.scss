@@ -130,4 +130,32 @@ input[type="search"]::-webkit-search-cancel-button {
 			}
 		}
 	}
+	#root-texts {
+		max-height: 500px;
+	}
+}
+
+@media screen and (max-height: 876px) {
+	#auth-contents {
+		h2 {
+			font-size: 1rem;
+			margin-bottom: 0.4em;
+		}
+		p {
+			font-size: 0.8rem;
+		}
+	}
+	#welcome-text {
+		h1 {
+			font-size: 1.6rem;
+		}
+		#greet {
+			:first-child {
+				font-size: 1.3rem;
+			}
+			& > :not(:first-child) {
+				font-size: 1.2rem;
+			}
+		}
+	}
 }
