@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import LogoutModal from "./LogoutModal";
+import UserActions from "./UserActions";
 import React, { SetStateAction, useState } from "react";
 import setComponentActivity from "@/utils/SetComponentActivity";
 
@@ -154,7 +154,7 @@ const SideMenu = ({
 					/>
 				</svg>
 			</button>
-			{activeModal && <LogoutModal />}
+			{activeModal && <UserActions />}
 		</div>
 	);
 };
