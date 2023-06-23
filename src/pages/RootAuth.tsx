@@ -5,6 +5,7 @@ import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { doc, collection, getDoc } from "firebase/firestore";
 import { useState, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import "../assets/styles/rootAuth.scss";
 
 const RootAuth = () => {
 	const navigate = useNavigate();
@@ -40,12 +41,12 @@ const RootAuth = () => {
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">
 			<section
 				id="left-auth-contents"
-				className="flex-1 flex w-full bg-vn-black p-8  "
+				className="flex-1 flex w-full bg-vn-black p-8"
 			>
 				<AuthContents />
 			</section>
 			<section
-				id="auth-form"
+				id="auth-form-section"
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
 				{!isSignedIn ? (

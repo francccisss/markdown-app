@@ -1,0 +1,16 @@
+#auth {
+	@media screen and (max-width: 870px) {
+		#left-auth-contents {
+			display: none;
+		}
+		#auth-form-section {
+			width: 100%;
+			box-sizing: border-box;
+		}
+		#instruct-user-txt {
+			h1 {
+				font-size: 1.8rem;
+			}
+		}
+	}
+}

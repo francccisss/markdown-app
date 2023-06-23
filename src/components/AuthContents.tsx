@@ -6,7 +6,7 @@ const AuthContents = () => {
 	return (
 		<div
 			id="auth-contents"
-			className="relative w-full bg-[#ffffff] flex rounded-2xl overflow-clip box-border justify-center items-center"
+			className="relative w-full bg-[#ffffff] flex rounded-2xl box-border justify-center items-center"
 		>
 			<section
 				id="text-section"
@@ -14,23 +14,18 @@ const AuthContents = () => {
 			>
 				<section id="main-auth-text" className="flex flex-col gap-6">
 					<WelcomeText />
-					<RootText
-						title="Free Note Taking App"
-						para="
+					<section className="enganyo flex gap-6">
+						<RootText
+							title="Free Note Taking App"
+							para="
 				Mainly targeted for vim users who are too used to vim keymaps when
 				using a note taking app (cause I know I do)."
-					/>
-				</section>
-
-				<section className="split-started flex gap-6">
-					<RootText
-						title="Split Pane"
-						para="To easily preview the changes written down and can also be expanded and collapsed."
-					/>
-					<RootText
-						title="Get Started"
-						para="By signing up or creating an account"
-					/>
+						/>
+						<RootText
+							title="Get Started"
+							para="By signing up or creating an account, to start becoming more efficient and never leave your keyboard when taking notes."
+						/>
+					</section>
 				</section>
 			</section>
 			<Wave />

@@ -4,7 +4,7 @@ const RootText = ({ title, para }: { title: string; para: string }) => {
 	return (
 		<RootTextLayout>
 			<h2 className="font-bold text-lg">{title}</h2>
-			{para == "" ? null : <p className="">{para}</p>}
+			{para == "" ? null : <p className="max-w-[480px]">{para}</p>}
 		</RootTextLayout>
 	);
 };
