@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import {
+import React, {
 	LegacyRef,
 	useCallback,
 	useContext,
@@ -20,11 +20,8 @@ import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
 const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const navigate = useNavigate();
-	const previousNoteContents = useRef<undefined | string>();
 	const { auth, db } = useContext(FirebaseContext);
-	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
-	const sideBarRef = useRef<HTMLDivElement>() as any;
 	const [notes, setNotes] = useState<INote[]>(fetchedNotes);
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
@@ -32,6 +29,11 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
 	const [editorActive, setEditorActive] = useState(true);
+
+	const previousNoteContents = useRef<undefined | string>();
+	const noteIDRef = useRef(undefined);
+	const sideBarRef = useRef<HTMLDivElement>() as any;
+	const searchBarRef = useRef<HTMLInputElement>(null) as any;
 	const mainRef = useRef<HTMLDivElement>(null) as any;
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -172,6 +174,53 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 	}
 
+	function shortCuts(e: React.KeyboardEvent) {
+		if (e.ctrlKey && e.code == "KeyS") {
+			mainRef.current.focus();
+			e.preventDefault();
+			writeNote();
+		}
+		if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
+			e.preventDefault();
+			console.log("open preview");
+			setEditorActive((prev) => (prev ? false : true));
+		}
+		if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
+			mainRef.current.focus();
+			e.preventDefault();
+			sideBarActivitiy();
+		}
+		if (e.ctrlKey && e.shiftKey && e.code == "KeyH") {
+			mainRef.current.focus();
+			e.preventDefault();
+			if (
+				window.location.pathname === "/app/vim-cheatsheet" &&
+				notes.length !== 0
+			) {
+				return navigate(-1);
+			}
+			navigate("/app/vim-cheatsheet");
+		}
+		if (e.ctrlKey && e.shiftKey && e.code == "KeyF") {
+			mainRef.current.focus();
+			const sideBarActive = sideBarRef.current.classList.contains(
+				"sidebar-active"
+			)
+				? true
+				: false;
+			if (sideBarActive) {
+				searchBarRef.current.focus();
+			} else {
+				sideBarActivitiy();
+				searchBarRef.current.focus();
+			}
+		}
+		if (e.ctrlKey && e.shiftKey && e.code == "KeyJ") {
+			addNote();
+			navigate(`/app/${notes[0].id}`);
+		}
+	}
+
 	useEffect(() => {
 		mainRef.current.focus();
 	}, [editorActive]);
@@ -181,34 +230,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			ref={mainRef}
 			tabIndex={0}
 			autoFocus
-			onKeyDown={(e) => {
-				if (e.ctrlKey && e.code == "KeyS") {
-					mainRef.current.focus();
-					e.preventDefault();
-					writeNote();
-				}
-				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
-					e.preventDefault();
-					console.log("open preview");
-					setEditorActive((prev) => (prev ? false : true));
-				}
-				if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
-					mainRef.current.focus();
-					e.preventDefault();
-					sideBarActivitiy();
-				}
-				if (e.ctrlKey && e.shiftKey && e.code == "KeyH") {
-					mainRef.current.focus();
-					e.preventDefault();
-					if (
-						window.location.pathname === "/app/vim-cheatsheet" &&
-						notes.length !== 0
-					) {
-						return navigate(-1);
-					}
-					navigate("/app/vim-cheatsheet");
-				}
-			}}
+			onKeyDown={shortCuts}
 			onClick={(e) => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
@@ -233,6 +255,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 				/>
 				<Sidebar sideBarRef={sideBarRef}>
 					<SidebarActions
+						searchBarRef={searchBarRef}
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
 						addNote={addNote}

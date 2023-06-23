@@ -2,12 +2,14 @@ interface ISearchBarProps {
 	handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	searchInput: string;
 	addNote: () => void;
+	searchBarRef: any;
 }
 
 const SidebarActions = ({
 	handleInput,
 	searchInput,
 	addNote,
+	searchBarRef,
 }: ISearchBarProps) => {
 	return (
 		<div
@@ -15,6 +17,7 @@ const SidebarActions = ({
 			className="p-3 shadow gap-2 flex items-center  border-b-[3px] border-separator-grey-line "
 		>
 			<input
+				ref={searchBarRef}
 				className="w-[100%] shadow-inner hover:outline-vn-blue px-4 py-2 block text-sm placeholder:text-center placeholder:text-vn-outline-black border-none text-[#d9d9d9] outline-1 rounded outline-none transition-all duration-150 ease-in-out  focus-within:outline-vn-blue bg-vn-dshade-black"
 				type="search"
 				onChange={handleInput}
