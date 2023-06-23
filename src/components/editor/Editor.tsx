@@ -35,7 +35,7 @@ const Editor = ({ onChange, input }: IEditorProps) => {
 				extensions={[
 					EditorView.lineWrapping,
 					theme,
-					vim(),
+					// vim(),
 					markdown({
 						base: markdownLanguage,
 						codeLanguages: languages,

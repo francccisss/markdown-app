@@ -182,6 +182,11 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			tabIndex={0}
 			autoFocus
 			onKeyDown={(e) => {
+				if (e.ctrlKey && e.code == "KeyS") {
+					mainRef.current.focus();
+					e.preventDefault();
+					writeNote();
+				}
 				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
 					e.preventDefault();
 					console.log("open preview");
