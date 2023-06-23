@@ -6,7 +6,6 @@ import { languages } from "@codemirror/language-data";
 import "./editor.scss";
 import createTheme from "@uiw/codemirror-themes";
 import { EditorView } from "@codemirror/view";
-import { useEffect, useRef } from "react";
 
 interface IEditorProps {
 	onChange: (value: string) => void;
@@ -30,12 +29,12 @@ const Editor = ({ onChange, input }: IEditorProps) => {
 				theme={editorAppTheme}
 				value={input}
 				onChange={onChange}
-				className="markdown-editor @[500px]:min-w-[500px] @[700px]:text-sm @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
+				className="markdown-editor @[200px]:min-w-[400px] @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none  "
 				height="100%"
 				extensions={[
 					EditorView.lineWrapping,
 					theme,
-					// vim(),
+					vim(),
 					markdown({
 						base: markdownLanguage,
 						codeLanguages: languages,
