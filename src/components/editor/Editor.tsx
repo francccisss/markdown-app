@@ -31,7 +31,7 @@ const Editor = ({ onChange, input }: IEditorProps) => {
 				value={input}
 				onChange={onChange}
 				className="markdown-editor @[500px]:min-w-[500px] @[700px]:text-sm @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
-				minHeight="100%"
+				height="100%"
 				extensions={[
 					EditorView.lineWrapping,
 					theme,
