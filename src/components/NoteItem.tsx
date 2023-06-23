@@ -14,7 +14,7 @@ const NoteItem = ({ note }: INoteItemProps) => {
 			id={note.id}
 			className="flex flex-col justify-center note  min-w-full box-border border-l-vn-dshade-white h-[80px] px-5 py-3 mb-[2px] hover:bg-vn-dshade-white3 hover:border-l-vn-blue select-none cursor-pointer transition-all ease-in-out duration-150 text-vn-white border-l-[2px] "
 		>
-			<p className="block box-content max-w-full overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold ">
+			<p className="block box-content max-w-full overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold text-[.9rem] ">
 				{note.contents === ""
 					? "New Note"
 					: note.contents.slice(0, characterLimit)}

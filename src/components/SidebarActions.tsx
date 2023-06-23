@@ -14,7 +14,7 @@ const SidebarActions = ({
 	return (
 		<div
 			id="sidebar-actions"
-			className="p-3 shadow gap-2 flex items-center  border-b-[3px] border-separator-grey-line "
+			className="p-3 shadow gap-2 flex items-center  border-b-[2px] border-separator-grey-line "
 		>
 			<input
 				ref={searchBarRef}

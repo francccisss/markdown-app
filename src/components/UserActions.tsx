@@ -7,7 +7,7 @@ const UserActions = ({}) => {
 	return (
 		<div
 			id="logout-modal-container"
-			className="overflow-hidden flex flex-col bg-vn-black  border-[#ffffff30] border-0 rounded justify-between absolute left-12 bottom-5 text-vn-white w-[270px]"
+			className="overflow-hidden flex flex-col bg-vn-black  border-[#ffffff30] border rounded justify-between absolute left-12 bottom-5 text-vn-white w-[270px]"
 		>
 			<p className="font-semibold px-3 py-2">{auth.currentUser?.email}</p>
 

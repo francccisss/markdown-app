@@ -156,14 +156,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 		return navigate("/app/empty-notes");
 	}
-	useEffect(() => {
-		searchQuery(searchInput, notes);
-	}, [searchInput]);
-
-	useEffect(() => {
-		setSearchedNotes(notes);
-		redirectToExistingNotes();
-	}, [notes]);
 
 	function sideBarActivitiy(): void {
 		const sideBar = sideBarRef.current;
@@ -174,10 +166,10 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 	}
 
-	function shortCuts(e: React.KeyboardEvent) {
+	function keyboardShortcuts(e: React.KeyboardEvent): void {
 		if (e.ctrlKey && e.code == "KeyS") {
-			mainRef.current.focus();
 			e.preventDefault();
+			mainRef.current.focus();
 			writeNote();
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
@@ -186,13 +178,13 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			setEditorActive((prev) => (prev ? false : true));
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
-			mainRef.current.focus();
 			e.preventDefault();
+			mainRef.current.focus();
 			sideBarActivitiy();
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyH") {
-			mainRef.current.focus();
 			e.preventDefault();
+			mainRef.current.focus();
 			if (
 				window.location.pathname === "/app/vim-cheatsheet" &&
 				notes.length !== 0
@@ -202,7 +194,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			navigate("/app/vim-cheatsheet");
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyF") {
-			mainRef.current.focus();
+			e.preventDefault();
 			const sideBarActive = sideBarRef.current.classList.contains(
 				"sidebar-active"
 			)
@@ -225,12 +217,20 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		mainRef.current.focus();
 	}, [editorActive]);
 
+	useEffect(() => {
+		searchQuery(searchInput, notes);
+	}, [searchInput]);
+
+	useEffect(() => {
+		setSearchedNotes(notes);
+		redirectToExistingNotes();
+	}, [notes]);
 	return (
 		<main
 			ref={mainRef}
 			tabIndex={0}
 			autoFocus
-			onKeyDown={shortCuts}
+			onKeyDown={keyboardShortcuts}
 			onClick={(e) => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
