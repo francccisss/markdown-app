@@ -103,7 +103,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	}
 }
 
-@media screen and (min-height: 1000px) {
+@media screen and (min-height: 1120px) {
 	.split-started {
 		flex-direction: column;
 		gap: 6;
@@ -126,7 +126,7 @@ input[type="search"]::-webkit-search-cancel-button {
 				font-size: 2rem;
 			}
 			& > :not(:first-child) {
-				font-size: 1.5rem;
+				font-size: 1.3rem;
 			}
 		}
 	}
@@ -134,17 +134,32 @@ input[type="search"]::-webkit-search-cancel-button {
 		max-height: 500px;
 	}
 }
-
-@media screen and (max-height: 876px) {
-	#auth-contents {
-		h2 {
-			font-size: 1rem;
-			margin-bottom: 0.4em;
+@media screen and (max-height: 830px) {
+	#root-texts {
+		padding: 1.7em 1.5em;
+	}
+	#welcome-text {
+		h1 {
+			font-size: 1.6rem;
+			margin-bottom: 5px;
 		}
-		p {
-			font-size: 0.8rem;
+		#greet {
+			p:first-of-type {
+				font-size: 1.2rem;
+				margin-bottom: 0px;
+			}
+			:not(p:first-of-type) {
+				font-size: 1rem;
+				line-height: normal;
+			}
+		}
+		a {
+			margin-top: 1em;
 		}
 	}
+}
+
+@media screen and (max-height: 920px) {
 	#welcome-text {
 		h1 {
 			font-size: 1.6rem;
@@ -155,6 +170,35 @@ input[type="search"]::-webkit-search-cancel-button {
 			}
 			& > :not(:first-child) {
 				font-size: 1.2rem;
+			}
+		}
+		a {
+			font-size: 0.8rem;
+			padding: 10px 12px;
+		}
+	}
+	.enganyo {
+		h2 {
+			font-size: 1rem;
+			margin-bottom: 0.4em;
+		}
+		p {
+			font-size: 0.8rem;
+		}
+	}
+}
+@media screen and (max-width: 1090px) {
+	.enganyo {
+		flex-direction: column;
+	}
+	#welcome-text {
+		h1 {
+			font-size: 1.8rem;
+		}
+
+		#greet {
+			:first-child {
+				font-size: 1.3rem;
 			}
 		}
 	}

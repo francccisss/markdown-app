@@ -47,7 +47,7 @@ const RootAuth = () => {
 			</section>
 			<section
 				id="auth-form-section"
-				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
+				className="z-10 max-lg:w-[40%]  lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
 				{!isSignedIn ? (
 					<Outlet />
