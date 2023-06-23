@@ -24,7 +24,7 @@ const theme = createTheme({
 
 const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
-		<section className="@container bg-vn-dshade-black py-10 px-16 flex w-full h-full justify-center overflow-auto">
+		<section className="@container bg-vn-dshade-black pt-10 px-16 flex w-full h-full justify-center overflow-auto">
 			<ReactCodeMirror
 				autoFocus
 				theme={editorAppTheme}

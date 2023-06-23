@@ -50,7 +50,7 @@ const Note = () => {
 			{currentNote && (
 				<section
 					id="note"
-					className=" flex flex-1 relative text-vn-white w-full "
+					className="bg-vn-dshade-black flex flex-1 relative text-vn-white w-full "
 				>
 					{noteModalActive && <NoteInfoModal note={currentNote} />}
 					{editorActive ? (
