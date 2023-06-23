@@ -1,35 +1,38 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+	LegacyRef,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import SidebarActions from "@/components/SidebarActions";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
 import SideMenu from "@/components/SideMenu";
-import { signOut } from "firebase/auth";
-import { FirebaseContext, app } from "@/utils/contexts/firebaseContext";
-import { placeholders } from "@/utils/placeholderNotes";
-import { doc, deleteDoc, updateDoc, addDoc, setDoc } from "firebase/firestore";
-import { NavbarActionsContext } from "@/pages/App";
-import { format } from "date-fns";
+import { FirebaseContext } from "@/utils/contexts/firebaseContext";
+import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
+import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
-interface IMainContentsProp {
-	fetchedNotes: INote[];
-}
-const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
+const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const navigate = useNavigate();
+	const previousNoteContents = useRef<undefined | string>();
 	const { auth, db } = useContext(FirebaseContext);
 	const noteIDRef = useRef(undefined);
 	const [searchInput, setSearchInput] = useState<string>("");
-	const sideBarRef = useRef<HTMLDivElement>();
-	const [notes, setNotes] = useState<INote[]>([
-		...fetchedNotes,
-		...placeholders,
-	]);
+	const sideBarRef = useRef<HTMLDivElement>() as any;
+	const [notes, setNotes] = useState<INote[]>(fetchedNotes);
 	const [noteModalActive, setNoteModalActive] = useState(false);
 	const [navBarActionsActive, setNavbarActionsActive] = useState(false);
 	const [searchedNotes, setSearchedNotes] = useState(notes);
+	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
+	const [editorActive, setEditorActive] = useState(true);
+	const mainRef = useRef<HTMLDivElement>(null) as any;
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
 		console.log(e.target.value);
@@ -61,11 +64,12 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		const newNote: INote = {
 			id: newID,
 			authorID: auth.currentUser?.uid,
-			dateAdded: format(new Date(), "PPP"),
-			lastUpdated: format(new Date(), "PPP"),
+			dateAdded: new Date(),
+			lastUpdated: new Date(),
 			contents: "",
 		};
 		try {
+			setIsSaving(true);
 			const newNoteDocRef = doc(
 				db,
 				"users",
@@ -73,8 +77,9 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				"notes",
 				newID
 			);
-			await setDoc(newNoteDocRef, newNote);
 			setNotes((prev) => [newNote, ...prev]);
+			await setDoc(newNoteDocRef, newNote);
+			setIsSaving(false);
 			console.log(newNote);
 		} catch (err) {
 			console.log("unable to add note ");
@@ -96,9 +101,9 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 					"notes",
 					noteRef.id
 				);
-				await deleteDoc(noteDocumentRef);
 				const filterNotes = notes.filter((note) => note.id !== noteRef.id);
 				setNotes(filterNotes);
+				await deleteDoc(noteDocumentRef);
 			} else {
 				console.log("Unauthorize access to user notes");
 			}
@@ -112,26 +117,35 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
-		console.log(noteRef);
-		try {
-			if (auth.currentUser) {
-				const noteDocRef = doc(
-					db,
-					"users",
-					auth.currentUser?.uid,
-					"notes",
-					noteRef.id
-				);
-				const updateNote = await updateDoc(noteDocRef, {
-					contents: noteRef.contents,
-					lastUpdated: format(new Date(), "PPP"),
-				});
-				console.log(`current note is saved: ${noteRef.id}`);
+		// saving the previous contents from last save, and checking the current contents of a note
+		// if they are the same with the old contents so that we users dont push the same contents
+		// to save write cost on database
+		if (previousNoteContents.current !== noteRef.contents) {
+			previousNoteContents.current = noteRef.contents;
+			try {
+				setIsSaving(true);
+				if (auth.currentUser) {
+					const noteDocRef = doc(
+						db,
+						"users",
+						auth.currentUser?.uid,
+						"notes",
+						noteRef.id
+					);
+					const updateNote = await updateDoc(noteDocRef, {
+						contents: noteRef.contents,
+						lastUpdated: new Date(),
+					});
+					console.log(`current note is saved: ${noteRef.id}`);
+					setIsSaving(false);
+					return;
+				}
+			} catch (err) {
+				console.log(err);
+				throw err;
 			}
-		} catch (err) {
-			console.log(err);
-			throw err;
 		}
+		console.log("the same");
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
@@ -140,7 +154,6 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		}
 		return navigate("/app/empty-notes");
 	}
-
 	useEffect(() => {
 		searchQuery(searchInput, notes);
 	}, [searchInput]);
@@ -150,24 +163,55 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 		redirectToExistingNotes();
 	}, [notes]);
 
+	function sideBarActivitiy(): void {
+		const sideBar = sideBarRef.current;
+		if (sideBar.classList.contains("sidebar-active")) {
+			sideBar.classList.replace("sidebar-active", "sidebar-inactive");
+		} else {
+			sideBar.classList.replace("sidebar-inactive", "sidebar-active");
+		}
+	}
+
+	useEffect(() => {
+		mainRef.current.focus();
+	}, [editorActive]);
+
 	return (
 		<main
+			ref={mainRef}
+			tabIndex={0}
+			autoFocus
+			onKeyDown={(e) => {
+				if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
+					e.preventDefault();
+					console.log("open preview");
+					setEditorActive((prev) => (prev ? false : true));
+				}
+				if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
+					mainRef.current.focus();
+					e.preventDefault();
+					sideBarActivitiy();
+				}
+				if (e.ctrlKey && e.shiftKey && e.code == "KeyH") {
+					mainRef.current.focus();
+					e.preventDefault();
+					if (
+						window.location.pathname === "/app/vim-cheatsheet" &&
+						notes.length !== 0
+					) {
+						return navigate(-1);
+					}
+					navigate("/app/vim-cheatsheet");
+				}
+			}}
 			onClick={(e) => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
+				setActiveLogoutModal(false);
 			}}
 			id="app-page"
 			className=" h-screen w-screen flex flex-col relative "
 		>
-			<button
-				className="absolute z-40"
-				onClick={() => {
-					signOut(auth);
-					navigate("/");
-				}}
-			>
-				sign out
-			</button>
 			<NavbarActionsContext.Provider
 				value={{ deleteNote, writeNote, infoModal }}
 			>
@@ -177,14 +221,18 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				/>
 			</NavbarActionsContext.Provider>
 			<section id="content-section" className="flex-1 flex h-[0%]">
-				<SideMenu sideBarRef={sideBarRef} />
+				<SideMenu
+					sideBarActivity={sideBarActivitiy}
+					activeModal={activeLogoutModal}
+					setActiveModal={setActiveLogoutModal}
+				/>
 				<Sidebar sideBarRef={sideBarRef}>
 					<SidebarActions
 						searchInput={searchInput}
 						handleInput={handleSearchInput}
 						addNote={addNote}
 					/>
-					<ul id="notes-list" className="h-full w-[384px] ">
+					<ul id="notes-list" className="h-full w-full ">
 						{notes.length !== 0 ? (
 							searchedNotes.map((note) => {
 								return <NoteItem key={note.id} note={note} />;
@@ -198,11 +246,14 @@ const MainContents = ({ fetchedNotes }: IMainContentsProp) => {
 				</Sidebar>
 				<Outlet
 					context={{
+						isSaving,
 						notes,
 						setNotes,
 						noteIDRef,
 						writeNote,
 						noteModalActive,
+						editorActive,
+						setEditorActive,
 					}}
 				/>
 			</section>

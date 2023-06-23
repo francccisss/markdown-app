@@ -1,19 +1,26 @@
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./note.scss";
-import { IContextType } from "@/pages/App";
 import { INote } from "@/utils/types/Note";
 import { Vim } from "@replit/codemirror-vim";
 import NoteInfoModal from "../NoteInfoModal";
+import { IMainContentsContextType } from "@/utils/types/MainContentsContextProp";
 
 const Note = () => {
 	const { noteID } = useParams();
-	const { notes, setNotes, noteIDRef, writeNote, noteModalActive } =
-		useOutletContext() as IContextType;
-	const [paneWidth, setPaneWidth] = useState<number>(500);
-	const [isResizing, setIsResizing] = useState<number>(0);
+	const navigate = useNavigate();
+	const {
+		editorActive,
+		isSaving,
+		notes,
+		setNotes,
+		noteIDRef,
+		writeNote,
+		noteModalActive,
+		setEditorActive,
+	} = useOutletContext() as IMainContentsContextType;
 	const [currentNote] = notes.filter((note: INote) => note.id === noteID);
 
 	function handleEditorOnChange(value: string): void {
@@ -25,58 +32,44 @@ const Note = () => {
 		const filterNotes = notes.filter((note: INote) => note.id !== noteID);
 		setNotes([updateNote, ...filterNotes]);
 	}
-	function handleOnMouseDown(e: React.MouseEvent): void {
-		setIsResizing(e.clientX);
-	}
-
-	function resizePane(e: React.MouseEvent): void {
-		const mouseX = e.clientX;
-		let sideBar = document.getElementById("sidebar");
-		const maxWidth = Math.floor(0.65 * window.innerWidth);
-		if (isResizing !== 0 && mouseX < maxWidth) {
-			if (sideBar?.className.includes("sidebar-inactive")) {
-				setPaneWidth(mouseX);
-				if (mouseX < 50) setPaneWidth(0);
-			} else if (sideBar?.className.includes("sidebar-active")) {
-				setPaneWidth(mouseX - 384);
-				if (mouseX - 384 < 50) setPaneWidth(0);
-			}
-		}
-	}
 
 	Vim.defineEx("write", "w", writeNote);
-
-	Vim.defineEx("quit", "q", () => setPaneWidth(0));
+	Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
+	Vim.defineEx("quit", "q", () => setEditorActive(false));
 
 	useEffect(() => {
 		noteIDRef.current = noteID?.toString();
 	}, [noteID]);
 
+	useEffect(() => {
+		console.log(editorActive);
+	}, [editorActive]);
+
 	return (
-		<section
-			id="note"
-			className="flex flex-1 bg-vn-dshade-black relative text-vn-white w-full "
-			onMouseMove={resizePane}
-			onMouseUpCapture={() => {
-				setIsResizing(0);
-			}}
-		>
-			{noteModalActive && <NoteInfoModal note={currentNote} />}
+		<>
 			{currentNote && (
-				<>
-					<Editor
-						newWidth={paneWidth}
-						input={currentNote.contents}
-						onChange={handleEditorOnChange}
-					/>
-					<div
-						onMouseDownCapture={handleOnMouseDown}
-						className=" h-full z-10 hover:bg-vn-outline-black transition-all active:bg-vn-dshade-white duration-150 ease-in-out select-none cursor-ew-resize  active:w-[6px] w-[4px] bg-vn-black box-content"
-					/>
-					<Preview markdownInput={currentNote.contents} />
-				</>
+				<section
+					id="note"
+					className=" flex flex-1 relative text-vn-white w-full "
+				>
+					{noteModalActive && <NoteInfoModal note={currentNote} />}
+					{editorActive ? (
+						<Editor
+							input={currentNote.contents}
+							onChange={handleEditorOnChange}
+						/>
+					) : (
+						<Preview markdownInput={currentNote.contents} />
+					)}
+					{isSaving ? (
+						<span
+							id="loading-spinner"
+							className="loading-spinner  w-[30px] h-[30px] absolute right-0 m-8 z-50 border-vn-black border-[6px] border-b-vn-blue"
+						/>
+					) : null}
+				</section>
 			)}
-		</section>
+		</>
 	);
 };
 

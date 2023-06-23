@@ -2,6 +2,8 @@
 // we wont have access to electron/nodejs methods
 // const shell = typeof window === "object" ? require("electron").shell : null;
 
+import { useEffect, useRef } from "react";
+
 const VimnoteCheatSheet = () => {
 	const keyboardShortcutStyles = `flex flex-col min-w-full basis-1/4 text-lg `;
 	const sectionTitles = `text-[2rem] font-semibold mb-2`;
@@ -9,7 +11,10 @@ const VimnoteCheatSheet = () => {
 		global: {
 			help: `:h - open vim Cheatsheeet`,
 			save: `:w - save file as `,
-			close: `:q - close editor pane`,
+			close: `:q - close editor`,
+			openPreview: `ctrl+shift+p to toggle between preview and editor`,
+			openSidebar: `ctrl+shift+e to toggle sidebar`,
+			cheatsheetToPreviousPage: `ctrl+shift+h to toggle help and previous note`,
 		},
 		cursorMovement: {
 			h: `h - move cursor left`,
@@ -104,9 +109,45 @@ const VimnoteCheatSheet = () => {
 		const link = event.target.href.toString();
 		navigator.clipboard.writeText(link);
 	}
+	const cheatSheetRef = useRef() as any;
+
+	useEffect(() => {
+		cheatSheetRef.current.focus();
+	}, []);
 
 	return (
-		<main className="text-vn-white appearance-none bg-vn-dshade-black  flex flex-1 gap-6 flex-col h-full overflow-auto p-[2em]">
+		<main
+			ref={cheatSheetRef}
+			tabIndex={0}
+			autoFocus
+			onKeyDown={(e) => {
+				e.preventDefault();
+				const target = e.target as Element;
+				switch (e.key) {
+					case "G": {
+						console.log("bottom scrolled");
+						target.scrollTo({ top: 99999 });
+						break;
+					}
+					case "g": {
+						console.log("bottom scrolled");
+						target.scrollTo({ top: 0 });
+						break;
+					}
+					case "j": {
+						console.log("scoll by 20");
+						target.scrollBy({ top: 50, behavior: "smooth" });
+						break;
+					}
+					case "k": {
+						console.log("scoll by 20");
+						target.scrollBy({ top: -50, behavior: "smooth" });
+						break;
+					}
+				}
+			}}
+			className="outline-none text-vn-white appearance-none bg-vn-dshade-black  flex flex-1 gap-6 flex-col h-full overflow-auto p-[2em]"
+		>
 			<section className="">
 				<p className="text-base">To help you get started using Vimnotes</p>
 				<h1 className="font-bold text-4xl">
@@ -125,9 +166,8 @@ const VimnoteCheatSheet = () => {
 						Here
 					</a>
 				</p>
-				{/* </p> */}
 			</section>
-			<section className="grid grid-cols-[repeat(3,minmax(150px,500px))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 ">
+			<section className="grid grid-cols-[repeat(3,minmax(150px,500px))] flex-1 grid-rows-[repeat(2,1fr)] gap-5 max-[800px]:flex max-[800px]:flex-col ">
 				<div className={``}>
 					<h2 className={sectionTitles}>Global</h2>
 					{mapContents(shortcuts.global)}

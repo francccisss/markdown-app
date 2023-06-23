@@ -1,4 +1,5 @@
 import AuthContents from "@/components/AuthContents";
+import LoadingScreen from "@/components/LoadingScreen";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { doc, collection, getDoc } from "firebase/firestore";
@@ -8,14 +9,18 @@ import { Outlet, useNavigate } from "react-router-dom";
 const RootAuth = () => {
 	const navigate = useNavigate();
 	const { auth, db } = useContext(FirebaseContext);
+	const [isSignedIn, setIsSignedIn] = useState(false);
 
 	useEffect(() => {
+		setIsSignedIn(true);
 		onAuthStateChanged(auth, async (user) => {
 			if (user && (await checkIfUserExists(user))) {
 				navigate("/app");
+				setIsSignedIn(false);
 			} else if (user === null) {
 				navigate("/sign-in");
 				auth.currentUser ? deleteUser(auth.currentUser) : 0;
+				setIsSignedIn(false);
 			}
 		});
 	}, []);
@@ -33,17 +38,21 @@ const RootAuth = () => {
 
 	return (
 		<main id="auth" className="page flex bg-[#ffffff] h-screen min-w-fit">
-			<section id="left-auth-contents" className="flex-1 flex w-full ">
+			<section
+				id="left-auth-contents"
+				className="flex-1 flex w-full bg-vn-black p-8  "
+			>
 				<AuthContents />
 			</section>
 			<section
-				style={{
-					boxShadow: "-2px 0px 10px 2px rgba(0,0,0,.5)",
-				}}
 				id="auth-form"
 				className="z-10 max-md:w-1/2 md:w-4/12 lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
 			>
-				<Outlet />
+				{!isSignedIn ? (
+					<Outlet />
+				) : (
+					<span id="loading-spinner" className="loading-spinner" />
+				)}
 			</section>
 		</main>
 	);

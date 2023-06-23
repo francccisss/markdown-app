@@ -78,11 +78,21 @@ input[type="search"]::-webkit-search-cancel-button {
 	border: none;
 }
 
-a.active {
-	transition: all 100ms ease-in-out;
-	background-color: #878a8c20;
-	border-left-color: #6b7ff2;
-	border-left-width: 4px;
+#notes-list {
+	a.active {
+		transition: all 100ms ease-in-out;
+		background-color: #878a8c20;
+		border-left-color: #6b7ff2;
+		border-left-width: 4px;
+	}
+}
+.side-menu {
+	& > *a.active {
+		transition: all 100ms ease-in-out;
+		background-color: #878a8c20;
+		border-left-color: #6b7ff2;
+		// border-left-width: 0px;
+	}
 }
 
 .btn-actions {
@@ -90,5 +100,34 @@ a.active {
 	&:hover {
 		filter: invert(44%) sepia(55%) saturate(1036%) hue-rotate(202deg)
 			brightness(102%) contrast(90%);
+	}
+}
+
+@media screen and (min-height: 1000px) {
+	.split-started {
+		flex-direction: column;
+		gap: 6;
+	}
+	#auth-contents {
+		h2 {
+			font-size: 1.6rem;
+			margin-bottom: 0.4em;
+		}
+		p {
+			font-size: 1.2rem;
+		}
+	}
+	#welcome-text {
+		h1 {
+			font-size: 3rem;
+		}
+		#greet {
+			:first-child {
+				font-size: 2rem;
+			}
+			& > :not(:first-child) {
+				font-size: 1.5rem;
+			}
+		}
 	}
 }

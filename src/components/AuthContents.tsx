@@ -1,36 +1,39 @@
-import { Link } from "react-router-dom";
+import RootText from "./RootText";
+import WelcomeText from "./WelcomeText";
+import { Wave } from "./decorator-components/Wave";
 
 const AuthContents = () => {
 	return (
 		<div
 			id="auth-contents"
-			className="relative bg-auth-left-waves bg-cover bg-no-repeat bg-center w-full"
+			className="relative w-full bg-[#ffffff] flex rounded-2xl overflow-clip box-border justify-center items-center"
 		>
-			<div className="top-1/2 left-14 auth-text-container text-vn-black w-[380px] inline-block absolute lg:top-24 lg:left-32">
-				<h1 className="text-6xl font-bold border-b-2 border-black border-solid inline-block mb-[19px]">
-					# Hi There!
-				</h1>
-				<div className="greet">
-					<p className="text-4xl mb-2">
-						Welcome to <span className="font-bold">Vimnotes</span>
-					</p>
-					<p className="text-2xl font-light">
-						A simple markdown app with vim key mappings.
-					</p>
-				</div>
-				<Link
-					to={
-						window.location.pathname === "/sign-in"
-							? "/sign-up"
-							: "/sign-in"
-					}
-					className="z-0 hover:bg-[#7086FF] ease-out duration-150 transition-all grow-0 font-bold text-[#ffffff] bg-vn-blue px-10 py-4 text-lg inline-block mt-[19px] drop-shadow-md"
-				>
-					{window.location.pathname === "/sign-in"
-						? "Create account"
-						: "Do Something"}
-				</Link>
-			</div>
+			<section
+				id="text-section"
+				className="overflow-auto w-full max-h-screen py-20 flex flex-col flex-1 z-30 px-16 max-xl:py-20 max-xl:px-10 justify-center items-start gap-6 max-xl:justify-start "
+			>
+				<section id="main-auth-text" className="flex flex-col gap-6">
+					<WelcomeText />
+					<RootText
+						title="Free Note Taking App"
+						para="
+				Mainly targeted for vim users who are too used to vim keymaps when
+				using a note taking app (cause I know I do)."
+					/>
+				</section>
+
+				<section className="split-started flex gap-6">
+					<RootText
+						title="Split Pane"
+						para="To easily preview the changes written down and can also be expanded and collapsed."
+					/>
+					<RootText
+						title="Get Started"
+						para="By signing up or creating an account"
+					/>
+				</section>
+			</section>
+			<Wave />
 		</div>
 	);
 };

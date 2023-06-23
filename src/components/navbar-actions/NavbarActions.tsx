@@ -1,5 +1,5 @@
-import { NavbarActionsContext } from "@/pages/App";
-import React, { useContext } from "react";
+import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
+import React, { useContext, createContext } from "react";
 
 interface IActionProps {
 	[key: string]: {
@@ -60,7 +60,7 @@ const NavbarActions = () => {
 	return (
 		<div
 			id="navbar-actions"
-			className="w-60 absolute right-4 z-0 top-[50px] text-[.9rem] text-vn-white bg-vn-black shadow-xl rounded-sm border-vn-dshade-white border"
+			className="w-60 absolute right-4 z-0 top-[50px] text-[.9rem] text-vn-white bg-vn-black shadow-xl rounded border-vn-outline-black border"
 		>
 			<ul className="w-full">{mapActions}</ul>
 		</div>

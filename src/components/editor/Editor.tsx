@@ -4,39 +4,51 @@ import { vim } from "@replit/codemirror-vim";
 import { markdownLanguage, markdown } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import "./editor.scss";
+import createTheme from "@uiw/codemirror-themes";
+import { EditorView } from "@codemirror/view";
+import { useEffect, useRef } from "react";
 
-export interface IEdtiorProps {
+interface IEditorProps {
 	onChange: (value: string) => void;
 	input: string;
 	newWidth?: number;
 }
 
-const Editor = ({ onChange, input, newWidth }: IEdtiorProps) => {
+const theme = createTheme({
+	theme: "dark",
+	styles: [],
+	settings: {
+		fontFamily: "inter",
+	},
+});
+
+const Editor = ({ onChange, input }: IEditorProps) => {
 	return (
-		<ReactCodeMirror
-			theme={editorAppTheme}
-			value={input}
-			onChange={onChange}
-			width={`${newWidth}px`}
-			className="focus-within:border-t-[3px] focus-within:border-vn-blue border-solid outline-none"
-			height="100%"
-			extensions={[
-				vim(),
-				markdown({
-					base: markdownLanguage,
-					codeLanguages: languages,
-					addKeymap: true,
-				}),
-			]}
-			basicSetup={{
-				foldGutter: false,
-				highlightActiveLine: false,
-			}}
-			onCreateEditor={(view, state) => {
-				// console.log(state.doc);
-				// console.log("vim");
-			}}
-		/>
+		<section className="@container bg-vn-dshade-black py-10 px-16 flex w-full h-full justify-center overflow-auto">
+			<ReactCodeMirror
+				autoFocus
+				theme={editorAppTheme}
+				value={input}
+				onChange={onChange}
+				className="markdown-editor @[500px]:min-w-[500px] @[700px]:text-sm @[700px]:w-[800px] @[1000px]:w-[900px] font-medium focus-within:border-t-[3px] text-[.8rem] border-none outline-none "
+				minHeight="100%"
+				extensions={[
+					EditorView.lineWrapping,
+					theme,
+					vim(),
+					markdown({
+						base: markdownLanguage,
+						codeLanguages: languages,
+						addKeymap: true,
+					}),
+				]}
+				basicSetup={{
+					foldGutter: false,
+					highlightActiveLine: false,
+					lineNumbers: false,
+				}}
+			/>
+		</section>
 	);
 };
 
