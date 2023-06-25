@@ -1,5 +1,10 @@
 .cm-editor {
+	display: flex;
 	padding-top: 2em;
+	flex: 1;
+	.cm-scroller {
+		height: 100%;
+	}
 }
 
 .cm-gutters {
