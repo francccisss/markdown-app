@@ -37,7 +37,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const mainRef = useRef<HTMLDivElement>(null) as any;
 
 	function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
-		console.log(e.target.value);
 		setSearchInput(e.target.value);
 	}
 
@@ -56,8 +55,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 
 	function infoModal(e: React.MouseEvent): void {
 		e.stopPropagation();
-		console.log("clicked");
-		console.log(noteModalActive);
 		setNoteModalActive(true);
 	}
 
@@ -82,7 +79,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			setNotes((prev) => [newNote, ...prev]);
 			await setDoc(newNoteDocRef, newNote);
 			setIsSaving(false);
-			console.log(newNote);
 		} catch (err) {
 			console.log("unable to add note ");
 			throw err;
@@ -174,7 +170,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {
 			e.preventDefault();
-			console.log("open preview");
 			setEditorActive((prev) => (prev ? false : true));
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyE") {
@@ -208,6 +203,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			}
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyJ") {
+			e.preventDefault();
 			addNote();
 			navigate(`/app/${notes[0].id}`);
 		}

@@ -41,10 +41,6 @@ const Note = () => {
 		noteIDRef.current = noteID?.toString();
 	}, [noteID]);
 
-	useEffect(() => {
-		console.log(editorActive);
-	}, [editorActive]);
-
 	return (
 		<>
 			{currentNote && (
