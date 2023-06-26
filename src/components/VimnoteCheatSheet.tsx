@@ -1,6 +1,8 @@
 // this won't work if the runtime is in nodejs and electron
 // we wont have access to electron/nodejs methods
 // const shell = typeof window === "object" ? require("electron").shell : null;
+const isBrowser = typeof window;
+console.log(isBrowser);
 
 import { useEffect, useRef } from "react";
 
@@ -108,7 +110,11 @@ const VimnoteCheatSheet = () => {
 	function onLinkClick(event: any): void {
 		event?.preventDefault();
 		const link = event.target.href.toString();
-		navigator.clipboard.writeText(link);
+		if (isBrowser === "object") {
+			window.open(link);
+		} else {
+			navigator.clipboard.writeText(link);
+		}
 	}
 	const cheatSheetRef = useRef() as any;
 
@@ -152,10 +158,7 @@ const VimnoteCheatSheet = () => {
 			<section className="">
 				<p className="text-base">To help you get started using Vimnotes</p>
 				<h1 className="font-bold text-4xl">
-					Vim Cheatsheet by{" "}
-					<span className="text-vn-blue hover:text-vn-dark-blue">
-						rtorr
-					</span>{" "}
+					Vim Cheatsheet by <span className="text-vn-blue">rtorr</span>{" "}
 				</h1>
 				<p className="text-sm text-vn-dshade-white ">
 					For more keyboard shortcuts click {""}
