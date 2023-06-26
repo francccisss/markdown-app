@@ -19,9 +19,6 @@ module.exports = {
 			"vn-outline-black": "#878a8c80",
 		},
 		extend: {
-			backgroundImage: {
-				"auth-left-waves": "url('./src/assets/img/waves.svg')",
-			},
 			minWidth: {
 				"form-min": "20%",
 			},

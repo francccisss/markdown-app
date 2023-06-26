@@ -1,6 +1,7 @@
 import setComponentActivity from "@/utils/SetComponentActivity";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import NavbarActions from "./navbar-actions/NavbarActions";
+import logo from "../assets/img/logo.png";
 
 interface INavbarProps {
 	navActionSetter: Dispatch<SetStateAction<boolean>>;
@@ -12,8 +13,11 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 			id="navbar"
 			className="h-[40px] bg-no-repeat flex relative bg-vn-black px-2 py-2 items-center border-separator-grey-line border-b-[2px] z-10 shadow "
 		>
-			<div id="left" className="text-vn-blue font-semibold text-sm">
-				Vimnotes
+			<div
+				id="left"
+				className="text-vn-blue font-semibold text-sm w-[25px] h-[25px]"
+			>
+				<img src={logo} />
 			</div>
 			{window.location.pathname !== "/app/vim-cheatsheet" && (
 				<div id="right" className="ml-auto flex items-center">
