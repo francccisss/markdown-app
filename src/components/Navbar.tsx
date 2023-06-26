@@ -15,7 +15,7 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 		>
 			<div
 				id="left"
-				className="text-vn-blue font-semibold text-sm w-[25px] h-[25px]"
+				className="text-vn-blue font-semibold text-sm w-[20px] h-[20px]"
 			>
 				<img src={logo} />
 			</div>

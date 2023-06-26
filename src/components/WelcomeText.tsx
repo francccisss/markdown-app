@@ -25,7 +25,7 @@ const WelcomeText = () => {
 				>
 					{window.location.pathname === "/sign-in"
 						? "Create account"
-						: "Do Something"}
+						: "Log in to your account"}
 				</Link>
 			</section>
 		</RootTextLayout>

@@ -37,7 +37,7 @@ export const formInputs: IFormInputsProps[] = [
 ];
 export const authText = {
 	signIn: {
-		header: "Sign in to Vimnotes",
+		header: "Welcome Back!",
 		forgot: "Forgot your password?",
 		noAcc: "Don't have an account?",
 		linkBtnText: "Create now",
