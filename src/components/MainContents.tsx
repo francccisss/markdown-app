@@ -5,6 +5,7 @@ import React, {
 	useCallback,
 	useContext,
 	useEffect,
+	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -28,7 +29,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const [activeLogoutModal, setActiveLogoutModal] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
 	const [editorActive, setEditorActive] = useState(true);
-
 	const previousNoteContents = useRef<undefined | string>();
 	const noteIDRef = useRef(undefined);
 	const sideBarRef = useRef<HTMLDivElement>() as any;
@@ -88,7 +88,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
-		console.log(noteRef);
 		try {
 			if (auth.currentUser) {
 				const noteDocumentRef = doc(
@@ -106,7 +105,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			}
 		} catch (err) {
 			console.log(err);
-			console.log("unable to delete note document:" + noteRef.id);
 		}
 	}
 
@@ -133,7 +131,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 						contents: noteRef.contents,
 						lastUpdated: new Date(),
 					});
-					console.log(`current note is saved: ${noteRef.id}`);
 					setIsSaving(false);
 					return;
 				}
@@ -142,7 +139,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 				throw err;
 			}
 		}
-		console.log("the same");
 	}
 
 	async function redirectToExistingNotes(): Promise<void> {
@@ -164,7 +160,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	function keyboardShortcuts(e: React.KeyboardEvent): void {
 		if (e.ctrlKey && e.code == "KeyS") {
 			e.preventDefault();
-			mainRef.current.focus();
+			console.log("saved");
 			writeNote();
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {

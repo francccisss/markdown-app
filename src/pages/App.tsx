@@ -13,7 +13,6 @@ const App = () => {
 	async function getFetchedNotes(): Promise<void> {
 		try {
 			const fetchedNotes = (await fetchUserNotesLoader()) as INote[];
-			console.log(fetchedNotes);
 			setNotes([...fetchedNotes]);
 			return;
 		} catch (err) {

@@ -27,22 +27,18 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
 				const target = e.target as Element;
 				switch (e.key) {
 					case "G": {
-						console.log("bottom scrolled");
 						target.scrollTo({ top: 99999 });
 						break;
 					}
 					case "g": {
-						console.log("bottom scrolled");
 						target.scrollTo({ top: 0 });
 						break;
 					}
 					case "j": {
-						console.log("scoll by 20");
 						target.scrollBy({ top: 50, behavior: "smooth" });
 						break;
 					}
 					case "k": {
-						console.log("scoll by 20");
 						target.scrollBy({ top: -50, behavior: "smooth" });
 						break;
 					}
