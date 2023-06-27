@@ -6,11 +6,13 @@ import RootAuth from "@/pages/RootAuth";
 import { createBrowserRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
+import MaintenancePage from "@/pages/MaintenancePage";
 
 export const ROUTES = createBrowserRouter([
 	{
 		path: "/",
 		element: <RootAuth />,
+		errorElement: <MaintenancePage />,
 		children: [
 			{
 				path: "sign-up",

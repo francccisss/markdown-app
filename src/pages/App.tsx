@@ -4,11 +4,13 @@ import { fetchUserNotesLoader } from "@/loader/fetchUserNotes";
 import { auth } from "@/utils/contexts/firebaseContext";
 import { INote } from "@/utils/types/Note";
 import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
 	const [notes, setNotes] = useState<INote[]>([]);
 	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
 
 	async function getFetchedNotes(): Promise<void> {
 		try {
@@ -28,6 +30,8 @@ const App = () => {
 					setLoading(false);
 				});
 				return;
+			} else {
+				navigate("/");
 			}
 		});
 	}, []);
