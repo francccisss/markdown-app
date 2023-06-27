@@ -24,8 +24,6 @@ function convertTimeStampDate(dateObject: {
 }
 
 export async function fetchUserNotesLoader(): Promise<Array<DocumentData>> {
-	console.log("called");
-	let retries = 4;
 	try {
 		const userNoteCollectionRef = collection(
 			db,
@@ -39,8 +37,6 @@ export async function fetchUserNotesLoader(): Promise<Array<DocumentData>> {
 		);
 		const userNotes = await getDocs(queryCollection);
 		const mapNoteDocument = userNotes.docs.map((doc) => {
-			const dateAdded = doc.data().dateAdded;
-			// console.log(timeStamp.toDate());
 			return {
 				...doc.data(),
 				dateAdded: convertTimeStampDate(doc.data().dateAdded),

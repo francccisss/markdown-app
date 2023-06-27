@@ -2,7 +2,6 @@
 // we wont have access to electron/nodejs methods
 // const shell = typeof window === "object" ? require("electron").shell : null;
 const isBrowser = typeof window;
-console.log(isBrowser);
 
 import { useEffect, useRef } from "react";
 
