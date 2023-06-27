@@ -12,7 +12,6 @@ export const ROUTES = createBrowserRouter([
 	{
 		path: "/",
 		element: <RootAuth />,
-		errorElement: <ErrorPage code="404" />,
 		children: [
 			{
 				path: "sign-up",
@@ -25,16 +24,20 @@ export const ROUTES = createBrowserRouter([
 		],
 	},
 	{
+		path: "*",
+		element: <ErrorPage code="404" />,
+	},
+	{
 		path: "/app",
-		errorElement: <ErrorPage code="404" />,
 		element: <App />,
 		shouldRevalidate: () => false,
 		children: [
 			{
+				path: "*",
+				element: <ErrorPage code="404" text="Unable to resolve url" />,
+			},
+			{
 				path: ":noteID",
-				errorElement: (
-					<ErrorPage code="404" text="Unable to resolve user note" />
-				),
 				element: <Note />,
 			},
 			{
