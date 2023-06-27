@@ -1,7 +1,7 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./note.scss";
 import { INote } from "@/utils/types/Note";
 import { Vim } from "@replit/codemirror-vim";

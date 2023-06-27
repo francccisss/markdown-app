@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import React, {
-	LegacyRef,
 	useCallback,
 	useContext,
 	useEffect,
@@ -85,7 +84,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 	}
 
-	async function deleteNote(e: React.MouseEvent): Promise<void> {
+	async function deleteNote(): Promise<void> {
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
@@ -130,7 +129,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 						"notes",
 						noteRef.id
 					);
-					const updateNote = await updateDoc(noteDocRef, {
+					await updateDoc(noteDocRef, {
 						contents: noteRef.contents,
 						lastUpdated: new Date(),
 					});
@@ -227,7 +226,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			tabIndex={0}
 			autoFocus
 			onKeyDown={keyboardShortcuts}
-			onClick={(e) => {
+			onClick={() => {
 				setNavbarActionsActive(false);
 				setNoteModalActive(false);
 				setActiveLogoutModal(false);

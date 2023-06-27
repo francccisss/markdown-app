@@ -1,8 +1,7 @@
 import AuthContents from "@/components/AuthContents";
-import LoadingScreen from "@/components/LoadingScreen";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
-import { doc, collection, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useState, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "../assets/styles/rootAuth.scss";
