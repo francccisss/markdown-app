@@ -23,7 +23,7 @@ const SignIn = () => {
 			setIsSigningUp(true);
 			try {
 				await setPersistence(auth, browserLocalPersistence);
-				const signIn = await signInWithEmailAndPassword(
+				await signInWithEmailAndPassword(
 					auth,
 					formEntries.email.toString(),
 					formEntries.password.toString()
@@ -38,7 +38,7 @@ const SignIn = () => {
 
 	function showError(
 		e: React.InvalidEvent<HTMLFormElement>,
-		{ email, password, passConf }: IFormEntries
+		{ email, password }: IFormEntries
 	): boolean {
 		const formElement = e.target;
 
