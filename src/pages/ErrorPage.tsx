@@ -1,12 +1,26 @@
 import ErrorPageLayout from "@/components/ErrorPageLayout";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ErrorPage = ({
+	redirect,
 	code = "404",
 	text,
 }: {
 	code?: string;
 	text?: string;
+	redirect?: boolean;
 }) => {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (redirect) {
+			setTimeout(() => {
+				navigate("/");
+			}, 3000);
+		}
+	}, []);
+
 	return (
 		<ErrorPageLayout>
 			<div className="grid place-items-center text-vn-white">

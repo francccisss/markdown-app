@@ -24,21 +24,16 @@ export const ROUTES = createBrowserRouter([
 		],
 	},
 	{
-		path: "*",
-		element: <ErrorPage code="404" />,
-	},
-	{
 		path: "/app",
 		element: <App />,
 		shouldRevalidate: () => false,
 		children: [
 			{
-				path: "*",
-				element: <ErrorPage code="404" text="Unable to resolve url" />,
-			},
-			{
 				path: ":noteID",
 				element: <Note />,
+				errorElement: (
+					<ErrorPage redirect={true} text="Unable to resolve note" />
+				),
 			},
 			{
 				path: "empty-notes",
@@ -49,5 +44,9 @@ export const ROUTES = createBrowserRouter([
 				element: <VimnoteCheatSheet />,
 			},
 		],
+	},
+	{
+		path: "*",
+		element: <ErrorPage code="404" />,
 	},
 ]);
