@@ -31,9 +31,6 @@ export const ROUTES = createBrowserRouter([
 			{
 				path: ":noteID",
 				element: <Note />,
-				errorElement: (
-					<ErrorPage redirect={true} text="Unable to resolve note" />
-				),
 			},
 			{
 				path: "empty-notes",
@@ -42,6 +39,10 @@ export const ROUTES = createBrowserRouter([
 			{
 				path: "vim-cheatsheet",
 				element: <VimnoteCheatSheet />,
+			},
+			{
+				path: "*",
+				element: <ErrorPage code="404" redirect={true} />,
 			},
 		],
 	},
