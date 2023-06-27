@@ -24,8 +24,8 @@ Visit the site here: [Vimnotes](https://vimnotes.vercel.app/)
 
 
 ## Reason
-I've been using [Simplenote](https://simplenote.com/) for a year now and i've been loving it, but the problem is that i wanted to be able to  
-utilize simple vim key bindings for navigation and the godsent habit of typing `:w` to save a file while taking notes, so that's why  
+I've been using [Simplenote](https://simplenote.com/) for a year now and i've been loving it, but the problem is that i wanted to be able to
+utilize simple vim key bindings for navigation and the godsent habit of typing `:w` to save a file while taking notes, so that's why
 I built vimnotes for my own personal use.
 
 ## User data
