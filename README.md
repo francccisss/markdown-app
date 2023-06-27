@@ -9,7 +9,8 @@ Visit the site here: [Vimnotes](https://vimnotes.vercel.app/)
 
 ## Todo
 - [ ] opting to normal mode and vim mode *(for mobile users)*
-- [ ] Make user able to delete their account  
+- [ ] Make user able to delete their account
+- [ ] changing password and email
 - [ ] Support for desktop app *(electron and react router aren't in good terms apparently)*
 
 
