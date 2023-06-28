@@ -95,7 +95,7 @@ const AuthForm = ({
 						className="flex content-center justify-center mt-4 mb-4"
 					>
 						<Link
-							to={"/sign-in"}
+							to={"/forgot-password"}
 							className="hover:underline inline-block text-[#d9d9d970]"
 						>
 							{authText.signIn.forgot}

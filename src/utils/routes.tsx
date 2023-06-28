@@ -6,6 +6,7 @@ import RootAuth from "@/pages/RootAuth";
 import { createBrowserRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
+import PasswordRecovery from "@/components/auth/PasswordRecovery";
 
 export const ROUTES = createBrowserRouter([
 	{
@@ -19,6 +20,10 @@ export const ROUTES = createBrowserRouter([
 			{
 				path: "sign-in",
 				element: <SignIn />,
+			},
+			{
+				path: "forgot-password",
+				element: <PasswordRecovery />,
 			},
 		],
 	},
