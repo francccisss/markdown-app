@@ -7,6 +7,7 @@ import { createBrowserRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
 import PasswordRecovery from "@/components/auth/PasswordRecovery";
+import ErrorPage from "@/pages/ErrorPage";
 
 export const ROUTES = createBrowserRouter([
 	{
@@ -44,6 +45,14 @@ export const ROUTES = createBrowserRouter([
 				path: "vim-cheatsheet",
 				element: <VimnoteCheatSheet />,
 			},
+			{
+				path: "*",
+				element: <ErrorPage code="404" redirect={true} />,
+			},
 		],
+	},
+	{
+		path: "*",
+		element: <ErrorPage code="404" />,
 	},
 ]);
