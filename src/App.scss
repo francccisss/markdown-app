@@ -102,3 +102,12 @@ input[type="search"]::-webkit-search-cancel-button {
 			brightness(102%) contrast(90%);
 	}
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+	color: white;
+	-webkit-text-fill-color: white;
+	-webkit-box-shadow: none;
+	transition: background-color 10000s ease-in-out 0s;
+}
