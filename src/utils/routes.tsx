@@ -32,10 +32,21 @@ export const ROUTES = createBrowserRouter([
 		path: "/app",
 		element: <App />,
 		shouldRevalidate: () => false,
+		errorElement: <ErrorPage code="404" redirect={true} />,
 		children: [
 			{
 				path: ":noteID",
 				element: <Note />,
+				errorElement: <ErrorPage code="404" redirect={true} />,
+				loader: ({ request, params }) => {
+					let trimUrl = request.url.slice(-16);
+					console.log(params);
+					if (trimUrl !== params.noteID) {
+						console.log("redirect");
+						throw new Response("Not Found", { status: 404 });
+					}
+					return null;
+				},
 			},
 			{
 				path: "empty-notes",
@@ -45,14 +56,10 @@ export const ROUTES = createBrowserRouter([
 				path: "vim-cheatsheet",
 				element: <VimnoteCheatSheet />,
 			},
-			{
-				path: "*",
-				element: <ErrorPage code="404" redirect={true} />,
-			},
 		],
 	},
 	{
 		path: "*",
-		element: <ErrorPage code="404" />,
+		element: <ErrorPage code="404" redirect={true} />,
 	},
 ]);
