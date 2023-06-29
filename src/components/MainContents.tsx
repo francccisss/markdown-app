@@ -1,11 +1,10 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import NoteItem from "@/components/NoteItem";
 import React, {
 	useCallback,
 	useContext,
 	useEffect,
-	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -20,6 +19,7 @@ import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
 const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { auth, db } = useContext(FirebaseContext);
 	const [searchInput, setSearchInput] = useState<string>("");
 	const [notes, setNotes] = useState<INote[]>(fetchedNotes);
@@ -173,7 +173,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 			e.preventDefault();
 			mainRef.current.focus();
 			if (
-				window.location.pathname === "/app/vim-cheatsheet" &&
+				location.pathname === "/app/vim-cheatsheet" &&
 				notes.length !== 0
 			) {
 				return navigate(-1);
@@ -196,8 +196,8 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		}
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyJ") {
 			e.preventDefault();
-			addNote();
 			setEditorActive(true);
+			addNote();
 			navigate(`/app/${notes[0].id}`);
 		}
 	}
