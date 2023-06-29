@@ -112,9 +112,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		const noteRef = notes.find(
 			(note) => note.id === noteIDRef.current
 		) as INote;
-		// saving the previous contents from last save, and checking the current contents of a note
-		// if they are the same with the old contents so that we users dont push the same contents
-		// to save write cost on database
 		if (previousNoteContents.current !== noteRef.contents) {
 			previousNoteContents.current = noteRef.contents;
 			try {
@@ -200,6 +197,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 		if (e.ctrlKey && e.shiftKey && e.code == "KeyJ") {
 			e.preventDefault();
 			addNote();
+			setEditorActive(true);
 			navigate(`/app/${notes[0].id}`);
 		}
 	}
