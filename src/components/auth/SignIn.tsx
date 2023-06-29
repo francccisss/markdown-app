@@ -1,5 +1,5 @@
 import AuthForm from "@/components/auth/AuthForm";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import { IFormEntries } from "@/utils/types/FormEntries";
 import {
@@ -7,11 +7,13 @@ import {
 	setPersistence,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useLocation } from "react-router-dom";
 
 const SignIn = () => {
 	const { db, auth } = useContext(FirebaseContext);
 	const [error, setError] = useState<string>("");
 	const [isSigninUp, setIsSigningUp] = useState(false);
+	const location = useLocation();
 
 	async function signInUser(
 		e: React.InvalidEvent<HTMLFormElement>
@@ -35,6 +37,10 @@ const SignIn = () => {
 			}
 		}
 	}
+	useEffect(() => {
+		console.log("sign in component: " + window.location.pathname);
+		console.log(location);
+	}, [window.location.pathname]);
 
 	function showError(
 		e: React.InvalidEvent<HTMLFormElement>,
@@ -62,7 +68,7 @@ const SignIn = () => {
 				setError={setError}
 				handleSubmit={signInUser}
 				error={error}
-				action={window.location.pathname}
+				action={location.pathname}
 			/>
 		</>
 	);

@@ -12,27 +12,29 @@ const RootAuth = () => {
 	const [isSignedIn, setIsSignedIn] = useState(false);
 
 	useEffect(() => {
-		setIsSignedIn(true);
-		onAuthStateChanged(auth, async (user) => {
-			if (user && (await checkIfUserExists(user))) {
-				navigate("/app");
-				setIsSignedIn(false);
-			} else if (user === null) {
-				navigate("/sign-in");
-				auth.currentUser ? deleteUser(auth.currentUser) : 0;
-				setIsSignedIn(false);
-			}
-		});
+		navigate("/sign-in");
+		// setIsSignedIn(true);
+		// onAuthStateChanged(auth, async (user) => {
+		// 	if (user) {
+		// 		// await checkIfUserExists(user);
+		// 		setIsSignedIn(false);
+		// 		navigate("/app");
+		// 	} else {
+		// 		setIsSignedIn(false);
+		// 		navigate("/sign-in");
+		// 	}
+		// });
 	}, []);
 
-	async function checkIfUserExists(user: User): Promise<boolean> {
+	async function checkIfUserExists(user: User): Promise<void> {
 		try {
 			const useRef = doc(db, "users", user.uid);
-			const userDoc = await getDoc(useRef);
-			return userDoc.exists() ? true : false;
+			await getDoc(useRef);
+			navigate("/app");
+			// return userDoc.exists() ? true : false;
 		} catch (err) {
 			console.log(err);
-			return false;
+			// return false;
 		}
 	}
 

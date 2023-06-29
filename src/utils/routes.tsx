@@ -3,24 +3,24 @@ import VimnoteCheatSheet from "@/components/VimnoteCheatSheet";
 import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createHashRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
 import PasswordRecovery from "@/components/auth/PasswordRecovery";
 import ErrorPage from "@/pages/ErrorPage";
 
-export const ROUTES = createBrowserRouter([
+export const ROUTES = createHashRouter([
 	{
 		path: "/",
 		element: <RootAuth />,
 		children: [
 			{
-				path: "sign-up",
-				element: <SignUp />,
-			},
-			{
 				path: "sign-in",
 				element: <SignIn />,
+			},
+			{
+				path: "sign-up",
+				element: <SignUp />,
 			},
 			{
 				path: "forgot-password",
@@ -34,6 +34,11 @@ export const ROUTES = createBrowserRouter([
 		shouldRevalidate: () => false,
 		errorElement: <ErrorPage code="404" redirect={true} />,
 		children: [
+			{
+				index: true,
+				element: <ErrorPage code="404" redirect={true} />,
+			},
+
 			{
 				path: ":noteID",
 				element: <Note />,
