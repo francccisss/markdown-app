@@ -1,10 +1,3 @@
 {
-	"routes": [
-		{ "src": "/[^.]+", "dest": "/", "status": 200 },
-		{
-			"src": "/app",
-			"dest": "https://vercel.com/docs/concepts/projects/project-configuration#redirects",
-			"status": 200
-		}
-	]
+	"routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
 }
