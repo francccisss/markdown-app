@@ -54,8 +54,8 @@ export interface IAuthProps {
 	action: string;
 }
 
-export function showRelevantInputs(): IFormInputsProps[] {
-	if (window.location.pathname === "/sign-in") {
+export function showRelevantInputs(location: string): IFormInputsProps[] {
+	if (location === "/sign-in") {
 		const filterInputs = formInputs.filter(
 			(input) => input.id !== "passConf"
 		);
