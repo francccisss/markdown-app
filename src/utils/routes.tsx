@@ -32,12 +32,28 @@ export const ROUTES = createHashRouter([
 		path: "/app",
 		element: <App />,
 		shouldRevalidate: () => false,
-		errorElement: <ErrorPage code="404" redirect={true} />,
+		errorElement: <ErrorPage code="404" redirect={true} path="/app" />,
 		children: [
 			{
 				path: ":noteID",
 				element: <Note />,
+				errorElement: (
+					<ErrorPage
+						code="Note Doesn't Exist"
+						text="Oops! the note your trying to read doesn't exist."
+					/>
+				),
+				loader: ({ request, params }) => {
+					let trimUrl = request.url.slice(-16);
+					console.log(params);
+					if (trimUrl !== params.noteID) {
+						console.log("redirect");
+						throw new Response("Not Found", { status: 404 });
+					}
+					return null;
+				},
 			},
+
 			{
 				path: "empty-notes",
 				element: <EmptyNotes />,
@@ -47,8 +63,8 @@ export const ROUTES = createHashRouter([
 				element: <VimnoteCheatSheet />,
 			},
 			{
-				path: "*",
-				element: <ErrorPage code="404" redirect={true} />,
+				index: true,
+				element: <EmptyNotes />,
 			},
 		],
 	},
