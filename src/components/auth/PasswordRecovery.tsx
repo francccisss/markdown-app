@@ -47,7 +47,7 @@ const PasswordRecovery = () => {
 					className="absolute top-[-8%] left-0 text-xs "
 				>
 					<p className="text-vn-green">
-						Password recovery will be sent to you email address
+						Password recovery will be sent to your email address shortly.
 					</p>
 				</span>
 			)}
