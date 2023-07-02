@@ -40,7 +40,6 @@ export const ROUTES = createBrowserRouter([
 				errorElement: <ErrorPage code="404" redirect={true} />,
 				loader: ({ request, params }) => {
 					let trimUrl = request.url.slice(-16);
-					console.log(params);
 					if (trimUrl !== params.noteID) {
 						console.log("redirect");
 						throw new Response("Not Found", { status: 404 });

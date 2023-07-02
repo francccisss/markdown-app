@@ -31,7 +31,7 @@ const SignIn = () => {
 			} catch (err) {
 				setIsSigningUp(false);
 				setError("*invalid email and password");
-				console.log(err);
+				throw err;
 			}
 		}
 	}

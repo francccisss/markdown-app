@@ -1,13 +1,12 @@
 import AuthForm from "@/components/auth/AuthForm";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
 import {
 	User,
 	createUserWithEmailAndPassword,
 	deleteUser,
-	onAuthStateChanged,
 } from "firebase/auth";
-import { collection, setDoc, addDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { IFormEntries } from "@/utils/types/FormEntries";
 
 const SignUp = () => {
@@ -61,7 +60,7 @@ const SignUp = () => {
 
 	function showError(
 		e: React.InvalidEvent<HTMLFormElement>,
-		{ email, password, passConf }: IFormEntries
+		{ password, passConf }: IFormEntries
 	): boolean {
 		const formElement = e.target;
 
