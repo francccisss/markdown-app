@@ -8,9 +8,10 @@ Visit the site here: [Vimnotes](https://vimnotes.vercel.app/)
 - [x] Keyboard shortcut for navigating 
 
 ## Todo
-- [ ] opting to normal mode and vim mode *(for mobile users)*
+- [ ] Opting to normal mode and vim mode *(for mobile users)*
 - [ ] Make user able to delete their account
-- [ ] changing password and email
+- [ ] Changing password and email
+- [x] Password recovery
 - [ ] Support for desktop app *(electron and react router aren't in good terms apparently)*
 
 

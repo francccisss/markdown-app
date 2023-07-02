@@ -31,7 +31,7 @@ const AuthForm = ({
 		}
 	}
 	const mapFormInputs: () => React.ReactNode = function () {
-		return showRelevantInputs().map((input) => {
+		return showRelevantInputs(action).map((input) => {
 			return (
 				<div key={input.id} className="inputs-container flex flex-col ">
 					<label

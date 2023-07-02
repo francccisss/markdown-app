@@ -15,12 +15,11 @@ const RootAuth = () => {
 		setIsSignedIn(true);
 		onAuthStateChanged(auth, async (user) => {
 			if (user && (await checkIfUserExists(user))) {
+				setIsSignedIn(false);
 				navigate("/app");
+			} else {
 				setIsSignedIn(false);
-			} else if (user === null) {
 				navigate("/sign-in");
-				auth.currentUser ? deleteUser(auth.currentUser) : 0;
-				setIsSignedIn(false);
 			}
 		});
 	}, []);
@@ -29,6 +28,7 @@ const RootAuth = () => {
 		try {
 			const useRef = doc(db, "users", user.uid);
 			const userDoc = await getDoc(useRef);
+			navigate("/app");
 			return userDoc.exists() ? true : false;
 		} catch (err) {
 			console.log(err);

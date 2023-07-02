@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import RootTextLayout from "./RootTextLayout";
 const WelcomeText = () => {
+	const location = useLocation();
 	return (
 		<RootTextLayout>
 			<section id="welcome-text" className="">
@@ -16,14 +17,10 @@ const WelcomeText = () => {
 					</p>
 				</div>
 				<Link
-					to={
-						window.location.pathname === "/sign-in"
-							? "/sign-up"
-							: "/sign-in"
-					}
+					to={location.pathname === "/sign-in" ? "/sign-up" : "/sign-in"}
 					className="z-0 hover:bg-[#7086FF] box-border ease-out duration-150 transition-all grow-0 font-bold text-[#ffffff] bg-vn-blue px-10 py-4 text-lg inline-block mt-[19px] drop-shadow-md"
 				>
-					{window.location.pathname === "/sign-in"
+					{location.pathname === "/sign-in"
 						? "Create account"
 						: "Log in to your account"}
 				</Link>

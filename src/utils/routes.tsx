@@ -3,24 +3,24 @@ import VimnoteCheatSheet from "@/components/VimnoteCheatSheet";
 import Note from "@/components/note/Note";
 import App from "@/pages/App";
 import RootAuth from "@/pages/RootAuth";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createHashRouter } from "react-router-dom";
 import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
 import PasswordRecovery from "@/components/auth/PasswordRecovery";
 import ErrorPage from "@/pages/ErrorPage";
 
-export const ROUTES = createBrowserRouter([
+export const ROUTES = createHashRouter([
 	{
 		path: "/",
 		element: <RootAuth />,
 		children: [
 			{
-				path: "sign-up",
-				element: <SignUp />,
-			},
-			{
 				path: "sign-in",
 				element: <SignIn />,
+			},
+			{
+				path: "sign-up",
+				element: <SignUp />,
 			},
 			{
 				path: "forgot-password",
@@ -32,12 +32,17 @@ export const ROUTES = createBrowserRouter([
 		path: "/app",
 		element: <App />,
 		shouldRevalidate: () => false,
-		errorElement: <ErrorPage code="404" redirect={true} />,
+		errorElement: <ErrorPage code="404" redirect={true} path="/app" />,
 		children: [
 			{
 				path: ":noteID",
 				element: <Note />,
-				errorElement: <ErrorPage code="404" redirect={true} />,
+				errorElement: (
+					<ErrorPage
+						code="Note Doesn't Exist"
+						text="Oops! the note your trying to read doesn't exist."
+					/>
+				),
 				loader: ({ request, params }) => {
 					let trimUrl = request.url.slice(-16);
 					if (trimUrl !== params.noteID) {
@@ -47,6 +52,7 @@ export const ROUTES = createBrowserRouter([
 					return null;
 				},
 			},
+
 			{
 				path: "empty-notes",
 				element: <EmptyNotes />,
@@ -54,6 +60,10 @@ export const ROUTES = createBrowserRouter([
 			{
 				path: "vim-cheatsheet",
 				element: <VimnoteCheatSheet />,
+			},
+			{
+				index: true,
+				element: <EmptyNotes />,
 			},
 		],
 	},

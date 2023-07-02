@@ -8,11 +8,13 @@ import {
 } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { IFormEntries } from "@/utils/types/FormEntries";
+import { useLocation } from "react-router-dom";
 
 const SignUp = () => {
 	const [error, setError] = useState<string>("");
 	const { db, auth } = useContext(FirebaseContext);
 	const [isSigninUp, setIsSigningUp] = useState(false);
+	const location = useLocation();
 
 	async function setUserInDatabase(user: User | null) {
 		if (user === null) {
@@ -32,6 +34,10 @@ const SignUp = () => {
 			}
 		}
 	}
+	useEffect(() => {
+		console.log("sign in component: " + window.location.pathname);
+		console.log(location);
+	}, [window.location.pathname]);
 
 	async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -81,7 +87,7 @@ const SignUp = () => {
 				setError={setError}
 				handleSubmit={signUpUser}
 				error={error}
-				action={window.location.pathname}
+				action={location.pathname}
 			/>
 		</>
 	);
