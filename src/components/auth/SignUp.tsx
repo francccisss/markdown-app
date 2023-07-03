@@ -34,11 +34,6 @@ const SignUp = () => {
 			}
 		}
 	}
-	useEffect(() => {
-		console.log("sign in component: " + window.location.pathname);
-		console.log(location);
-	}, [window.location.pathname]);
-
 	async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const form = new FormData(e.currentTarget);

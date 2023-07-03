@@ -10,7 +10,7 @@ import {
 import { useLocation } from "react-router-dom";
 
 const SignIn = () => {
-	const { db, auth } = useContext(FirebaseContext);
+	const { auth } = useContext(FirebaseContext);
 	const [error, setError] = useState<string>("");
 	const [isSigninUp, setIsSigningUp] = useState(false);
 	const location = useLocation();
@@ -37,10 +37,6 @@ const SignIn = () => {
 			}
 		}
 	}
-	useEffect(() => {
-		console.log("sign in component: " + window.location.pathname);
-		console.log(location);
-	}, [window.location.pathname]);
 
 	function showError(
 		e: React.InvalidEvent<HTMLFormElement>,
