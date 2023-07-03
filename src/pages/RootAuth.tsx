@@ -28,7 +28,6 @@ const RootAuth = () => {
 		try {
 			const useRef = doc(db, "users", user.uid);
 			const userDoc = await getDoc(useRef);
-			navigate("/app");
 			return userDoc.exists() ? true : false;
 		} catch (err) {
 			console.log(err);
