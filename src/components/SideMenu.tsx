@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import UserActions from "./UserActions";
 import React, { SetStateAction, useState } from "react";
-import setComponentActivity from "@/utils/SetComponentActivity";
 
 interface ISideMenuProps {
 	activeModal: boolean;
@@ -130,7 +129,7 @@ const SideMenu = ({
 			<button
 				onClick={(e) => {
 					e.stopPropagation();
-					setComponentActivity(activeModal, setActiveModal);
+					setActiveModal((prev) => (prev ? false : true));
 				}}
 				id="logout"
 				className={actionsStyle}

@@ -1,4 +1,3 @@
-import setComponentActivity from "@/utils/SetComponentActivity";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import NavbarActions from "./navbar-actions/NavbarActions";
 import logo from "../assets/img/logo.png";
@@ -24,7 +23,7 @@ const Navbar = ({ navActionSetter, navActionState }: INavbarProps) => {
 					<button
 						onClick={(e) => {
 							e.stopPropagation();
-							setComponentActivity(navActionState, navActionSetter);
+							navActionSetter((prev) => (prev ? false : true));
 						}}
 						id="note-actions-btn"
 						className="btn-actions w-[25px] h-[25px] inline-block"
