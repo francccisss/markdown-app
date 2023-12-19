@@ -14,7 +14,6 @@ const RootAuth = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location);
     setIsSignedIn(true);
     onAuthStateChanged(auth, async (user) => {
       if (user && (await checkIfUserExists(user))) {
@@ -51,7 +50,7 @@ const RootAuth = () => {
         className="z-10 max-lg:w-[50%]  lg:w-5/12 2xl:w-4/12 bg-vn-black flex items-center justify-center "
       >
         {!isSignedIn ? (
-          <>{window.location.pathname === "/" ? <SignIn /> : <Outlet />}</>
+          <>{location.pathname === "/" ? <SignIn /> : <Outlet />}</>
         ) : (
           <span id="loading-spinner" className="loading-spinner" />
         )}
