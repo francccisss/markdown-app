@@ -1,43 +1,43 @@
 .sidebar-inactive {
-	transition: all 100ms ease-in-out;
-	width: 0%;
-	box-shadow: none;
-	#notes-list {
-		display: none;
-		opacity: 0;
-	}
-	#sidebar-actions {
-		border: none;
-		display: none;
-	}
+  transition: all 100ms ease-in-out;
+  width: 0%;
+  box-shadow: none;
+  #notes-list {
+    display: none;
+    opacity: 0;
+  }
+  #sidebar-actions {
+    border: none;
+    display: none;
+  }
 }
 
 @keyframes notelistActiveAnim {
-	from {
-		overflow: hidden;
-		display: none;
-		opacity: 0;
-	}
-	to {
-		display: block;
-		overflow-y: auto;
-		overflow-x: hidden;
-		opacity: 1;
-	}
+  from {
+    overflow: hidden;
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 1;
+  }
 }
 
 .sidebar-active {
-	transition: all 150ms ease-in-out;
-	width: 350px;
-	box-shadow: 0px 2px 5px 2px rgba($color: #000000, $alpha: 0.2);
-	#notes-list,
-	input {
-		animation: notelistActiveAnim 150ms forwards ease-in-out;
-	}
-	#sidebar-actions {
-		display: flex;
-		button {
-			display: block;
-		}
-	}
+  transition: all 150ms ease-in-out;
+  width: 350px;
+  box-shadow: 0px 2px 5px 2px rgba($color: #000000, $alpha: 0.2);
+  #notes-list,
+  input {
+    animation: notelistActiveAnim 150ms forwards ease-in-out;
+  }
+  #sidebar-actions {
+    display: flex;
+    button {
+      display: block;
+    }
+  }
 }
