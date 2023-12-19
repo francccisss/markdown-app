@@ -1,14 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import NoteItem from "@/components/NoteItem";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import SidebarActions from "@/components/SidebarActions";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
 import { INote } from "@/utils/types/Note";
@@ -21,36 +13,16 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { auth, db } = useContext(FirebaseContext);
-  const [searchInput, setSearchInput] = useState<string>("");
   const [notes, setNotes] = useState<INote[]>(fetchedNotes);
   const [noteModalActive, setNoteModalActive] = useState(false);
   const [navBarActionsActive, setNavbarActionsActive] = useState(false);
-  const [searchedNotes, setSearchedNotes] = useState(notes);
   const [activeLogoutModal, setActiveLogoutModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editorActive, setEditorActive] = useState(true);
   const previousNoteContents = useRef<undefined | string>();
   const noteIDRef = useRef(undefined);
   const sideBarRef = useRef<HTMLDivElement>() as any;
-  const searchBarRef = useRef<HTMLInputElement>(null) as any;
   const mainRef = useRef<HTMLDivElement>(null) as any;
-
-  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>): void {
-    setSearchInput(e.target.value);
-  }
-
-  const searchQuery = useCallback(
-    (input: string, notesArr: Array<INote>) => {
-      if (input !== "") {
-        const filterNotes = notesArr.filter((note) =>
-          note.contents.includes(input)
-        );
-        return setSearchedNotes(filterNotes);
-      }
-      return setSearchedNotes(searchedNotes);
-    },
-    [notes]
-  );
 
   function infoModal(e: React.MouseEvent): void {
     e.stopPropagation();
@@ -177,20 +149,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
       }
       navigate("/app/vim-cheatsheet");
     }
-    if (e.ctrlKey && e.shiftKey && e.code == "KeyF") {
-      e.preventDefault();
-      const sideBarActive = sideBarRef.current.classList.contains(
-        "sidebar-active"
-      )
-        ? true
-        : false;
-      if (sideBarActive) {
-        searchBarRef.current.focus();
-      } else {
-        sideBarActivitiy();
-        searchBarRef.current.focus();
-      }
-    }
     if (e.ctrlKey && e.shiftKey && e.code == "KeyJ") {
       e.preventDefault();
       setEditorActive(true);
@@ -204,11 +162,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }, [editorActive]);
 
   useEffect(() => {
-    searchQuery(searchInput, notes);
-  }, [searchInput]);
-
-  useEffect(() => {
-    setSearchedNotes(notes);
     redirectToExistingNotes();
   }, [notes]);
   return (
@@ -239,18 +192,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
           activeModal={activeLogoutModal}
           setActiveModal={setActiveLogoutModal}
         />
-        <Sidebar
-          sideBarRef={sideBarRef}
-          notes={notes}
-          searchedNotes={searchedNotes}
-        >
-          <SidebarActions
-            searchBarRef={searchBarRef}
-            searchInput={searchInput}
-            handleInput={handleSearchInput}
-            addNote={addNote}
-          />
-        </Sidebar>
+        <Sidebar sideBarRef={sideBarRef} notes={notes} addNote={addNote} />
         <Outlet
           context={{
             isSaving,
