@@ -8,6 +8,7 @@ import SignIn from "@/components/auth/SignIn";
 import SignUp from "@/components/auth/SignUp";
 import PasswordRecovery from "@/components/auth/PasswordRecovery";
 import ErrorPage from "@/pages/ErrorPage";
+import { fetchUserNotesLoader } from "@/loader/fetchUserNotes";
 
 export const ROUTES = createHashRouter([
   {
