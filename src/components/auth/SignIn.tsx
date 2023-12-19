@@ -1,13 +1,13 @@
 import AuthForm from "@/components/auth/AuthForm";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { FirebaseContext } from "@/utils/contexts/firebaseContext";
-import { IFormEntries } from "@/utils/types/FormEntries";
 import {
   browserLocalPersistence,
   setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useLocation } from "react-router-dom";
+import { IFormEntries } from "@/utils/types/FormEntries";
 
 const SignIn = () => {
   const { auth } = useContext(FirebaseContext);
@@ -20,7 +20,9 @@ const SignIn = () => {
   ): Promise<void> {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const formEntries = Object.fromEntries(form.entries());
+    const formEntries = Object.fromEntries(
+      form.entries()
+    ) as unknown as IFormEntries;
     if (showError(e, formEntries)) {
       setIsSigningUp(true);
       try {

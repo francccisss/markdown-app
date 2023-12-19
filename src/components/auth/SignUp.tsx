@@ -37,7 +37,9 @@ const SignUp = () => {
   async function signUpUser(e: React.InvalidEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const formEntries = Object.fromEntries(form.entries());
+    const formEntries = Object.fromEntries(
+      form.entries()
+    ) as unknown as IFormEntries;
     if (showError(e, formEntries)) {
       setIsSigningUp(true);
       try {
