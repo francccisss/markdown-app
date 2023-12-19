@@ -1,3 +1,5 @@
 export interface IFormEntries {
-	[k: string]: FormDataEntryValue;
+  password: string;
+  email: string;
+  passConf: string;
 }

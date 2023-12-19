@@ -1,73 +1,80 @@
 #markdown-preview {
-	color: rgb(223, 223, 223);
-	background-color: #2d2f33 !important;
-	li {
-		list-style-type: disc;
-	}
-	p {
-		font-size: 0.9rem;
-	}
-	pre {
-		background-color: #ffffff15;
-		padding: 0.8em !important;
-	}
-	blockquote {
-		border-left-color: #6b7ff2;
-		color: #d9d9d980;
-	}
-	h1 {
-		font-weight: 600 !important;
-		font-size: 1.8rem;
-	}
-	h2 {
-		font-size: 1.6rem;
-	}
-	h3 {
-		font-size: 1.4rem;
-	}
-	h4 {
-		font-size: 1.1rem;
-	}
-	h5 {
-		font-size: 1rem;
-	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5 {
-		border: none;
-		font-weight: 800;
-	}
-	a {
-		color: #6b7ff2;
-	}
-	td,
-	th,
-	tr {
-		background-color: transparent !important;
-		color: #d9d9d9 !important;
-		border: #6b7ff2 2px solid !important;
-	}
-	td {
-		max-width: 500px;
-	}
-	th {
-		text-align: left;
-	}
+  color: rgb(223, 223, 223);
+  background-color: #2d2f33 !important;
+  ul:has(li):not(:has(input[type="checkbox"])) {
+    list-style-type: disc;
+  }
+  ol:has(li):has(ol),
+  ol:has(li):has(ul),
+  ul:has(li):has(ol),
+  ul:has(li):has(ul) {
+    padding: 0;
+  }
 
-	section.footnotes,
-	li[id^="user-content-fn-"] {
-		color: #d9d9d9;
-		::before {
-			border-color: #6b7ff2;
-		}
-	}
-	section.footnotes {
-		border-top: #d9d9d980 2px solid;
-	}
+  p {
+    font-size: 0.9rem;
+  }
+  pre {
+    background-color: #ffffff15;
+    padding: 0.8em !important;
+  }
+  blockquote {
+    border-left-color: #6b7ff2;
+    color: #d9d9d980;
+  }
+  h1 {
+    font-weight: 600 !important;
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    border: none;
+    font-weight: 800;
+  }
+  a {
+    color: #6b7ff2;
+  }
+  td,
+  th,
+  tr {
+    background-color: transparent !important;
+    color: #d9d9d9 !important;
+    border: #6b7ff2 2px solid !important;
+  }
+  td {
+    max-width: 500px;
+  }
+  th {
+    text-align: left;
+  }
+
+  section.footnotes,
+  li[id^="user-content-fn-"] {
+    color: #d9d9d9;
+    ::before {
+      border-color: #6b7ff2;
+    }
+  }
+  section.footnotes {
+    border-top: #d9d9d980 2px solid;
+  }
 }
 
 .pane {
-	border-right: #ffffff60 solid 2px;
+  border-right: #ffffff60 solid 2px;
 }
