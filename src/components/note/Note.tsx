@@ -36,8 +36,8 @@ const Note = () => {
 
   Vim.defineEx("write", "w", async () => {
     const filterNotes = notes.filter((note: INote) => note.id !== noteID);
-    setNotes([currentNote, ...filterNotes]);
     await writeNote();
+    setNotes([currentNote, ...filterNotes]);
   });
   Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
   Vim.defineEx("quit", "q", () => setEditorActive(false));

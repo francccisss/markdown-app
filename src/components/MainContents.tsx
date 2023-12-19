@@ -52,7 +52,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
       setIsSaving(false);
     } catch (err) {
       console.log("unable to add note ");
-      throw err;
     }
   }
 
@@ -101,7 +100,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
         }
       } catch (err) {
         console.log(err);
-        throw err;
       }
     }
   }
