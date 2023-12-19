@@ -4,13 +4,27 @@
   ul:has(li):not(:has(input[type="checkbox"])) {
     list-style-type: disc;
   }
-  ol:has(li):has(ol),
-  ol:has(li):has(ul),
-  ul:has(li):has(ol),
-  ul:has(li):has(ul) {
+
+  // applies 0 padding if there are no nested UL or OL
+  // within a list
+  ol:has(li):has(:not(ul)),
+  ul:has(li):has(:not(ol)),
+  ol:has(li):has(:not(ol)),
+  ul:has(li):has(:not(ul)) {
     padding: 0;
   }
 
+  hr {
+    background-color: #878a8c40;
+    height: 2px;
+  }
+  ul,
+  ol {
+    li > ol:first-of-type,
+    li > ul:first-of-type {
+      padding-left: 2em;
+    }
+  }
   p {
     font-size: 0.9rem;
   }
@@ -23,7 +37,7 @@
     color: #d9d9d980;
   }
   h1 {
-    font-weight: 600 !important;
+    // font-weight: 600 !important;
     font-size: 1.8rem;
   }
   h2 {
@@ -44,7 +58,7 @@
   h4,
   h5 {
     border: none;
-    font-weight: 800;
+    font-weight: 700;
   }
   a {
     color: #6b7ff2;
