@@ -1,10 +1,10 @@
 export const EmptyNotes = () => {
-  const spanContents = `flex justify-between mb-2 @[630px]:text-base text-sm`;
+  const spanContents = `flex justify-between mb-1 @[630px]:text-base text-sm`;
 
   return (
     <div className="@container bg-vn-dshade-black text-vn-dshade-white  flex flex-1 flex-col justify-center items-center">
       <p>Welcome to </p>
-      <h1 className="@[630px]:text-8xl text-7xl text-vn-blue uppercase font-bold">
+      <h1 className="@[630px]:text-8xl text-7xl @[200px]:text-6xl text-vn-blue uppercase font-bold">
         Vimnotes
       </h1>
       <div className="empty-notes-contents mt-2">

@@ -187,12 +187,14 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
         />
       </NavbarActionsContext.Provider>
       <section id="content-section" className="flex-1 flex h-[0%]">
-        <SideMenu
-          sideBarActivity={sideBarActivitiy}
-          activeModal={activeLogoutModal}
-          setActiveModal={setActiveLogoutModal}
-        />
-        <Sidebar sideBarRef={sideBarRef} notes={notes} addNote={addNote} />
+        <div className="max-[400px]:flex-col-reverse flex">
+          <SideMenu
+            sideBarActivity={sideBarActivitiy}
+            activeModal={activeLogoutModal}
+            setActiveModal={setActiveLogoutModal}
+          />
+          <Sidebar sideBarRef={sideBarRef} notes={notes} addNote={addNote} />
+        </div>
         <Outlet
           context={{
             isSaving,

@@ -14,14 +14,17 @@ const SideMenu = ({
   sideBarActivity,
 }: ISideMenuProps) => {
   const actionsStyle = `side-menu-actions border-l-[3px] border-l-[#00000000] w-10 p-2 h-fit block box-border bg-center transition-all duration-150 ease-in-out
-     hover:bg-vn-dshade-white3 `;
+     hover:bg-vn-dshade-white3`;
 
   return (
-    <div className=" side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-50  bg-vn-black border-r-[2px] border-separator-grey-line ">
-      <div id="upper-side-menu-actions" className="flex flex-col gap-2">
+    <div className="max-[400px]:w-full max-[400px]:h-[min-content] max-[400px]:py-0 max-[400px]:absolute max-[400px]:flex-row  side-menu h-full py-3 relative flex flex-col justify-between items-center text-vn-dshade-white w-10 z-50  bg-vn-black border-r-[2px] border-separator-grey-line ">
+      <div
+        id="upper-side-menu-actions"
+        className="max-[400px]:flex-row max-[400px]:items-center flex flex-col gap-2"
+      >
         <button onClick={sideBarActivity} className={actionsStyle}>
           <svg
-            viewBox="0 0 34 34"
+            viewBox="0 0 36 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
