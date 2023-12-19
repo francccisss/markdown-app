@@ -15,7 +15,7 @@ const UserActions = ({}) => {
         <button
           onClick={() => {
             signOut(auth).then(() => {
-              navigate("/sign-in");
+              navigate("/");
             });
           }}
           className="flex-1 text-start  hover:bg-vn-dshade-white3 transition-all duration-100 ease-in-out px-3 py-2 "
