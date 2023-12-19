@@ -14,10 +14,6 @@ export const ROUTES = createHashRouter([
     path: "/",
     element: <RootAuth />,
     children: [
-      // {
-      // 	path: "sign-in",
-      // 	element: <SignIn />,
-      // },
       {
         path: "sign-up",
         element: <SignUp />,
