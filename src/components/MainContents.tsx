@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { uid } from "uid";
@@ -10,6 +10,9 @@ import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
 const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
+  // noteID is used to get the reference of the current opened note
+
+  const { noteID } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { auth, db } = useContext(FirebaseContext);
@@ -20,7 +23,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [editorActive, setEditorActive] = useState(true);
   const previousNoteContents = useRef<undefined | string>();
-  const noteIDRef = useRef(undefined);
   const sideBarRef = useRef<HTMLDivElement>() as any;
   const mainRef = useRef<HTMLDivElement>(null) as any;
 
@@ -57,9 +59,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }
 
   async function deleteNote(): Promise<void> {
-    const noteRef = notes.find(
-      (note) => note.id === noteIDRef.current
-    ) as INote;
+    const noteRef = notes.find((note) => note.id === noteID) as INote;
     try {
       if (auth.currentUser) {
         const noteDocumentRef = doc(
@@ -81,9 +81,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }
 
   async function writeNote(): Promise<void> {
-    const noteRef = notes.find(
-      (note) => note.id === noteIDRef.current
-    ) as INote;
+    const noteRef = notes.find((note) => note.id === noteID) as INote;
     if (previousNoteContents.current !== noteRef.contents) {
       previousNoteContents.current = noteRef.contents;
       try {
@@ -198,7 +196,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
             isSaving,
             notes,
             setNotes,
-            noteIDRef,
+            // noteID,
             writeNote,
             noteModalActive,
             editorActive,

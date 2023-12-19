@@ -1,7 +1,7 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Editor from "../editor/Editor";
 import Preview from "../preview/Preview";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./note.scss";
 import { INote } from "@/utils/types/Note";
 import { Vim } from "@replit/codemirror-vim";
@@ -16,20 +16,22 @@ const Note = () => {
     isSaving,
     notes,
     setNotes,
-    noteIDRef,
     writeNote,
     noteModalActive,
     setEditorActive,
   } = useOutletContext() as IMainContentsContextType;
-  const [currentNote] = notes.filter((note: INote) => note.id === noteID);
+  const [currentNote, setCurrentNote] = useState<INote>({
+    ...notes.find((note) => note.id === noteID),
+  });
 
   function handleEditorOnChange(value: string): void {
     const editorMarkdownValue: string = value;
-    const updateNote = {
+    const updateNote: INote = {
       ...currentNote,
       contents: editorMarkdownValue,
     };
     const filterNotes = notes.filter((note: INote) => note.id !== noteID);
+    setCurrentNote({ ...updateNote });
     setNotes([updateNote, ...filterNotes]);
   }
 
@@ -38,7 +40,8 @@ const Note = () => {
   Vim.defineEx("quit", "q", () => setEditorActive(false));
 
   useEffect(() => {
-    noteIDRef.current = noteID?.toString();
+    const filterCurrentNote = notes.find((note) => note.id === noteID);
+    setCurrentNote({ ...filterCurrentNote });
   }, [noteID]);
 
   return (
