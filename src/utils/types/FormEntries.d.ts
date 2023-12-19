@@ -1,3 +1,3 @@
 export interface IFormEntries {
-	[k: string]: FormDataEntryValue;
+  [k: string]: FormDataEntryValue;
 }
