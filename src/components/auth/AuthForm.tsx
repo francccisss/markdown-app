@@ -30,29 +30,28 @@ const AuthForm = ({
       setError("");
     }
   }
-  const mapFormInputs: () => React.ReactNode = function () {
-    return showRelevantInputs(action).map((input) => {
-      return (
-        <div key={input.id} className="inputs-container flex flex-col ">
-          <label
-            className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-150 ease-in-out"
-            htmlFor={input.htmlFor}
-          >
-            {input.label}
-          </label>
-          <input
-            required
-            onChange={validateUserCredentialsOnChange}
-            type={input.type}
-            className={`valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors  focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
-            id={input.id}
-            name={input.name}
-            minLength={input.minLength ? input.minLength : 0}
-          />
-        </div>
-      );
-    });
-  };
+  const mapFormInputs = showRelevantInputs(action).map((input) => {
+    return (
+      <div key={input.id} className="inputs-container flex flex-col ">
+        <label
+          className="text-sm block w-full text-[#D9D9D970] focus-within:text-vn-white hover:text-vn-white transition-colors duration-150 ease-in-out"
+          htmlFor={input.htmlFor}
+        >
+          {input.label}
+        </label>
+        <input
+          required
+          onChange={validateUserCredentialsOnChange}
+          type={input.type}
+          className={`valid:border-vn-green valid:hover:border-vn-green focus:valid:border-vn-green focus:invalid:border-vn-red hover:border-vn-white transition-colors 
+          focus-within:border-vn-white focus-within:transition-[border-color] duration-150 ease-in-out appearance-none outline-none text-vn-white bg-[transparent] border-b-[1px] border-[#D9D9D970]`}
+          id={input.id}
+          name={input.name}
+          minLength={input.minLength ? input.minLength : 0}
+        />
+      </div>
+    );
+  });
 
   return (
     <div
@@ -75,8 +74,7 @@ const AuthForm = ({
         onSubmit={handleSubmit}
         noValidate
       >
-        {mapFormInputs()}
-
+        {mapFormInputs}
         <button
           type="submit"
           disabled={processingAuth}
