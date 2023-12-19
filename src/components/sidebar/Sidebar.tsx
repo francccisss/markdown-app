@@ -45,7 +45,7 @@ const Sidebar = ({ notes, sideBarRef, addNote }: ISidebarProps) => {
     <div
       id="sidebar"
       ref={sideBarRef}
-      className="sidebar-inactive z-10 bg-vn-black flex flex-col max-[720px]:left-10 h-full max-[720px]:h-[97vh] max-[720px]:absolute max-[400px]:left-0"
+      className="sidebar-inactive z-10 bg-vn-black flex flex-col max-[720px]:left-10 h-full max-[720px]:h-[97vh] max-[720px]:absolute max-[400px]:left-0 max-[400px]:h-[100vh]"
     >
       <SidebarActions
         searchInput={searchInput}
