@@ -15,7 +15,7 @@ const NavbarActions = () => {
     useContext(NavbarActionsContext);
   const actions: IActionProps = {
     openEditor: {
-      title: "Open Editor",
+      title: "Editor",
       onClick: (e: React.MouseEvent) => {
         setEditorActive(true);
       },

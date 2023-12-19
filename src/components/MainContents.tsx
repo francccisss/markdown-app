@@ -152,6 +152,12 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }
 
   useEffect(() => {
+    if (innerWidth < 600) {
+      setEditorActive(false);
+    }
+  }, []);
+
+  useEffect(() => {
     mainRef.current.focus();
   }, [editorActive]);
 
