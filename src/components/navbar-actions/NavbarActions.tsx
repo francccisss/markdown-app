@@ -11,27 +11,29 @@ interface IActionProps {
 }
 
 const NavbarActions = () => {
-  const { deleteNote, writeNote, infoModal } = useContext(NavbarActionsContext);
+  const { deleteNote, writeNote, infoModal, setEditorActive } =
+    useContext(NavbarActionsContext);
   const actions: IActionProps = {
-    info: {
-      title: "Note Information",
-      onClick: infoModal,
+    openEditor: {
+      title: "Open Editor",
+      onClick: (e: React.MouseEvent) => {
+        setEditorActive(true);
+      },
     },
-    // openEditor: {
-    // 	title: "Open Editor",
-    // 	onClick: (e: React.MouseEvent) => {
-    // 		console.log("open editor clicked");
-    // 	},
-    // },
-    // closeEditor: {
-    // 	title: "Close Editor",
-    // 	onClick: (e: React.MouseEvent) => {
-    // 		console.log("close editor clicked");
-    // 	},
-    // },
+    preview: {
+      title: "Preview",
+      onClick: (e: React.MouseEvent) => {
+        setEditorActive(false);
+      },
+    },
     save: {
       title: "Save Note",
       onClick: writeNote,
+    },
+
+    info: {
+      title: "Note Information",
+      onClick: infoModal,
     },
     remove: {
       title: "Remove Note",

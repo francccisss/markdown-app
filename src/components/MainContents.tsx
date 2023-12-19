@@ -173,7 +173,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
       className=" h-screen w-screen flex flex-col relative "
     >
       <NavbarActionsContext.Provider
-        value={{ deleteNote, writeNote, infoModal }}
+        value={{ deleteNote, writeNote, infoModal, setEditorActive }}
       >
         <Navbar
           navActionSetter={setNavbarActionsActive}
