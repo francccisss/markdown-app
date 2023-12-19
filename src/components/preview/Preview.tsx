@@ -45,12 +45,12 @@ const Preview = ({ markdownInput }: IPreviewProps) => {
         }
       }}
       id="markdown-preview"
-      className={`@container outline-none h-full overflow-auto px-16 py-10 markdown-body flex-1 flex justify-center `}
+      className={`@container outline-none h-full overflow-auto px-10 py-10 markdown-body flex-1 flex justify-center `}
     >
       <ReactMarkdown
         children={markdownInput}
         remarkPlugins={[remarkGfm]}
-        className="z-10 react-markdown h-fit my-5 @[200px]:min-w-[200px] @[700px]:w-[800px] @[1000px]:w-[900px] "
+        className="z-10 react-markdown h-fit my-5 @[200px]:min-w-[270px] max-[450px]:text-sm  @[700px]:w-[800px] @[1000px]:w-[900px] "
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");

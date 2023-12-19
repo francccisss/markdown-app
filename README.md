@@ -21,7 +21,6 @@ Visit the site here: [Vimnotes](https://vimnotes.vercel.app/)
 - `:q`  - to close editor and open preview (can only be triggered within editor)
 - `:h` - to open up vim cheatsheet page ( `ctrl+shift+h` so you can toggle between current page and vim cheatsheet page so you can easily look up vim keybindings while using your editor for ease of access)
 - `ctrl+shift+e` - to toggle sidebar  
-- `ctrl+shift+f` - to toggle focus on search bar
 - `ctrl+shift+p` - to toggle between preview and editor
 
 

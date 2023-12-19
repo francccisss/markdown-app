@@ -152,12 +152,28 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }
 
   useEffect(() => {
+    if (innerWidth < 600) {
+      setEditorActive(false);
+    }
+  }, []);
+
+  useEffect(() => {
     mainRef.current.focus();
+    // a fallback for updating notes if user forgets to save
+    writeNote();
   }, [editorActive]);
 
   useEffect(() => {
     redirectToExistingNotes();
   }, [notes]);
+
+  // a fallback for updating notes if user forgets to save
+  useEffect(() => {
+    if (innerWidth < 600) {
+      sideBarActivitiy();
+    }
+  }, [location.pathname]);
+
   return (
     <main
       ref={mainRef}
@@ -173,7 +189,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
       className=" h-screen w-screen flex flex-col relative "
     >
       <NavbarActionsContext.Provider
-        value={{ deleteNote, writeNote, infoModal }}
+        value={{ deleteNote, writeNote, infoModal, setEditorActive }}
       >
         <Navbar
           navActionSetter={setNavbarActionsActive}
@@ -181,12 +197,14 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
         />
       </NavbarActionsContext.Provider>
       <section id="content-section" className="flex-1 flex h-[0%]">
-        <SideMenu
-          sideBarActivity={sideBarActivitiy}
-          activeModal={activeLogoutModal}
-          setActiveModal={setActiveLogoutModal}
-        />
-        <Sidebar sideBarRef={sideBarRef} notes={notes} addNote={addNote} />
+        <div className="max-[400px]:flex-col-reverse flex">
+          <SideMenu
+            sideBarActivity={sideBarActivitiy}
+            activeModal={activeLogoutModal}
+            setActiveModal={setActiveLogoutModal}
+          />
+          <Sidebar sideBarRef={sideBarRef} notes={notes} addNote={addNote} />
+        </div>
         <Outlet
           context={{
             isSaving,

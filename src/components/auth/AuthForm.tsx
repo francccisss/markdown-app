@@ -56,7 +56,7 @@ const AuthForm = ({
   return (
     <div
       id="auth-form"
-      className="flex w-2/3 flex-col z-40 text-[#ffffff]  rounded-md"
+      className="flex max-[500px]:text-sm max-[340px]:text-xsm w-2/3 flex-col z-40 text-[#ffffff]  rounded-md"
     >
       <div id="instruct-user-txt">
         <h1 className="font-semibold mb-[8px] sm:text-2xl lg:text-3xl xl:text-4xl">
@@ -78,7 +78,7 @@ const AuthForm = ({
         <button
           type="submit"
           disabled={processingAuth}
-          className="grid place-items-center disabled:bg-vn-dark-blue disabled:text-[#ffffff60] text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
+          className=" grid place-items-center disabled:bg-vn-dark-blue disabled:text-[#ffffff60] text-[#FFFFFF] drop-shadow-md bg-vn-blue py-4 hover:bg-[#7086FF] ease-out duration-150 transition-all"
         >
           {" "}
           {action === "/" ? "Sign in" : "Sign up"}
@@ -100,7 +100,7 @@ const AuthForm = ({
         ) : null}
         <div
           id="create-signin"
-          className="flex justify-between items-center text-sm pt-6 border-t-[1px] border-[#d9d9d970] max-lg:text-xs"
+          className="max-[380px]:flex-col-reverse max-[380px]:gap-[.8em] flex justify-between items-center text-sm pt-6 border-t-[1px] border-[#d9d9d970] max-lg:text-xs"
         >
           <span className="inline-block">
             <p className="text-[#D9D9D970]">

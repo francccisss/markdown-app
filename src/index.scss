@@ -45,7 +45,6 @@
 }
 
 .App {
-  min-width: 500px;
   font-family: inter, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   text-decoration: none;
   list-style: none;
@@ -90,12 +89,19 @@ input[type="search"]::-webkit-search-cancel-button {
     border-left-width: 4px;
   }
 }
-.side-menu {
-  & > *a.active {
-    transition: all 100ms ease-in-out;
-    background-color: #878a8c20;
-    border-left-color: #6b7ff2;
-    // border-left-width: 0px;
+// .side-menu {
+//   & > *a.active {
+//     transition: all 100ms ease-in-out;
+//     background-color: #878a8c20;
+//     border-left-color: #6b7ff2;
+//     // border-left-width: 0px;
+//   }
+// }
+@media (max-width: 400px) {
+  .side-menu {
+    & > *a.active {
+      border: 0;
+    }
   }
 }
 
