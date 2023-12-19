@@ -186,7 +186,7 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
         setActiveLogoutModal(false);
       }}
       id="app-page"
-      className=" h-screen w-screen flex flex-col relative "
+      className=" h-[100dvh] w-screen flex flex-col relative "
     >
       <NavbarActionsContext.Provider
         value={{ deleteNote, writeNote, infoModal, setEditorActive }}
