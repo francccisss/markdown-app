@@ -159,11 +159,21 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
 
   useEffect(() => {
     mainRef.current.focus();
+    // a fallback for updating notes if user forgets to save
+    writeNote();
   }, [editorActive]);
 
   useEffect(() => {
     redirectToExistingNotes();
   }, [notes]);
+
+  // a fallback for updating notes if user forgets to save
+  useEffect(() => {
+    if (innerWidth < 600) {
+      sideBarActivitiy();
+    }
+  }, [location.pathname]);
+
   return (
     <main
       ref={mainRef}

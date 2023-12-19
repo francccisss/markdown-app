@@ -1,5 +1,5 @@
 .sidebar-inactive {
-  transition: all 100ms ease-in-out;
+  // transition: width 100ms ease-in-out;
   width: 0%;
   box-shadow: none;
   #notes-list {
@@ -27,11 +27,13 @@
 }
 
 .sidebar-active {
-  transition: width 150ms ease-in-out;
+  // transition: width 100ms ease-in-out;
   width: 350px;
   #notes-list,
   input {
-    animation: notelistActiveAnim 150ms forwards ease-in-out;
+    // animation: notelistActiveAnim 150ms forwards ease-in-out;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   #sidebar-actions {
     display: flex;
