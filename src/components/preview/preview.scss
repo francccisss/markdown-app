@@ -4,6 +4,13 @@
   ul:has(li):not(:has(input[type="checkbox"])) {
     list-style-type: disc;
   }
+  ol:has(li):has(ol),
+  ol:has(li):has(ul),
+  ul:has(li):has(ol),
+  ul:has(li):has(ul) {
+    padding: 0;
+  }
+
   p {
     font-size: 0.9rem;
   }
