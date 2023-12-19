@@ -10,8 +10,6 @@ import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import { NavbarActionsContext } from "@/utils/contexts/navbarActionsContext";
 
 const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
-  // noteID is used to get the reference of the current opened note
-
   const { noteID } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -196,7 +194,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
             isSaving,
             notes,
             setNotes,
-            // noteID,
             writeNote,
             noteModalActive,
             editorActive,
