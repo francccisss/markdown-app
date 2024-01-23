@@ -1,7 +1,7 @@
 {
   "name": "vimnotes",
   "version": "1.0.0",
-  "main": "dist-electron/main/index.js",
+  "main": "src/index.js",
   "description": "A simple markdown app with vim keymappings.",
   "author": "Fdiaz",
   "license": "MIT",
@@ -13,13 +13,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "pree2e": "vite build --mode=test",
-    "e2e": "playwright test",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@codemirror/lang-markdown": "^6.1.1",
