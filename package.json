@@ -1,7 +1,7 @@
 {
   "name": "vimnotes",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/main.tsx",
   "description": "A simple markdown app with vim keymappings.",
   "author": "Fdiaz",
   "license": "MIT",
