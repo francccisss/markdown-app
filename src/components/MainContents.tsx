@@ -123,7 +123,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   function keyboardShortcuts(e: React.KeyboardEvent): void {
     if (e.ctrlKey && e.code == "KeyS") {
       e.preventDefault();
-      console.log("saved");
       writeNote();
     }
     if (e.ctrlKey && e.shiftKey && e.code == "KeyP") {

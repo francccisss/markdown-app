@@ -35,13 +35,15 @@ const Note = () => {
   }
 
   Vim.defineEx("write", "w", async () => {
-    await writeNote();
     const filterNotes = notes.filter((note: INote) => note.id !== noteID);
     setNotes([currentNote, ...filterNotes]);
   });
   Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
   Vim.defineEx("quit", "q", () => setEditorActive(false));
 
+  useEffect(() => {
+    writeNote();
+  }, [notes]);
   useEffect(() => {
     const filterCurrentNote = notes.find((note) => note.id === noteID);
     setCurrentNote({ ...filterCurrentNote });
