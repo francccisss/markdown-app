@@ -151,6 +151,10 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
   }
 
   useEffect(() => {
+    writeNote();
+  }, [notes]);
+
+  useEffect(() => {
     if (innerWidth < 600) {
       setEditorActive(false);
     }
@@ -166,7 +170,6 @@ const MainContents = ({ fetchedNotes }: { fetchedNotes: INote[] }) => {
     redirectToExistingNotes();
   }, [notes]);
 
-  // a fallback for updating notes if user forgets to save
   useEffect(() => {
     if (innerWidth < 600) {
       sideBarActivitiy();

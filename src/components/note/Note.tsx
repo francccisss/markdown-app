@@ -34,16 +34,18 @@ const Note = () => {
     setCurrentNote({ ...updateNote });
   }
 
-  Vim.defineEx("write", "w", async () => {
+  function updateNotesState(): void {
     const filterNotes = notes.filter((note: INote) => note.id !== noteID);
     setNotes([currentNote, ...filterNotes]);
-  });
-  Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
-  Vim.defineEx("quit", "q", () => setEditorActive(false));
+  }
 
-  useEffect(() => {
-    writeNote();
-  }, [notes]);
+  Vim.defineEx("write", "w", updateNotesState);
+  Vim.defineEx("help", "h", () => navigate("/app/vim-cheatsheet"));
+  Vim.defineEx("quit", "q", () => {
+    updateNotesState();
+    setEditorActive(false);
+  });
+
   useEffect(() => {
     const filterCurrentNote = notes.find((note) => note.id === noteID);
     setCurrentNote({ ...filterCurrentNote });
